@@ -2,4 +2,5 @@
   <Project Path="SecureFileTransfer.Client/SecureFileTransfer.Client.csproj" />
   <Project Path="SecureFileTransfer.Protocol/SecureFileTransfer.Protocol.csproj" />
   <Project Path="SecureFileTransfer.Server/SecureFileTransfer.Server.csproj" />
+  <Project Path="SecureFileTransfer.ConnectionChecks/SecureFileTransfer.ConnectionChecks.csproj" />
 </Solution>

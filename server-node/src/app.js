@@ -7,7 +7,7 @@ app.get('/health', (_req, res) => {
   res.json({
     status: 'ok',
     service: 'SecureFileTransfer.Server',
-    stage: 'P0.1',
+    stage: 'P0.2',
   });
 });
 
