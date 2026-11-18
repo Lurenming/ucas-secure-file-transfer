@@ -13,7 +13,7 @@ try {
   });
   service.server.listen(port, host, () => {
     const address = service.server.address();
-    console.log(`[server] Listening on https://${address.address}:${address.port}; WSS /ws (P0.2, TLS >= 1.2, local only)`);
+    console.log(`[server] Listening on https://${address.address}:${address.port}; WSS /ws (P1, TLS >= 1.2, local only)`);
   });
   let stopping = false;
   const shutdown = async (signal) => {

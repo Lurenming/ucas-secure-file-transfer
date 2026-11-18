@@ -136,7 +136,14 @@ if (args.Length >= 3 && args[2].StartsWith("wss://", StringComparison.Ordinal))
     }
 }
 
-Console.WriteLine("C# idle acceptance started: 61 seconds without application ECHO.");
+if (args.Contains("--auth-stdin"))
+{
+    string credentials = await Console.In.ReadLineAsync() ?? throw new InvalidDataException("Missing test input.");
+    await AuthenticationChecks.RunAsync(caPath, address, new Uri(args[2]), credentials);
+    credentials = "";
+}
+
+Console.WriteLine("C# idle acceptance started: 61 seconds without application ECHO (within the 120-second unauthenticated wait).");
 await Task.Delay(TimeSpan.FromSeconds(61));
 var afterIdle = await first.EchoAsync("after C# idle");
 Check(afterIdle.ConnectionId == originalId, "C# connection remains usable after 61 seconds idle");

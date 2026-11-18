@@ -9,6 +9,11 @@ logs/
 !.env.example
 .npmrc
 secrets/
+data/
+*.sqlite
+*.sqlite-*
+*.db
+*.db-*
 
 # Future TLS certificates and private keys
 certs/

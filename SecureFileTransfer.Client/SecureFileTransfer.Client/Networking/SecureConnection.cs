@@ -2,6 +2,8 @@ using System.Collections.Concurrent;
 using System.Net.WebSockets;
 using System.Text;
 using System.Text.Json;
+using System.Security.Cryptography;
+using System.Text.RegularExpressions;
 
 namespace SecureFileTransfer.Client.Networking;
 
@@ -26,13 +28,20 @@ public sealed class SecureConnection : IAsyncDisposable
     private int started;
     private int disconnecting;
     private int queuedBytes;
-    private sealed record Pending(string Text, TaskCompletionSource<EchoReply> Result);
+    private sealed record Pending(string ExpectedType, long AuthGeneration, string? EchoText, TaskCompletionSource<JsonElement> Result);
+    private readonly object authLock = new();
+    private long authGeneration;
+    private int loginPending;
+    private SessionIdentity? identity;
+    private System.Threading.Timer? expiryTimer;
 
     public Guid? ConnectionId { get; private set; }
     public string? CertificateValidationError => certificates.LastError;
     public bool IsConnected => socket.State == WebSocketState.Open && Volatile.Read(ref disconnecting) == 0 && ConnectionId.HasValue;
     public Task Completion => receiver;
     public event Action<string>? Log;
+    public SessionIdentity? Identity { get { lock (authLock) return identity; } }
+    public event Action? IdentityChanged;
 
     public SecureConnection(Uri address, string publicCaPath)
     {
@@ -70,26 +79,84 @@ public sealed class SecureConnection : IAsyncDisposable
     {
         ArgumentNullException.ThrowIfNull(text);
         if (text.Length > MaxTextLength) throw new ArgumentException("文本最多 1024 个 UTF-16 代码单元。");
-        if (!IsConnected) throw new InvalidOperationException("连接尚未建立或已经断开。");
-        if (!await requestSlots.WaitAsync(0, cancellationToken).ConfigureAwait(false)) throw new InvalidOperationException("最多允许 8 个待完成请求。");
         var requestId = Guid.NewGuid();
         byte[] body = JsonSerializer.SerializeToUtf8Bytes(new { version = 1, type = "ECHO", requestId, data = new { text } });
-        var request = new Pending(text, new(TaskCreationOptions.RunContinuationsAsynchronously));
+        var result = await RequestAsync(requestId, "ECHO_RESULT", body, 0, text, cancellationToken).ConfigureAwait(false);
+        var reply = new EchoReply(requestId, result.GetProperty("connectionId").GetGuid(), result.GetProperty("data").GetProperty("text").GetString()!);
+        Log?.Invoke($"ECHO_RESULT requestId={reply.RequestId}, connectionId={reply.ConnectionId}");
+        return reply;
+    }
+
+    // This non-async method serializes credentials without retaining a password in an async state machine.
+    public Task<SessionIdentity> LoginAsync(string username, string password, CancellationToken cancellationToken = default)
+    {
+        if (!Regex.IsMatch(username, "^[A-Za-z][A-Za-z0-9_]{2,31}$")) throw new ArgumentException("用户名须为 3–32 个 ASCII 字母、数字或下划线，以字母开头。");
+        if (password.EnumerateRunes().Count() < 12 || new UTF8Encoding(false, true).GetByteCount(password) > 256)
+            throw new ArgumentException("密码至少 12 个 Unicode 字符，最多 256 个 UTF-8 字节。");
+        if (Interlocked.CompareExchange(ref loginPending, 1, 0) != 0) throw new ServerRequestException("AUTH_BUSY");
         try
         {
+            var requestId = Guid.NewGuid();
+            byte[] body = JsonSerializer.SerializeToUtf8Bytes(new { version = 1, type = "AUTH_LOGIN", requestId, data = new { username, password } });
+            long generation;
+            lock (authLock) generation = identity is null ? ++authGeneration : authGeneration;
+            return LoginCoreAsync(requestId, body, generation, cancellationToken);
+        }
+        catch { Interlocked.Exchange(ref loginPending, 0); throw; }
+    }
+
+    private async Task<SessionIdentity> LoginCoreAsync(Guid requestId, byte[] body, long generation, CancellationToken token)
+    {
+        try
+        {
+            var result = await RequestAsync(requestId, "AUTH_LOGIN_RESULT", body, generation, null, token).ConfigureAwait(false);
+            return ParseIdentity(result.GetProperty("data"));
+        }
+        catch (OperationCanceledException) { await DisconnectAsync().ConfigureAwait(false); throw; }
+        finally { Interlocked.Exchange(ref loginPending, 0); }
+    }
+
+    public async Task<SessionIdentity> MeAsync(CancellationToken cancellationToken = default)
+    {
+        var requestId = Guid.NewGuid();
+        long generation;
+        lock (authLock) generation = authGeneration;
+        byte[] body = JsonSerializer.SerializeToUtf8Bytes(new { version = 1, type = "AUTH_ME", requestId, data = new { } });
+        var result = await RequestAsync(requestId, "AUTH_ME_RESULT", body, generation, null, cancellationToken).ConfigureAwait(false);
+        return ParseIdentity(result.GetProperty("data"));
+    }
+
+    public async Task LogoutAsync(CancellationToken cancellationToken = default)
+    {
+        long generation = ClearIdentity(); // Invalidate earlier async replies before sending logout.
+        var requestId = Guid.NewGuid();
+        byte[] body = JsonSerializer.SerializeToUtf8Bytes(new { version = 1, type = "AUTH_LOGOUT", requestId, data = new { } });
+        try { await RequestAsync(requestId, "AUTH_LOGOUT_RESULT", body, generation, null, cancellationToken).ConfigureAwait(false); }
+        catch { await DisconnectAsync().ConfigureAwait(false); throw; } // Uncertain logout must not leave a usable hidden session.
+    }
+
+    private async Task<JsonElement> RequestAsync(Guid requestId, string expectedType, byte[] body, long generation, string? echoText, CancellationToken cancellationToken)
+    {
+        bool admitted = false;
+        try
+        {
+            if (!IsConnected) throw new InvalidOperationException("连接尚未建立或已经断开。");
+            if (!await requestSlots.WaitAsync(0, cancellationToken).ConfigureAwait(false)) throw new InvalidOperationException("最多允许 8 个待完成请求。");
+            admitted = true;
             if (body.Length > MaxMessageBytes) throw new ArgumentException("消息超过 16 KiB。");
+            var request = new Pending(expectedType, generation, echoText, new(TaskCreationOptions.RunContinuationsAsynchronously));
             pending[requestId] = request;
             using var timeout = CancellationTokenSource.CreateLinkedTokenSource(lifetime.Token, cancellationToken);
             timeout.CancelAfter(TimeSpan.FromSeconds(10));
-            await SendFrameAsync(body, timeout.Token).ConfigureAwait(false);
-            var reply = await request.Result.Task.WaitAsync(timeout.Token).ConfigureAwait(false);
-            Log?.Invoke($"ECHO_RESULT requestId={reply.RequestId}, connectionId={reply.ConnectionId}, text={reply.Text}");
-            return reply;
+            try { await SendFrameAsync(body, timeout.Token).ConfigureAwait(false); }
+            finally { CryptographicOperations.ZeroMemory(body); }
+            return await request.Result.Task.WaitAsync(timeout.Token).ConfigureAwait(false);
         }
         finally
         {
             pending.TryRemove(requestId, out _);
-            requestSlots.Release();
+            CryptographicOperations.ZeroMemory(body);
+            if (admitted) requestSlots.Release();
         }
     }
 
@@ -146,6 +213,7 @@ public sealed class SecureConnection : IAsyncDisposable
         finally
         {
             Interlocked.Exchange(ref disconnecting, 1);
+            ClearIdentity();
             hello.TrySetException(reason);
             foreach (var item in pending.Values) item.Result.TrySetException(reason);
             lifetime.Cancel();
@@ -168,16 +236,73 @@ public sealed class SecureConnection : IAsyncDisposable
             return;
         }
         if (ConnectionId != connectionId) throw new InvalidDataException("connectionId 不匹配。");
-        if (type.GetString() == "ERROR") throw new InvalidDataException("服务器拒绝了消息。");
-        if (type.GetString() != "ECHO_RESULT" || !message.TryGetProperty("requestId", out var request)
-            || request.ValueKind != JsonValueKind.String || !Guid.TryParseExact(request.GetString(), "D", out var requestId)
-            || !message.TryGetProperty("data", out var data) || data.ValueKind != JsonValueKind.Object
-            || !data.TryGetProperty("text", out var text) || text.ValueKind != JsonValueKind.String || text.GetString()!.Length > MaxTextLength)
+        string messageType = type.GetString()!;
+        if (messageType == "AUTH_EXPIRED") { ClearIdentity(); Log?.Invoke("会话已过期，请重新登录。"); return; }
+        if (!message.TryGetProperty("requestId", out var request)
+            || request.ValueKind != JsonValueKind.String || !Guid.TryParseExact(request.GetString(), "D", out var requestId))
             throw new InvalidDataException("服务器回复无效。");
         // A timed-out/cancelled request may have a late reply; never map it to another request.
         if (!pending.TryGetValue(requestId, out var waiting)) return;
-        if (waiting.Text != text.GetString()) throw new InvalidDataException("ECHO 返回文本不匹配。");
-        waiting.Result.TrySetResult(new(requestId, connectionId, text.GetString()!));
+        if (messageType == "ERROR")
+        {
+            if (!message.TryGetProperty("code", out var code) || code.ValueKind != JsonValueKind.String || !Regex.IsMatch(code.GetString()!, "^[A-Z_]{1,64}$"))
+                throw new InvalidDataException("服务器错误格式无效。");
+            if (code.GetString() == "AUTH_REQUIRED") ClearIdentity(waiting.AuthGeneration);
+            waiting.Result.TrySetException(new ServerRequestException(code.GetString()!));
+            return;
+        }
+        if (messageType != waiting.ExpectedType || !message.TryGetProperty("data", out var data) || data.ValueKind != JsonValueKind.Object)
+            throw new InvalidDataException("服务器回复类型不匹配。");
+        if (messageType == "ECHO_RESULT")
+        {
+            if (!data.TryGetProperty("text", out var text) || text.ValueKind != JsonValueKind.String || text.GetString()!.Length > MaxTextLength
+                || waiting.EchoText != text.GetString()) throw new InvalidDataException("ECHO 返回文本不匹配。");
+        }
+        else if (messageType is "AUTH_LOGIN_RESULT" or "AUTH_ME_RESULT")
+        {
+            if (!ApplyIdentity(ParseIdentity(data), waiting.AuthGeneration))
+            { waiting.Result.TrySetException(new ServerRequestException("AUTH_CANCELLED")); return; }
+        }
+        waiting.Result.TrySetResult(message.Clone());
+    }
+
+    private static SessionIdentity ParseIdentity(JsonElement data)
+    {
+        if (!data.TryGetProperty("userId", out var id) || id.ValueKind != JsonValueKind.String || !Guid.TryParseExact(id.GetString(), "D", out var userId)
+            || !data.TryGetProperty("username", out var name) || name.ValueKind != JsonValueKind.String || !Regex.IsMatch(name.GetString()!, "^[a-z][a-z0-9_]{2,31}$")
+            || !data.TryGetProperty("expiresAt", out var expiry) || expiry.ValueKind != JsonValueKind.String || !expiry.TryGetDateTimeOffset(out var expiresAt))
+            throw new InvalidDataException("服务器身份字段无效。");
+        return new(userId, name.GetString()!, expiresAt);
+    }
+
+    private bool ApplyIdentity(SessionIdentity value, long generation)
+    {
+        lock (authLock)
+        {
+            if (authGeneration != generation || value.ExpiresAt <= DateTimeOffset.UtcNow) return false;
+            if (value.ExpiresAt > DateTimeOffset.UtcNow.AddDays(1)) throw new InvalidDataException("服务器会话有效期无效。");
+            identity = value;
+            expiryTimer?.Dispose();
+            expiryTimer = new System.Threading.Timer(_ => ClearIdentity(generation), null,
+                TimeSpan.FromMilliseconds(Math.Max(1, (value.ExpiresAt - DateTimeOffset.UtcNow).TotalMilliseconds)), Timeout.InfiniteTimeSpan);
+        }
+        IdentityChanged?.Invoke();
+        return true;
+    }
+
+    private long ClearIdentity(long? expectedGeneration = null)
+    {
+        long generation;
+        lock (authLock)
+        {
+            if (expectedGeneration.HasValue && authGeneration != expectedGeneration) return authGeneration;
+            generation = ++authGeneration;
+            identity = null;
+            expiryTimer?.Dispose();
+            expiryTimer = null;
+        }
+        IdentityChanged?.Invoke();
+        return generation;
     }
 
     private async Task CloseOutputAsync(string reason, CancellationToken token)
@@ -201,6 +326,7 @@ public sealed class SecureConnection : IAsyncDisposable
     private async Task DisconnectCoreAsync()
     {
         Interlocked.Exchange(ref disconnecting, 1);
+        ClearIdentity();
         try
         {
             await CloseOutputAsync("Client disconnect", CancellationToken.None).ConfigureAwait(false);

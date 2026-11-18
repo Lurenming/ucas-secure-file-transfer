@@ -14,6 +14,7 @@ import { setTimeout as delay } from 'node:timers/promises';
 import WebSocket from 'ws';
 import { createService, limits } from '../src/service.js';
 import { defaultCertDirectory } from '../src/tls.js';
+import { temporaryAccounts } from './helpers.js';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const ca = readFileSync(join(defaultCertDirectory, 'public/dev-ca.crt'));
@@ -23,10 +24,15 @@ const bounded = async (promise, ms = 5000) => {
   finally { clearTimeout(timer); }
 };
 async function start(options) {
-  const service = createService(options);
+  const accounts = temporaryAccounts();
+  const service = createService({ accountStore: accounts.store, ...options });
+  let cleaned = false;
   service.server.listen(0, '127.0.0.1');
   await once(service.server, 'listening');
-  return { ...service, port: service.server.address().port };
+  return { ...service, port: service.server.address().port, stop: async () => {
+    await service.stop();
+    if (!cleaned) { cleaned = true; accounts.cleanup(); }
+  } };
 }
 function httpsGet(port, options = {}) {
   return new Promise((resolveGet, reject) => {
@@ -66,7 +72,7 @@ async function echo(client, text) {
 test('HTTPS trust, hostname, TLS floor and invalid startup fail closed', async (t) => {
   const service = await start();
   t.after(() => service.stop());
-  assert.deepEqual(await httpsGet(service.port), { status: 200, body: { status: 'ok', service: 'SecureFileTransfer.Server', stage: 'P0.2' } });
+  assert.deepEqual(await httpsGet(service.port), { status: 200, body: { status: 'ok', service: 'SecureFileTransfer.Server', stage: 'P1' } });
   await assert.rejects(httpsGet(service.port, { ca: undefined }));
   await assert.rejects(httpsGet(service.port, { ca: rootCertificates[0] }));
   await assert.rejects(httpsGet(service.port, { servername: 'mismatch.invalid' }));

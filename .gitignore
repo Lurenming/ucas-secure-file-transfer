@@ -17,6 +17,11 @@ logs/
 !.env.example
 .npmrc
 secrets/
+data/
+*.sqlite
+*.sqlite-*
+*.db
+*.db-*
 
 # Generated certificates and private keys (public CA is distributed locally)
 certs/

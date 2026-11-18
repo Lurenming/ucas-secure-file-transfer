@@ -1,15 +1,17 @@
 {
   "name": "secure-file-transfer-server",
-  "version": "0.2.0",
+  "version": "1.0.0",
   "private": true,
-  "description": "P0.2 local HTTPS and WebSocket connection test",
+  "description": "P1 local WSS account authentication and connection sessions",
   "type": "module",
   "scripts": {
     "start": "node src/server.js",
     "certs:dev": "node scripts/certs-dev.js",
     "health": "node scripts/health.js",
+    "user:create": "node scripts/user-create.js",
     "test": "node --test --test-concurrency=1 test/*.test.js",
-    "test:csharp": "node scripts/check-csharp.js"
+    "test:csharp": "node scripts/check-csharp.js",
+    "test:cli": "python test/cli-check.py"
   },
   "engines": {
     "node": ">=22"

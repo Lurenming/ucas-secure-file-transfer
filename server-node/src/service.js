@@ -3,14 +3,19 @@ import { randomUUID } from 'node:crypto';
 import { WebSocket, WebSocketServer } from 'ws';
 import app from './app.js';
 import { loadTlsOptions } from './tls.js';
+import { openAccounts } from './accounts.js';
+import { AuthManager } from './auth.js';
 
 export const limits = Object.freeze({ messageBytes: 16 * 1024, textLength: 1024, connections: 32, sendQueueBytes: 64 * 1024 });
 const uuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 const object = (value) => value !== null && typeof value === 'object' && !Array.isArray(value);
 
 // Options are injectable for tests; the production entry point uses these defaults.
-export function createService({ tlsOptions = loadTlsOptions(), heartbeatIntervalMs = 15000, pongTimeoutMs = 10000, shutdownMs = 5000 } = {}) {
+export function createService({ tlsOptions = loadTlsOptions(), heartbeatIntervalMs = 15000, pongTimeoutMs = 10000, shutdownMs = 5000, accountStore, authOptions } = {}) {
   const server = createServer({ ...tlsOptions, maxHeaderSize: 8192, requestTimeout: 10000, headersTimeout: 10000 }, app);
+  const accounts = accountStore ?? openAccounts();
+  const authentication = new AuthManager(accounts, authOptions);
+  const sessions = new Set();
   server.maxConnections = 64; // Also bounds pre-upgrade TCP/TLS connections.
   const sockets = new Set();
   server.on('connection', (socket) => {
@@ -49,6 +54,9 @@ export function createService({ tlsOptions = loadTlsOptions(), heartbeatInterval
       if (ws.bufferedAmount + Buffer.byteLength(body) > limits.sendQueueBytes) return close(1013, 'Send queue limit');
       ws.send(body, { binary: false, compress: false }, (error) => { if (error) ws.terminate(); });
     };
+    const auth = authentication.attach((message) => send({ version: 1, connectionId, ...message }), close,
+      () => !stopping && ws.readyState === WebSocket.OPEN);
+    sessions.add(auth);
     ws.on('error', () => {
       // ws has already sent the appropriate protocol close (e.g. 1009).
       closeDeadline ??= setTimeout(() => ws.terminate(), shutdownMs);
@@ -69,6 +77,8 @@ export function createService({ tlsOptions = loadTlsOptions(), heartbeatInterval
     }, heartbeatIntervalMs);
     heartbeat.unref();
     ws.on('close', () => {
+      auth.dispose();
+      sessions.delete(auth);
       clearInterval(heartbeat);
       clearTimeout(pongDeadline);
       clearTimeout(closeDeadline);
@@ -80,8 +90,13 @@ export function createService({ tlsOptions = loadTlsOptions(), heartbeatInterval
       try { message = JSON.parse(raw.toString('utf8')); }
       catch { return send({ version: 1, type: 'ERROR', code: 'INVALID_JSON', connectionId }); }
       const requestId = object(message) && typeof message.requestId === 'string' && uuid.test(message.requestId) ? message.requestId : undefined;
-      if (!object(message) || message.version !== 1 || message.type !== 'ECHO' || !requestId || !object(message.data) || typeof message.data.text !== 'string' || message.data.text.length > limits.textLength) {
+      if (!object(message) || message.version !== 1 || !requestId || !object(message.data)
+        || !['ECHO', 'AUTH_LOGIN', 'AUTH_ME', 'AUTH_LOGOUT'].includes(message.type)) {
         return send({ version: 1, type: 'ERROR', code: 'INVALID_MESSAGE', ...(requestId ? { requestId } : {}), connectionId });
+      }
+      if (message.type.startsWith('AUTH_')) { auth.handle(message); return; }
+      if (typeof message.data.text !== 'string' || message.data.text.length > limits.textLength) {
+        return send({ version: 1, type: 'ERROR', code: 'INVALID_MESSAGE', requestId, connectionId });
       }
       send({ version: 1, type: 'ECHO_RESULT', requestId, data: { text: message.data.text }, connectionId });
     });
@@ -91,6 +106,8 @@ export function createService({ tlsOptions = loadTlsOptions(), heartbeatInterval
   function stop() {
     if (stopPromise) return stopPromise;
     stopping = true;
+    authentication.close();
+    for (const session of sessions) session.dispose();
     stopPromise = new Promise((resolve, rejectStop) => {
       const deadline = setTimeout(() => {
         for (const ws of wss.clients) ws.terminate();
@@ -101,9 +118,12 @@ export function createService({ tlsOptions = loadTlsOptions(), heartbeatInterval
       const httpClosed = new Promise((resolveHttp, rejectHttp) => {
         server.close((error) => error && error.code !== 'ERR_SERVER_NOT_RUNNING' ? rejectHttp(error) : resolveHttp());
       });
-      Promise.all([wsClosed, httpClosed]).then(resolve, rejectStop).finally(() => clearTimeout(deadline));
+      Promise.all([wsClosed, httpClosed]).then(() => {
+        if (!accountStore) accounts.close();
+        resolve();
+      }, rejectStop).finally(() => clearTimeout(deadline));
     });
     return stopPromise;
   }
-  return { server, wss, stop };
+  return { server, wss, stop, authentication };
 }
