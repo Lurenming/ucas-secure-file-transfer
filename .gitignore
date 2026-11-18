@@ -1,0 +1,29 @@
+# Dependencies, build output and IDE/user state
+node_modules/
+**/bin/
+**/obj/
+.vs/
+.idea/
+*.user
+*.suo
+TestResults/
+artifacts/
+
+# Logs, local configuration and credentials
+*.log
+logs/
+.env
+.env.*
+!.env.example
+.npmrc
+secrets/
+
+# Generated certificates and private keys (public CA is distributed locally)
+certs/
+.certs-dev-*/
+*.pem
+*.key
+*.pfx
+*.p12
+*.jks
+*.keystore

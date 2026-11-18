@@ -1,0 +1,21 @@
+# Dependencies and logs
+node_modules/
+logs/
+*.log
+
+# Local environment values and secrets
+.env
+.env.*
+!.env.example
+.npmrc
+secrets/
+
+# Future TLS certificates and private keys
+certs/
+keys/
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks
+*.keystore
