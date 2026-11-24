@@ -1,0 +1,108 @@
+Window: "安全文件传输 · 并行与断点恢复", App: SecureFileTransfer.Client.exe.
+	0 window (窗口) 安全文件传输 · 并行与断点恢复 Secondary Actions: Raise
+		1 pane (窗格)
+			2 pane (窗格)
+				3 text (文本) 服务器 IP / 域名
+				4 text field (编辑) (disabled, settable, string) 服务器 IP / 域名 Value: 127.0.0.1
+				5 text (文本) 端口
+				6 spinner (沙网) (disabled) 端口
+					7 spinner (沙网) (disabled) 上下箭头
+						8 button (按钮) (disabled) 向上键
+						9 button (按钮) (disabled) 向下键
+					10 text field (编辑) (disabled, settable, string) 端口 Value: 8443
+				11 text (文本) 并发
+				12 spinner (沙网) (disabled) 并发
+					13 spinner (沙网) (disabled) 上下箭头
+						14 button (按钮) (disabled) 向上键
+						15 button (按钮) (disabled) 向下键
+					16 text field (编辑) (disabled, settable, string) 并发 Value: 4
+				17 button (按钮) (disabled) 连接
+				18 button (按钮) 断开
+				19 text (文本) 当前账户：delivery_check
+			20 pane (窗格) 当前账户：delivery_check
+				21 button (按钮) (disabled) CA 公共证书…
+				22 text field (编辑) (disabled, settable, string) Value: D:\UCAS\软件与系统安全\lab1\artifacts\final-entry-check\SFT desktop copy\runtime\certs\public\dev-ca.crt
+				23 button (按钮) (disabled) 客户端 PFX…
+				24 button (按钮) (disabled) 证书库…
+				25 button (按钮) (disabled) 清除证书
+				26 text (文本) 未选择客户端证书（密码兼容模式）
+			27 pane (窗格) 未选择客户端证书（密码兼容模式）
+				28 text (文本) 账户
+				29 text field (编辑) (disabled, settable, string) 账户 Value: delivery_check
+				30 text (文本) 密码
+				31 text field (编辑) (disabled, settable, string) 密码 Value: 已拒绝访问
+				32 button (按钮) (disabled) 登录
+				33 button (按钮) 注销
+				34 text (文本) mTLS 由服务器证书绑定确认身份；选证书后重新连接
+			35 pane (窗格) mTLS 由服务器证书绑定确认身份；选证书后重新连接
+				36 button (按钮) 刷新本人文件
+				37 button (按钮) (disabled) 下一页
+				38 button (按钮) 上传
+				39 button (按钮) 下载
+			40 table (表格)
+				41 header (标头) 标头控件 ID: Header
+					42 header item (标头项目) 文件名 ID: HeaderItem 0
+					43 header item (标头项目) 大小（字节） ID: HeaderItem 1
+					44 header item (标头项目) SHA-256 ID: HeaderItem 2
+					45 header item (标头项目) 文件 ID ID: HeaderItem 3
+				234 scroll bar (滚动条) (settable, float) 水平滚动条 Value: 0 ID: NonClientHorizontalScrollBar
+					235 button (按钮) 左移一列 ID: UpButton
+					236 thumb (缩略图) 位置 ID: ScrollbarThumb
+					237 button (按钮) 向右翻页 ID: DownPageButton
+					238 button (按钮) 右移一列 ID: DownButton
+				239 list item (列表项目) (selectable) roundtrip-small.txt ID: ListViewItem-0
+					240 text (文本) roundtrip-small.txt ID: ListViewSubItem-0
+					241 text (文本) 8225 ID: ListViewSubItem-1
+					242 text (文本) f6c0f9ba37e2b3e5328e9889a99d517e820a420f9d5a1e88eb4c662d3c22a204 ID: ListViewSubItem-2
+					243 text (文本) 1029b6f1-0381-4844-a0cf-49a999ba91f6 ID: ListViewSubItem-3
+			46 pane (窗格)
+				47 button (按钮) 暂停所选
+				48 button (按钮) 继续 / 恢复
+				49 button (按钮) 取消并清理
+				50 text (文本) 暂停/断线/关窗保留恢复数据；主动取消清理；重新登录后手动恢复
+			51 table (表格) 暂停/断线/关窗保留恢复数据；主动取消清理；重新登录后手动恢复
+				52 header (标头) 标头控件 ID: Header
+					53 header item (标头项目) 方向 ID: HeaderItem 0
+					54 header item (标头项目) 文件名 ID: HeaderItem 1
+					55 header item (标头项目) 状态 ID: HeaderItem 2
+					56 header item (标头项目) 进度 ID: HeaderItem 3
+					57 header item (标头项目) 已传 / 总字节 ID: HeaderItem 4
+					58 header item (标头项目) 速度 KiB/s ID: HeaderItem 5
+					59 header item (标头项目) 结果 ID: HeaderItem 6
+				221 scroll bar (滚动条) (settable, float) 水平滚动条 Value: 0 ID: NonClientHorizontalScrollBar
+					222 button (按钮) 左移一列 ID: UpButton
+					223 thumb (缩略图) 位置 ID: ScrollbarThumb
+					224 button (按钮) 向右翻页 ID: DownPageButton
+					225 button (按钮) 右移一列 ID: DownButton
+				370 list item (列表项目) (selectable) 上传 ID: ListViewItem-0
+					371 text (文本) 上传 ID: ListViewSubItem-0
+					372 text (文本) roundtrip-small.txt ID: ListViewSubItem-1
+					373 text (文本) 完成 ID: ListViewSubItem-2
+					374 text (文本) 100.0% ID: ListViewSubItem-3
+					375 text (文本) 8,225 / 8,225 ID: ListViewSubItem-4
+					376 text (文本) — ID: ListViewSubItem-5
+					377 text (文本) fileId=1029b6f1-0381-4844-a0cf-49a999ba91f6; SHA-256=f6c0f9ba37e2b3e5328e9889a99d517e820a420f9d5a1e88eb4c662d3c22a204 ID: ListViewSubItem-6
+				378 list item (列表项目) (selectable) 下载 ID: ListViewItem-1
+					379 text (文本) 下载 ID: ListViewSubItem-0
+					380 text (文本) roundtrip-small.txt ID: ListViewSubItem-1
+					381 text (文本) 完成 ID: ListViewSubItem-2
+					382 text (文本) 100.0% ID: ListViewSubItem-3
+					383 text (文本) 8,225 / 8,225 ID: ListViewSubItem-4
+					384 text (文本) — ID: ListViewSubItem-5
+					385 text (文本) 已保存 D:\UCAS\软件与系统安全\lab1\artifacts\final-entry-check\downloads\roundtrip-small.txt; SHA-256=f6c0f9ba37e2b3e5328e9889a99d517e820a420f9d5a1e88eb4c662d3c22a204 ID: ListViewSubItem-6
+			60 text field (编辑) Value: [04:29:26] 控制连接 38f31a8d-4caf-428a-9ba9-1d4805a7d2b2；认证模式 password [04:30:13] 已认证：delivery_check；绝对到期 04:45:13
+				61 scroll bar (滚动条) (disabled, settable, float) 垂直滚动条 Value: 0 ID: NonClientVerticalScrollBar
+					62 button (按钮) (disabled) 上一行 ID: UpButton
+					63 button (按钮) (disabled) 下一行 ID: DownButton
+		64 title bar (标题栏) (settable, string) Value: 安全文件传输 · 并行与断点恢复
+			65 menu bar (菜单栏) 系统 ID: MenuBar
+				70 menu item (菜单项目) 系统
+			67 button (按钮) 最小化
+			68 button (按钮) 最大化
+			69 button (按钮) 关闭
+
+Selected text: ```
+127.0.0.1
+```
+
+Note: Pay special attention to the content selected by the user. If the user asks a question or refers to the content they are looking at on-screen, they might be referring to the selected content (but they might be referring to something else that's visible, too).

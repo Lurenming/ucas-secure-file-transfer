@@ -10,6 +10,13 @@ TestResults/
 artifacts/
 __pycache__/
 *.py[cod]
+/runtime/
+/runtime-*/
+/runtime_*/
+/publish/
+/tools/runtime/
+/.cache/
+/交付/
 
 # Logs, local configuration and credentials
 *.log
@@ -38,3 +45,56 @@ certs/
 *.p12
 *.jks
 *.keystore
+
+# Reviewed archived material: untracked only; local originals and Git history are retained.
+/SFT_Manual_Acceptance_P5.md
+/docs/acceptance-20261125.md
+/docs/delivery-closure.md
+/docs/demo-script.md
+/docs/enhancements.md
+/docs/evidence/acceptance-20261125.json
+/docs/evidence/acceptance-20261125/
+/docs/evidence/delivery-closure-20261124.json
+/docs/evidence/enhanced-20261124.json
+/docs/evidence/gui-20261124.md
+/docs/evidence/manual-20261124/
+/docs/evidence/p4-environment.json
+/docs/evidence/p4-validation.json
+/docs/evidence/p5-validation.json
+/docs/evidence/ui-labels-20261125.json
+/docs/gui-p2-p3.md
+/docs/manual-enhanced.md
+/docs/p0.1.md
+/docs/p0.2.md
+/docs/p1.md
+/docs/p2.md
+/docs/p3.md
+/docs/p4.md
+/docs/p5.md
+/docs/report-draft.md
+/docs/ui-labels-20261125.md
+/submission-info.json
+/tools/backup-runtime.py
+/tools/baseline.py
+/tools/check-deployed-runtime.mjs
+/tools/check-runtime-boundary.ps1
+/tools/collect-enhanced-evidence.py
+/tools/delivery.py
+/tools/prepare-acl-fixture.ps1
+/tools/record-acceptance.py
+/tools/reproduce.py
+/tools/tests/test_delivery.py
+/tools/verify-originals.py
+
+# Local course/reference attachments, not source dependencies.
+/SecureFileTransfer.Client/TextFile1.json
+/image-1.png
+/image.png
+/test.sh
+/出师表.txt
+/实验 1 讲解 2026.pdf
+/验收.md
+/黑猫警长.jpg
+
+# Generated source/delivery archives
+*.zip

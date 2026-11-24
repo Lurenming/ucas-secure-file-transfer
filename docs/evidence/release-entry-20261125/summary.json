@@ -1,0 +1,60 @@
+{
+  "dateBeijing": "2026-11-25",
+  "scope": "launcher, shared configuration, clean delivery and one small GUI roundtrip",
+  "businessCodeChanged": false,
+  "fullBackendRegressionRun": false,
+  "stressTestRun": false,
+  "testCopies": ["artifacts/final-entry-check/SFT clean copy", "artifacts/final-entry-check/SFT desktop copy"],
+  "setup": {
+    "cmdInvoked": true,
+    "freshClientPublish": "Release, net10.0-windows, framework-dependent",
+    "solutionBuild": "all five projects succeeded; zero warnings and errors",
+    "serverRestore": "npm ci from unchanged package-lock.json; 66 packages",
+    "portableNode": "v22.23.5, x64, official archive SHA-256 verified before extraction",
+    "newTestCaAndServerCertificate": true,
+    "refusesExistingRuntime": true,
+    "existingDatabaseAndThreeCertificateFilesUnchanged": true
+  },
+  "accountMenu": {
+    "cmdInvoked": true,
+    "username": "delivery_check",
+    "passwordInput": "existing hidden interactive CLI, two prompts; no password persisted in scripts/config/evidence",
+    "createdOrdinary": {"tier": "ordinary", "upload_bps": 65536, "download_bps": 65536},
+    "setVipAndQueriedWithMenu2": {"tier": "vip", "upload_bps": 262144, "download_bps": 262144},
+    "exitMenuSucceeded": true
+  },
+  "serverEntry": {
+    "cmdInvoked": true,
+    "menuPassword": "listened on 127.0.0.1:8443",
+    "menuMtls": "listened on 127.0.0.1:8443; no-client-certificate health request rejected with ERR_SSL_TLSV13_ALERT_CERTIFICATE_REQUIRED",
+    "dataDirectory": "same test-copy runtime/data for server, account menu and both authentication modes",
+    "clientAddressPortAndCaPrinted": true,
+    "pkiCliArgumentForwarding": "pki check runtime/certs --ip 127.0.0.1 passed after positional binding fix",
+    "mtlsClientLoginRetested": false
+  },
+  "gui": {
+    "cmdInvoked": true,
+    "actualVisibleExecutable": "test-copy/publish/client/SecureFileTransfer.Client.exe",
+    "initialSandboxDesktopLimitation": "sandbox-launched window not exposed to desktop helper; repeated in separate clean test copy as current desktop user",
+    "login": "delivery_check authenticated in actual GUI",
+    "fileName": "roundtrip-small.txt",
+    "bytes": 8225,
+    "fileId": "1029b6f1-0381-4844-a0cf-49a999ba91f6",
+    "originalSha256": "f6c0f9ba37e2b3e5328e9889a99d517e820a420f9d5a1e88eb4c662d3c22a204",
+    "downloadSha256": "f6c0f9ba37e2b3e5328e9889a99d517e820a420f9d5a1e88eb4c662d3c22a204",
+    "uploadAndDownloadRows": "completed, 8225 / 8225",
+    "normalClientCloseExitCode": 0,
+    "evidence": ["gui-completed.jpg", "gui-completed.txt"]
+  },
+  "dependencyAudit": {
+    "allTrackedBusinessAndTestFilesRetained": 87,
+    "staticRelativeImportsAndProjectReferencesResolved": 100,
+    "testedEntryAndBusinessSourcesMatchCurrentWorkspace": true,
+    "officialNodeArchiveFilesCompared": 2032,
+    "packageLockUnchanged": true,
+    "npmLsExitCode": 0,
+    "missingNodeErrorIsClearAndCreatesNoRuntime": true
+  },
+  "testDataIncludedInDelivery": false,
+  "limits": ["local loopback only", "no repeated full regression or throughput measurement", "terminal harness did not deliver observable Ctrl+C shutdown; idle test servers stopped by their own verified PID"]
+}

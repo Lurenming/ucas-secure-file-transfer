@@ -1,0 +1,8 @@
+{
+  "runtimeDirectory": "runtime",
+  "nodeDirectory": "tools/runtime/node-v22.23.5-win-x64",
+  "listenHost": "127.0.0.1",
+  "clientHost": "127.0.0.1",
+  "port": 8443,
+  "allowLan": false
+}
