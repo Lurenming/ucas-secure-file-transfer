@@ -1,8 +1,9 @@
 import { DatabaseSync } from 'node:sqlite';
 import { mkdirSync, lstatSync, existsSync, chmodSync } from 'node:fs';
-import { execFileSync } from 'node:child_process';
 import { resolve, join, parse } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { restrictPrivatePath } from './private-storage.js';
+import { migrate } from './migrations.js';
 
 export const defaultDataDirectory = fileURLToPath(new URL('../data/', import.meta.url));
 
@@ -21,12 +22,10 @@ export function openAccounts(directory = process.env.SFT_DATA_DIR || defaultData
   }
   mkdirSync(base, { recursive: true, mode: 0o700 });
   if (lstatSync(base).isSymbolicLink()) throw new Error('Data directory must not be a symbolic link.');
-  if (process.platform === 'win32') {
-    const identity = execFileSync('whoami', [], { encoding: 'utf8', windowsHide: true }).trim();
-    execFileSync('icacls.exe', [base, '/inheritance:r', '/grant:r', `${identity}:(OI)(CI)F`], { stdio: 'pipe', windowsHide: true });
-  } else chmodSync(base, 0o700);
+  restrictPrivatePath(base);
   const filename = join(base, 'accounts.sqlite');
-  if (existsSync(filename) && lstatSync(filename).isSymbolicLink()) throw new Error('Database must not be a symbolic link.');
+  for (const knownFile of [filename, filename + '-wal', filename + '-shm'])
+    if (existsSync(knownFile)) restrictPrivatePath(knownFile, false);
   const db = new DatabaseSync(filename);
   try {
     // Experimental synchronous API: only bounded indexed queries; never password work here.
@@ -41,12 +40,18 @@ export function openAccounts(directory = process.env.SFT_DATA_DIR || defaultData
         key_length INTEGER NOT NULL, maxmem INTEGER NOT NULL,
         created_at TEXT NOT NULL
       ) STRICT;`);
+    migrate(db, 'accounts');
     if (process.platform !== 'win32') chmodSync(filename, 0o600);
     const find = db.prepare('SELECT user_id, username, password_hash, salt, algorithm, n, r, p, key_length, maxmem, created_at FROM users WHERE username = ?');
     const insert = db.prepare('INSERT INTO users (user_id, username, password_hash, salt, algorithm, n, r, p, key_length, maxmem, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
     let closed = false;
     return {
       filename,
+      db,
+      findById: id => db.prepare('SELECT user_id, username FROM users WHERE user_id=?').get(id),
+      policy: id => db.prepare('SELECT tier,upload_bps,download_bps FROM account_policy WHERE user_id=?').get(id)
+        ?? { tier: 'ordinary', upload_bps: 1048576, download_bps: 1048576 },
+      certificate: fingerprint => db.prepare('SELECT c.*,u.username FROM client_certificates c JOIN users u ON u.user_id=c.user_id WHERE fingerprint=? AND disabled=0').get(fingerprint),
       findByUsername: (username) => find.get(username),
       insert: (record) => {
         const username = normalizeUsername(record.username);

@@ -72,7 +72,7 @@ async function echo(client, text) {
 test('HTTPS trust, hostname, TLS floor and invalid startup fail closed', async (t) => {
   const service = await start();
   t.after(() => service.stop());
-  assert.deepEqual(await httpsGet(service.port), { status: 200, body: { status: 'ok', service: 'SecureFileTransfer.Server', stage: 'P1' } });
+  assert.deepEqual(await httpsGet(service.port), { status: 200, body: { status: 'ok', service: 'SecureFileTransfer.Server', stage: 'EnhancedV1', softwareVersion: '4.0.0', capabilities: ['window-auth-v1', 'resume-v1', 'account-bandwidth-v1'] } });
   await assert.rejects(httpsGet(service.port, { ca: undefined }));
   await assert.rejects(httpsGet(service.port, { ca: rootCertificates[0] }));
   await assert.rejects(httpsGet(service.port, { servername: 'mismatch.invalid' }));
@@ -121,6 +121,7 @@ test('persistent ECHO, isolation, fragmentation, invalid messages and limits', a
   }
   await echo(a, 'still alive after errors');
   const binary = await peer(service.port);
+  // P2 accepts only well-formed authenticated upload blocks; this remains malformed.
   binary.ws.send(Buffer.from([1, 2, 3]));
   assert.equal(await bounded(binary.closed), 1003);
   const oversized = await peer(service.port);

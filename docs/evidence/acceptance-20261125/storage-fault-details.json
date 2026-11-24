@@ -1,0 +1,133 @@
+{
+  "simulated": true,
+  "realDiskFull": false,
+  "passed": true,
+  "events": [
+    {
+      "kind": "checkpointContention",
+      "realWindowsFileLock": true,
+      "transientRecovered": true,
+      "persistentDenied": true,
+      "oldCheckpointPreserved": true,
+      "maxRenameAttempts": 6,
+      "maxRetryDelayMilliseconds": 385
+    },
+    {
+      "kind": "initialRecordFailureRecovered",
+      "simulated": true,
+      "sha256": "ad359aeca8072f710b50e317b77cff127aca17be78faeaa62971e3d55d0097ae",
+      "Size": 65539
+    },
+    {
+      "kind": "serverFault",
+      "phase": "write",
+      "id": "5d4cfef1-4ce0-46fe-9f82-b3f21fec7903",
+      "confirmed": 8192,
+      "Status": "待恢复",
+      "survivor": "1bde8d44-6e75-4bff-a3cf-ae9677d3f6b2"
+    },
+    {
+      "kind": "recovered",
+      "phase": "write",
+      "id": "5d4cfef1-4ce0-46fe-9f82-b3f21fec7903",
+      "size": 65539,
+      "sha256": "d237d7407ceb44cecc84a32c315e1cbd2acc3a26ed0327434191e7c60e66ad29"
+    },
+    {
+      "kind": "serverFault",
+      "phase": "flush",
+      "id": "17244e40-241e-4057-a46f-e0fafd9e7af1",
+      "confirmed": 8192,
+      "Status": "待恢复",
+      "survivor": "409e60bd-eec9-4237-9445-ff306e1f1b0f"
+    },
+    {
+      "kind": "recovered",
+      "phase": "flush",
+      "id": "17244e40-241e-4057-a46f-e0fafd9e7af1",
+      "size": 65539,
+      "sha256": "9af7e9d3eb5995c226431217b9640f39730bbc70191dd5e13e13429086def252"
+    },
+    {
+      "kind": "serverFault",
+      "phase": "checkpoint",
+      "id": "73162678-6ac2-4ee0-9e8d-02facc6d7389",
+      "confirmed": 8192,
+      "Status": "待恢复",
+      "survivor": "3665b985-6560-49bd-89b8-a9b9d392943c"
+    },
+    {
+      "kind": "recovered",
+      "phase": "checkpoint",
+      "id": "73162678-6ac2-4ee0-9e8d-02facc6d7389",
+      "size": 65539,
+      "sha256": "fadf6651ddb3e898eb6e6b0fbafab18f9bcb349570a28d2a5585d000daa8102a"
+    },
+    {
+      "kind": "serverFault",
+      "phase": "precommit",
+      "id": "bc3ae93e-9cae-4e91-937c-32325291a4e2",
+      "confirmed": 65539,
+      "Status": "待恢复",
+      "survivor": "44f92ee6-82a5-47cd-82b6-8359ef206d9f"
+    },
+    {
+      "kind": "recovered",
+      "phase": "precommit",
+      "id": "bc3ae93e-9cae-4e91-937c-32325291a4e2",
+      "size": 65539,
+      "sha256": "19eebed1c92b86082d0c82dc0de1e59670f472be1d33f9b36136fdccf5a588dc"
+    },
+    {
+      "kind": "serverFault",
+      "phase": "commit",
+      "id": "4800b601-f51e-4517-8624-71bfe24419c9",
+      "confirmed": 65539,
+      "Status": "待恢复",
+      "survivor": "7d9d1b16-6ea6-4223-9489-003467197dd9"
+    },
+    {
+      "kind": "recovered",
+      "phase": "commit",
+      "id": "4800b601-f51e-4517-8624-71bfe24419c9",
+      "size": 65539,
+      "sha256": "ebf8428cd4347bd52c513c23b76ae6b40e02f8cc71a34d8887a0ad70a9c73914"
+    },
+    {
+      "kind": "clientFaultRecovered",
+      "phase": "download-write",
+      "savedOffset": 8192,
+      "size": 65539,
+      "sha256": "d11d1a3829eb367c31d841f51fab7955872b03f762d3effbcd405c9ec12c8202",
+      "handleReleased": true,
+      "Status": "完成"
+    },
+    {
+      "kind": "clientFaultRecovered",
+      "phase": "download-flush",
+      "savedOffset": 8192,
+      "size": 65539,
+      "sha256": "d11d1a3829eb367c31d841f51fab7955872b03f762d3effbcd405c9ec12c8202",
+      "handleReleased": true,
+      "Status": "完成"
+    },
+    {
+      "kind": "clientFaultRecovered",
+      "phase": "record-commit",
+      "savedOffset": 8192,
+      "size": 65539,
+      "sha256": "d11d1a3829eb367c31d841f51fab7955872b03f762d3effbcd405c9ec12c8202",
+      "handleReleased": true,
+      "Status": "完成"
+    },
+    {
+      "kind": "done",
+      "serverScenarios": 5,
+      "clientScenarios": 4,
+      "existingTargetPreserved": true,
+      "diskFullScenariosAreSimulated": true
+    }
+  ],
+  "activeAfter": 0,
+  "connectionsAfter": 0
+}

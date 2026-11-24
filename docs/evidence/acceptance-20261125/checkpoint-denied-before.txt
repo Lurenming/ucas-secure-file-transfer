@@ -1,0 +1,41 @@
+2026/11/24 17:04:55 +00:00
+System.UnauthorizedAccessException: Access to the path is denied.
+   at System.IO.FileSystem.MoveFile(String sourceFullPath, String destFullPath, Boolean overwrite)
+2026/11/24 17:04:55 +00:00
+System.UnauthorizedAccessException: Access to the path is denied.
+   at System.IO.FileSystem.MoveFile(String sourceFullPath, String destFullPath, Boolean overwrite)
+   at SecureFileTransfer.Client.Networking.TransferState.Save() in D:\UCAS\软件与系统安全\lab1\SecureFileTransfer.Client\SecureFileTransfer.Client\Networking\TransferState.cs:line 37
+   at SecureFileTransfer.Client.Networking.SecureConnection.<>c__DisplayClass80_1.<<ResumeUploadAsync>b__0>d.MoveNext() in D:\UCAS\软件与系统安全\lab1\SecureFileTransfer.Client\SecureFileTransfer.Client\Networking\SecureConnection.Resume.cs:line 56
+--- End of stack trace from previous location ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+2026/11/24 17:04:55 +00:00
+System.UnauthorizedAccessException: Access to the path is denied.
+   at System.IO.FileSystem.MoveFile(String sourceFullPath, String destFullPath, Boolean overwrite)
+   at SecureFileTransfer.Client.Networking.TransferState.Save() in D:\UCAS\软件与系统安全\lab1\SecureFileTransfer.Client\SecureFileTransfer.Client\Networking\TransferState.cs:line 37
+   at SecureFileTransfer.Client.Networking.SecureConnection.<>c__DisplayClass80_1.<<ResumeUploadAsync>b__0>d.MoveNext() in D:\UCAS\软件与系统安全\lab1\SecureFileTransfer.Client\SecureFileTransfer.Client\Networking\SecureConnection.Resume.cs:line 56
+--- End of stack trace from previous location ---
+   at SecureFileTransfer.Client.Networking.SecureConnection.<>c__DisplayClass80_1.<<ResumeUploadAsync>b__0>d.MoveNext() in D:\UCAS\软件与系统安全\lab1\SecureFileTransfer.Client\SecureFileTransfer.Client\Networking\SecureConnection.Resume.cs:line 61
+--- End of stack trace from previous location ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+2026/11/24 17:04:55 +00:00
+System.UnauthorizedAccessException: Access to the path is denied.
+   at System.IO.FileSystem.MoveFile(String sourceFullPath, String destFullPath, Boolean overwrite)
+   at SecureFileTransfer.Client.Networking.TransferState.Save() in D:\UCAS\软件与系统安全\lab1\SecureFileTransfer.Client\SecureFileTransfer.Client\Networking\TransferState.cs:line 37
+   at SecureFileTransfer.Client.Networking.SecureConnection.<>c__DisplayClass80_1.<<ResumeUploadAsync>b__0>d.MoveNext() in D:\UCAS\软件与系统安全\lab1\SecureFileTransfer.Client\SecureFileTransfer.Client\Networking\SecureConnection.Resume.cs:line 56
+--- End of stack trace from previous location ---
+   at SecureFileTransfer.Client.Networking.SecureConnection.<>c__DisplayClass80_1.<<ResumeUploadAsync>b__0>d.MoveNext() in D:\UCAS\软件与系统安全\lab1\SecureFileTransfer.Client\SecureFileTransfer.Client\Networking\SecureConnection.Resume.cs:line 61
+--- End of stack trace from previous location ---
+   at SecureFileTransfer.Client.Networking.SecureConnection.ResumeUploadAsync(TransferState state, IProgress`1 progress, CancellationToken token) in D:\UCAS\软件与系统安全\lab1\SecureFileTransfer.Client\SecureFileTransfer.Client\Networking\SecureConnection.Resume.cs:line 19
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+2026/11/24 17:04:55 +00:00
+System.UnauthorizedAccessException: Access to the path is denied.
+   at System.IO.FileSystem.MoveFile(String sourceFullPath, String destFullPath, Boolean overwrite)
+   at SecureFileTransfer.Client.Networking.TransferState.Save() in D:\UCAS\软件与系统安全\lab1\SecureFileTransfer.Client\SecureFileTransfer.Client\Networking\TransferState.cs:line 37
+   at SecureFileTransfer.Client.Networking.SecureConnection.<>c__DisplayClass80_1.<<ResumeUploadAsync>b__0>d.MoveNext() in D:\UCAS\软件与系统安全\lab1\SecureFileTransfer.Client\SecureFileTransfer.Client\Networking\SecureConnection.Resume.cs:line 56
+--- End of stack trace from previous location ---
+   at SecureFileTransfer.Client.Networking.SecureConnection.<>c__DisplayClass80_1.<<ResumeUploadAsync>b__0>d.MoveNext() in D:\UCAS\软件与系统安全\lab1\SecureFileTransfer.Client\SecureFileTransfer.Client\Networking\SecureConnection.Resume.cs:line 61
+--- End of stack trace from previous location ---
+   at SecureFileTransfer.Client.Networking.SecureConnection.ResumeUploadAsync(TransferState state, IProgress`1 progress, CancellationToken token) in D:\UCAS\软件与系统安全\lab1\SecureFileTransfer.Client\SecureFileTransfer.Client\Networking\SecureConnection.Resume.cs:line 19
+   at SecureFileTransfer.Client.Networking.SecureConnection.ResumeUploadAsync(TransferState state, IProgress`1 progress, CancellationToken token) in D:\UCAS\软件与系统安全\lab1\SecureFileTransfer.Client\SecureFileTransfer.Client\Networking\SecureConnection.Resume.cs:line 72
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+StartupHook active; pid=6564

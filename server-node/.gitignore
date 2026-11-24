@@ -10,6 +10,9 @@ logs/
 .npmrc
 secrets/
 data/
+uploads/
+downloads/
+*.part
 *.sqlite
 *.sqlite-*
 *.db

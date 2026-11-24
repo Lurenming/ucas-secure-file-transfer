@@ -1,0 +1,147 @@
+{
+  "checkedAt": "2026-11-24T14:19:56.144983+00:00",
+  "method": "Read-only streaming SHA-256 of existing source/download files; no transfer or backend regression rerun.",
+  "serverFilesRecheckedThisClosure": false,
+  "threeWayConclusionSource": "User manual confirmation in current delivery-closure request; not substituted by the pair checks below.",
+  "comparisons": [
+    {
+      "source": {
+        "path": "D:\\UCAS\\软件与系统安全\\lab1-manual-20261119-124555-87e0a880\\sources\\中文-0.bin",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "downloaded": {
+        "path": "D:\\UCAS\\软件与系统安全\\lab1-manual-20261124-184911-6749a0d8\\downloads-alice\\中文-0.bin",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "sizeEqual": true,
+      "sha256Equal": true
+    },
+    {
+      "source": {
+        "path": "D:\\UCAS\\软件与系统安全\\lab1-manual-20261119-124555-87e0a880\\sources\\中文-1.bin",
+        "bytes": 1,
+        "sha256": "4b68ab3847feda7d6c62c1fbcbeebfa35eab7351ed5e78f4ddadea5df64b8015"
+      },
+      "downloaded": {
+        "path": "D:\\UCAS\\软件与系统安全\\lab1-manual-20261124-184911-6749a0d8\\downloads-alice\\中文-1.bin",
+        "bytes": 1,
+        "sha256": "4b68ab3847feda7d6c62c1fbcbeebfa35eab7351ed5e78f4ddadea5df64b8015"
+      },
+      "sizeEqual": true,
+      "sha256Equal": true
+    },
+    {
+      "source": {
+        "path": "D:\\UCAS\\软件与系统安全\\lab1-manual-20261119-124555-87e0a880\\sources\\中文-8191.bin",
+        "bytes": 8191,
+        "sha256": "8073a2b2eacda74b669f3a316328731b478476f66f8d3b4ab047983ec63c6d95"
+      },
+      "downloaded": {
+        "path": "D:\\UCAS\\软件与系统安全\\lab1-manual-20261124-184911-6749a0d8\\downloads-alice\\中文-8191.bin",
+        "bytes": 8191,
+        "sha256": "8073a2b2eacda74b669f3a316328731b478476f66f8d3b4ab047983ec63c6d95"
+      },
+      "sizeEqual": true,
+      "sha256Equal": true
+    },
+    {
+      "source": {
+        "path": "D:\\UCAS\\软件与系统安全\\lab1-manual-20261119-124555-87e0a880\\sources\\中文-8192.bin",
+        "bytes": 8192,
+        "sha256": "21df62f0e8d367180b8b5c9784d169ccea9111517fae2b801e0bbfb3caa50735"
+      },
+      "downloaded": {
+        "path": "D:\\UCAS\\软件与系统安全\\lab1-manual-20261124-184911-6749a0d8\\downloads-alice\\中文-8192.bin",
+        "bytes": 8192,
+        "sha256": "21df62f0e8d367180b8b5c9784d169ccea9111517fae2b801e0bbfb3caa50735"
+      },
+      "sizeEqual": true,
+      "sha256Equal": true
+    },
+    {
+      "source": {
+        "path": "D:\\UCAS\\软件与系统安全\\lab1-manual-20261119-124555-87e0a880\\sources\\中文-8193.bin",
+        "bytes": 8193,
+        "sha256": "3bb042c5330f296c3b119707fe8812280f4f50d2d50a5b7f2f4250cbb72acdfb"
+      },
+      "downloaded": {
+        "path": "D:\\UCAS\\软件与系统安全\\lab1-manual-20261124-184911-6749a0d8\\downloads-alice\\中文-8193.bin",
+        "bytes": 8193,
+        "sha256": "3bb042c5330f296c3b119707fe8812280f4f50d2d50a5b7f2f4250cbb72acdfb"
+      },
+      "sizeEqual": true,
+      "sha256Equal": true
+    },
+    {
+      "source": {
+        "path": "D:\\UCAS\\软件与系统安全\\lab1-manual-20261119-124555-87e0a880\\sources\\中文-48017.bin",
+        "bytes": 48017,
+        "sha256": "2001bca24000d868d6417dbd3c23116c25f3d7505c03f6f2f7a74340418225e4"
+      },
+      "downloaded": {
+        "path": "D:\\UCAS\\软件与系统安全\\lab1-manual-20261124-184911-6749a0d8\\downloads-alice\\中文-48017.bin",
+        "bytes": 48017,
+        "sha256": "2001bca24000d868d6417dbd3c23116c25f3d7505c03f6f2f7a74340418225e4"
+      },
+      "sizeEqual": true,
+      "sha256Equal": true
+    },
+    {
+      "source": {
+        "path": "D:\\UCAS\\软件与系统安全\\lab1-manual-20261124-184911-6749a0d8\\sources\\Alice-64MiB.bin",
+        "bytes": 67108864,
+        "sha256": "301d1a3da0c93bd158cee18739f3d3f7fd0929f34009b8f080ce1e39a5536f8b"
+      },
+      "downloaded": {
+        "path": "D:\\UCAS\\软件与系统安全\\lab1-manual-20261124-184911-6749a0d8\\downloads-alice\\Alice-64MiB.bin",
+        "bytes": 67108864,
+        "sha256": "301d1a3da0c93bd158cee18739f3d3f7fd0929f34009b8f080ce1e39a5536f8b"
+      },
+      "sizeEqual": true,
+      "sha256Equal": true
+    },
+    {
+      "source": {
+        "path": "D:\\UCAS\\软件与系统安全\\lab1-manual-20261124-184911-6749a0d8\\sources\\D02-8193-20261124-202228.bin",
+        "bytes": 8193,
+        "sha256": "5ff8510a5511912c74941b6f978123691e2df3653604d7c409c4282af0152a47"
+      },
+      "downloaded": {
+        "path": "D:\\UCAS\\软件与系统安全\\lab1-manual-20261124-184911-6749a0d8\\downloads-alice\\D02-8193-20261124-202228.bin",
+        "bytes": 8193,
+        "sha256": "5ff8510a5511912c74941b6f978123691e2df3653604d7c409c4282af0152a47"
+      },
+      "sizeEqual": true,
+      "sha256Equal": true
+    },
+    {
+      "source": {
+        "path": "D:\\UCAS\\软件与系统安全\\lab1-manual-20261119-124555-87e0a880\\sources\\中文-8193.bin",
+        "bytes": 8193,
+        "sha256": "3bb042c5330f296c3b119707fe8812280f4f50d2d50a5b7f2f4250cbb72acdfb"
+      },
+      "downloaded": {
+        "path": "D:\\UCAS\\软件与系统安全\\lab1-manual-20261124-184911-6749a0d8\\downloads-alice\\中文-8193-重复.bin",
+        "bytes": 8193,
+        "sha256": "3bb042c5330f296c3b119707fe8812280f4f50d2d50a5b7f2f4250cbb72acdfb"
+      },
+      "sizeEqual": true,
+      "sha256Equal": true
+    }
+  ],
+  "initial48017SourceMixup": {
+    "incorrectlySelectedSource": {
+      "path": "D:\\UCAS\\软件与系统安全\\lab1-manual-20261124-184911-6749a0d8\\sources\\中文-48017.bin",
+      "bytes": 48017,
+      "sha256": "cdb0cdad9351d5c5ae8a71f44f4166d36557a49df5fe24f20aabc3ea306503d8"
+    },
+    "actualSource": {
+      "path": "D:\\UCAS\\软件与系统安全\\lab1-manual-20261119-124555-87e0a880\\sources\\中文-48017.bin",
+      "bytes": 48017,
+      "sha256": "2001bca24000d868d6417dbd3c23116c25f3d7505c03f6f2f7a74340418225e4"
+    },
+    "reason": "Same display filename in different preparation directories; original mismatch retained."
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "originalFiles": 71,
+  "currentFiles": 73,
+  "originalContentsUnchanged": true,
+  "directoryCompletelyUnchanged": false,
+  "changedOrMissingOriginals": [],
+  "addedFiles": [
+    "server-node/data/uploads-backup-20261124-191550/uploads.sqlite-shm",
+    "server-node/data/uploads-backup-20261124-191550/uploads.sqlite-wal"
+  ],
+  "differences": [
+    "server-node/data/uploads-backup-20261124-191550/uploads.sqlite-shm",
+    "server-node/data/uploads-backup-20261124-191550/uploads.sqlite-wal"
+  ],
+  "userAcceptanceFileUnchanged": true,
+  "originalsOpenedReadOnly": true
+}

@@ -1,5 +1,7 @@
 import { normalizeUsername } from './accounts.js';
 import { validPassword, verifyPasswordBytes } from './passwords.js';
+import { WindowAuth } from './window-auth.js';
+import { authMode } from './connection-config.js';
 
 export const authPolicy = Object.freeze({
   sessionMs: 15 * 60 * 1000, unauthenticatedMs: 120000,
@@ -31,6 +33,8 @@ class Bucket {
 export class AuthManager {
   constructor(store, options = {}) {
     this.store = store;
+    this.mode = authMode(options.mode);
+    this.windows = new WindowAuth(this);
     this.policy = { ...authPolicy, ...options };
     this.active = 0;
     this.queue = [];
@@ -100,15 +104,21 @@ class ConnectionAuth {
     this.waitTimer.unref();
   }
   invalidate() {
+    this.manager.windows.leave(this);
     this.generation++;
     this.attempt?.controller.abort();
     this.identity = null;
     clearTimeout(this.sessionTimer);
+    this.onInvalidate?.();
   }
   expireIfNeeded() {
+    if (this.identity?.fingerprint && !this.manager.store.certificate(this.identity.fingerprint)) {
+      this.invalidate(); this.beginUnauthenticatedWait(); this.send({ type: 'AUTH_EXPIRED', data: {} });
+      return;
+    }
     if (this.identity && Date.now() < this.identity.expiresAt) {
       clearTimeout(this.sessionTimer);
-      this.sessionTimer = setTimeout(() => this.expireIfNeeded(), this.identity.expiresAt - Date.now());
+      this.sessionTimer = setTimeout(() => this.expireIfNeeded(), Math.min(this.identity.expiresAt - Date.now(), this.identity.fingerprint ? 1000 : this.manager.policy.sessionMs));
       this.sessionTimer.unref();
       return;
     }
@@ -122,6 +132,29 @@ class ConnectionAuth {
     if (this.disposed || !this.isOpen()) return;
     this.expireIfNeeded();
     const { type, requestId, data } = message;
+    if (type === 'AUTH_WINDOW') {
+      try { this.send({ type: 'AUTH_WINDOW_RESULT', requestId, data: this.manager.windows.open(this) }); }
+      catch (error) { this.error(requestId, error.message); } return;
+    }
+    if (type === 'AUTH_CERT' || type === 'AUTH_ATTACH') {
+      try {
+        if (this.identity) throw new Error('AUTH_ALREADY_LOGGED_IN');
+        if (this.attempt) throw new Error('AUTH_BUSY');
+        if (!this.bucket.take() || Date.now() >= this.unauthenticatedDeadline) throw new Error('AUTH_RATE_LIMITED');
+        let user;
+        if (type === 'AUTH_CERT') {
+          const row = this.peerFingerprint && this.manager.store.certificate(this.peerFingerprint);
+          if (!row || Date.now() >= Date.parse(row.not_after)) throw new Error('AUTH_FAILED');
+          if (data.username !== undefined && data.username !== row.username) throw new Error('AUTH_FAILED');
+          user = { userId: row.user_id, username: row.username, fingerprint: row.fingerprint,
+            expiresAt: Math.min(Date.now() + this.manager.policy.sessionMs, Date.parse(row.not_after)) };
+        } else {
+          user = this.manager.windows.attach(this, data.ticket); delete data.ticket;
+        }
+        this.generation++; this.identity = user; clearTimeout(this.waitTimer); this.expireIfNeeded();
+        this.send({ type: type + '_RESULT', requestId, data: this.publicIdentity() });
+      } catch (error) { this.error(requestId, error.message); } return;
+    }
     if (type === 'AUTH_LOGOUT') {
       const wasAuthenticated = Boolean(this.identity);
       this.invalidate();
@@ -131,6 +164,7 @@ class ConnectionAuth {
       if (!this.identity) return this.error(requestId, 'AUTH_REQUIRED');
       this.send({ type: 'AUTH_ME_RESULT', requestId, data: this.publicIdentity() });
     } else if (type === 'AUTH_LOGIN') {
+      if (this.manager.mode === 'mtls-required') { delete data.password; return this.error(requestId, 'AUTH_FAILED'); }
       // Discard the parsed password field immediately; no raw messages are logged.
       const password = data.password;
       delete data.password;
@@ -168,6 +202,10 @@ class ConnectionAuth {
     }
   }
   publicIdentity() { return { userId: this.identity.userId, username: this.identity.username, expiresAt: new Date(this.identity.expiresAt).toISOString() }; }
+  snapshot() {
+    this.expireIfNeeded();
+    return !this.disposed && this.isOpen() && this.identity ? { userId: this.identity.userId, generation: this.generation } : null;
+  }
   dispose() {
     if (this.disposed) return;
     this.disposed = true;

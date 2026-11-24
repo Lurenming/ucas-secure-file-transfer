@@ -7,7 +7,9 @@ app.get('/health', (_req, res) => {
   res.json({
     status: 'ok',
     service: 'SecureFileTransfer.Server',
-    stage: 'P1',
+    stage: 'EnhancedV1',
+    softwareVersion: '4.0.0',
+    capabilities: ['window-auth-v1', 'resume-v1', 'account-bandwidth-v1'],
   });
 });
 

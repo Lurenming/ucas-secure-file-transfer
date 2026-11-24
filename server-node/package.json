@@ -1,8 +1,8 @@
 {
   "name": "secure-file-transfer-server",
-  "version": "1.0.0",
+  "version": "4.0.0",
   "private": true,
-  "description": "P1 local WSS account authentication and connection sessions",
+  "description": "Private WSS file transfer with mTLS, reusable parallel connections, account bandwidth and durable resume",
   "type": "module",
   "scripts": {
     "start": "node src/server.js",

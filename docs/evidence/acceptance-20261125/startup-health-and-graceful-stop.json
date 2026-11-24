@@ -1,0 +1,25 @@
+﻿{
+    "Modes":  [
+                  {
+                      "Mode":  "password",
+                      "Start":  "2026-11-24T17:28:08.506Z",
+                      "End":  "2026-11-24T17:29:04.920Z",
+                      "HttpsStatus":  200,
+                      "StrictTls":  true,
+                      "ConnectionsAfter":  0,
+                      "ActiveAfter":  0
+                  },
+                  {
+                      "Mode":  "mtls",
+                      "Start":  "2026-11-24T17:28:32.628Z",
+                      "End":  "2026-11-24T17:29:07.802Z",
+                      "HttpsStatus":  200,
+                      "StrictTls":  true,
+                      "ConnectionsAfter":  0,
+                      "ActiveAfter":  0
+                  }
+              ],
+    "PortsReleased":  true,
+    "StoppedVia":  "own server stdin stop; graceful service.stop",
+    "PowerLossTest":  false
+}

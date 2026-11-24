@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "checks": [
+    "Rejected address leaves last valid form configuration intact: 0.0.0.0",
+    "Rejected connection is not persisted and subsequent render does not throw",
+    "Rejected address leaves last valid form configuration intact: bad/host",
+    "Rejected connection is not persisted and subsequent render does not throw",
+    "Expired partial upload has no local part requirement and does not delete source",
+    "Expired owned download part is cleaned",
+    "Unverifiable foreign part is retained",
+    "Expired upload terminal state persists across reload"
+  ],
+  "classification": "WinForms form-method integration regression; not desktop clicks"
+}

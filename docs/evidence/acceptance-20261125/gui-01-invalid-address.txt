@@ -1,0 +1,75 @@
+Window: "安全文件传输 · 并行与断点恢复", App: SecureFileTransfer.Client.exe.
+	0 window (窗口) 安全文件传输 · 并行与断点恢复 Secondary Actions: Raise
+		1 pane (窗格)
+			2 pane (窗格)
+				3 text (文本) 服务器 IP / 域名
+				4 text field (编辑) (settable, string) 服务器 IP / 域名 Value: 0.0.0.0
+				5 text (文本) 端口
+				6 spinner (沙网) 端口
+					7 spinner (沙网) 上下箭头
+						8 button (按钮) (disabled) 向上键
+						9 button (按钮) (disabled) 向下键
+					10 text field (编辑) (settable, string) 端口 Value: 62284
+				11 text (文本) 并发
+				12 spinner (沙网) 并发
+					13 spinner (沙网) 上下箭头
+						14 button (按钮) (disabled) 向上键
+						15 button (按钮) (disabled) 向下键
+					16 text field (编辑) (settable, string) 并发 Value: 4
+				17 button (按钮) 连接
+				18 button (按钮) (disabled) 断开
+				19 text (文本) 未连接
+			20 pane (窗格) 未连接
+				21 button (按钮) CA 公共证书…
+				22 text field (编辑) (settable, string) Value: D:\UCAS\软件与系统安全\lab1\artifacts\acceptance-20261125\manual\certs\public\dev-ca.crt
+				23 button (按钮) 客户端 PFX…
+				24 button (按钮) 证书库…
+				25 button (按钮) 清除证书
+				26 text (文本) 未选择客户端证书（密码兼容模式）
+			27 pane (窗格) 未选择客户端证书（密码兼容模式）
+				28 text (文本) 账户
+				29 text field (编辑) (disabled, settable, string) 账户
+				30 text (文本) 密码
+				31 text field (编辑) (disabled, settable, string) 密码 Value: 已拒绝访问
+				32 button (按钮) (disabled) 登录
+				33 button (按钮) (disabled) 注销
+				34 text (文本) mTLS 由服务器证书绑定确认身份；选证书后重新连接
+			35 pane (窗格) mTLS 由服务器证书绑定确认身份；选证书后重新连接
+				36 button (按钮) (disabled) 刷新本人文件
+				37 button (按钮) (disabled) 下一页
+				38 button (按钮) (disabled) 多选上传…
+				39 button (按钮) (disabled) 所选下载入队…
+			40 table (表格)
+				41 header (标头) 标头控件 ID: Header
+					42 header item (标头项目) 文件名 ID: HeaderItem 0
+					43 header item (标头项目) 大小（字节） ID: HeaderItem 1
+					44 header item (标头项目) SHA-256 ID: HeaderItem 2
+					45 header item (标头项目) 文件 ID ID: HeaderItem 3
+			46 pane (窗格)
+				47 button (按钮) (disabled) 暂停所选
+				48 button (按钮) (disabled) 继续 / 恢复
+				49 button (按钮) (disabled) 取消并清理
+				50 text (文本) 暂停/断线/关窗保留恢复数据；主动取消清理；重新登录后手动恢复
+			51 table (表格) 暂停/断线/关窗保留恢复数据；主动取消清理；重新登录后手动恢复
+				52 header (标头) 标头控件 ID: Header
+					53 header item (标头项目) 方向 ID: HeaderItem 0
+					54 header item (标头项目) 文件名 ID: HeaderItem 1
+					55 header item (标头项目) 状态 ID: HeaderItem 2
+					56 header item (标头项目) 进度 ID: HeaderItem 3
+					57 header item (标头项目) 已传 / 总字节 ID: HeaderItem 4
+					58 header item (标头项目) 速度 KiB/s ID: HeaderItem 5
+					59 header item (标头项目) 结果 ID: HeaderItem 6
+			60 text field (编辑) Value: [00:35:59] 请填写服务器实际 IP/域名、1–65535 端口和 1–8 并发数。
+				61 scroll bar (滚动条) (disabled, settable, float) 垂直滚动条 Value: 0 ID: NonClientVerticalScrollBar
+					62 button (按钮) (disabled) 上一行 ID: UpButton
+					63 button (按钮) (disabled) 下一行 ID: DownButton
+		64 title bar (标题栏) (settable, string) Value: 安全文件传输 · 并行与断点恢复
+			65 menu bar (菜单栏) 系统 ID: MenuBar
+				66 menu item (菜单项目) 系统
+			67 button (按钮) 最小化
+			68 button (按钮) 最大化
+			69 button (按钮) 关闭
+
+Document text: ```
+[00:35:59] 请填写服务器实际 IP/域名、1–65535 端口和 1–8 并发数。
+```

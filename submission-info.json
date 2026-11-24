@@ -1,0 +1,29 @@
+{
+  "name": "姓名待填写",
+  "studentId": "学号待填写",
+  "repositoryUrl": "待填写真实Git仓库链接",
+  "softwareVersion": "4.0.0",
+  "guiAcceptanceCompleted": false,
+  "reportReviewed": false,
+  "videoReviewed": false,
+  "guiAcceptanceSummary": {
+    "basis": "Actual desktop automation and separate form/core regressions completed; user manual signoff still pending",
+    "evidence": "docs/evidence/acceptance-20261125.json",
+    "realCrossMachine": "pending manual validation",
+    "historicalAcceptanceIsNotCurrent": true
+  },
+  "historicalP5GuiAcceptanceSummary": {
+    "recordedDate": "2026-11-24",
+    "basis": "user manual confirmation and supplied evidence",
+    "mandatoryPassed": 26,
+    "conditionalPassed": [
+      "A04"
+    ],
+    "passed": 27,
+    "conditionalNotCovered": [
+      "D05"
+    ],
+    "D05Reason": "No suitable existing unwritable directory; historical automated simulated write failure is separate evidence.",
+    "evidence": "docs/evidence/gui-20261124.md"
+  }
+}

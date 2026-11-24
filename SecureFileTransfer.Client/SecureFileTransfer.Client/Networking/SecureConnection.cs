@@ -4,13 +4,14 @@ using System.Text;
 using System.Text.Json;
 using System.Security.Cryptography;
 using System.Text.RegularExpressions;
+using System.Security.Cryptography.X509Certificates;
 
 namespace SecureFileTransfer.Client.Networking;
 
 public sealed record EchoReply(Guid RequestId, Guid ConnectionId, string Text);
 
 // One instance represents one connection generation; reconnect creates a fresh instance.
-public sealed class SecureConnection : IAsyncDisposable
+public sealed partial class SecureConnection : IAsyncDisposable
 {
     public const int MaxMessageBytes = 16 * 1024;
     public const int MaxTextLength = 1024;
@@ -28,7 +29,11 @@ public sealed class SecureConnection : IAsyncDisposable
     private int started;
     private int disconnecting;
     private int queuedBytes;
-    private sealed record Pending(string ExpectedType, long AuthGeneration, string? EchoText, TaskCompletionSource<JsonElement> Result);
+    private sealed record Pending(string ExpectedType, long AuthGeneration, string? EchoText, TaskCompletionSource<JsonElement>? Result,
+        TaskCompletionSource<DownloadBlock>? BinaryResult = null, Guid? DownloadId = null, long Offset = 0, int Length = 0)
+    {
+        public void Fail(Exception error) { Result?.TrySetException(error); BinaryResult?.TrySetException(error); }
+    }
     private readonly object authLock = new();
     private long authGeneration;
     private int loginPending;
@@ -42,17 +47,24 @@ public sealed class SecureConnection : IAsyncDisposable
     public event Action<string>? Log;
     public SessionIdentity? Identity { get { lock (authLock) return identity; } }
     public event Action? IdentityChanged;
+    public HashSet<string> Capabilities { get; } = [];
+    public string AuthenticationMode { get; private set; } = "password";
 
-    public SecureConnection(Uri address, string publicCaPath)
+    public SecureConnection(Uri address, string publicCaPath, X509Certificate2? clientCertificate = null)
     {
         if (address.Scheme != "wss" || address.AbsolutePath != "/ws" || address.Query.Length != 0 || address.Fragment.Length != 0 || address.UserInfo.Length != 0)
             throw new ArgumentException("地址必须为 wss://主机:端口/ws，且不含用户信息、查询参数或片段。");
         this.address = address;
+        if (address.Host is "0.0.0.0" or "::" or "[::]") throw new ArgumentException("客户端必须填写服务器实际 IP 或域名，不能使用通配监听地址。");
         certificates = new DevelopmentCertificateValidator(publicCaPath, address.IdnHost);
         socket.Options.RemoteCertificateValidationCallback = certificates.Validate;
         socket.Options.KeepAliveInterval = TimeSpan.FromSeconds(15);
         socket.Options.KeepAliveTimeout = TimeSpan.FromSeconds(10);
         socket.Options.Proxy = null;
+        if (clientCertificate is not null) {
+            if (!clientCertificate.HasPrivateKey) throw new ArgumentException("客户端证书没有可用私钥。");
+            socket.Options.ClientCertificates.Add(clientCertificate);
+        }
         // Compression is off: DangerousDeflateOptions is intentionally not configured.
     }
 
@@ -135,7 +147,7 @@ public sealed class SecureConnection : IAsyncDisposable
         catch { await DisconnectAsync().ConfigureAwait(false); throw; } // Uncertain logout must not leave a usable hidden session.
     }
 
-    private async Task<JsonElement> RequestAsync(Guid requestId, string expectedType, byte[] body, long generation, string? echoText, CancellationToken cancellationToken)
+    private async Task<JsonElement> RequestAsync(Guid requestId, string expectedType, byte[] body, long generation, string? echoText, CancellationToken cancellationToken, bool binary = false)
     {
         bool admitted = false;
         try
@@ -147,10 +159,10 @@ public sealed class SecureConnection : IAsyncDisposable
             var request = new Pending(expectedType, generation, echoText, new(TaskCreationOptions.RunContinuationsAsynchronously));
             pending[requestId] = request;
             using var timeout = CancellationTokenSource.CreateLinkedTokenSource(lifetime.Token, cancellationToken);
-            timeout.CancelAfter(TimeSpan.FromSeconds(10));
-            try { await SendFrameAsync(body, timeout.Token).ConfigureAwait(false); }
+            timeout.CancelAfter(TimeSpan.FromSeconds(binary || expectedType.StartsWith("UPLOAD_") || expectedType.StartsWith("DOWNLOAD_") ? 120 : 10));
+            try { await SendFrameAsync(body, timeout.Token, binary).ConfigureAwait(false); }
             finally { CryptographicOperations.ZeroMemory(body); }
-            return await request.Result.Task.WaitAsync(timeout.Token).ConfigureAwait(false);
+            return await request.Result!.Task.WaitAsync(timeout.Token).ConfigureAwait(false);
         }
         finally
         {
@@ -160,7 +172,7 @@ public sealed class SecureConnection : IAsyncDisposable
         }
     }
 
-    private async Task SendFrameAsync(byte[] body, CancellationToken token)
+    private async Task SendFrameAsync(byte[] body, CancellationToken token, bool binary = false)
     {
         int total = Interlocked.Add(ref queuedBytes, body.Length);
         try
@@ -170,7 +182,7 @@ public sealed class SecureConnection : IAsyncDisposable
             try
             {
                 if (!IsConnected) throw new IOException("连接已关闭。");
-                await socket.SendAsync(new ArraySegment<byte>(body), WebSocketMessageType.Text, true, token).ConfigureAwait(false);
+                await socket.SendAsync(new ArraySegment<byte>(body), binary ? WebSocketMessageType.Binary : WebSocketMessageType.Text, true, token).ConfigureAwait(false);
             }
             finally { sendGate.Release(); }
         }
@@ -187,6 +199,7 @@ public sealed class SecureConnection : IAsyncDisposable
             {
                 using var message = new MemoryStream();
                 WebSocketReceiveResult part;
+                WebSocketMessageType? messageType = null;
                 do
                 {
                     part = await socket.ReceiveAsync(new ArraySegment<byte>(buffer), lifetime.Token).ConfigureAwait(false);
@@ -196,10 +209,12 @@ public sealed class SecureConnection : IAsyncDisposable
                         await CloseOutputAsync("Close acknowledged", CancellationToken.None).ConfigureAwait(false);
                         return;
                     }
-                    if (part.MessageType != WebSocketMessageType.Text) throw new InvalidDataException("只允许文本消息。");
+                    messageType ??= part.MessageType;
+                    if (part.MessageType != messageType) throw new InvalidDataException("消息分片类型不一致。");
                     if (message.Length + part.Count > MaxMessageBytes) throw new InvalidDataException("接收消息超过 16 KiB。");
                     message.Write(buffer, 0, part.Count);
                 } while (!part.EndOfMessage);
+                if (messageType == WebSocketMessageType.Binary) { HandleDownloadFrame(message.ToArray()); continue; }
                 string json = new UTF8Encoding(false, true).GetString(message.ToArray());
                 using var document = JsonDocument.Parse(json, new JsonDocumentOptions { MaxDepth = 16 });
                 HandleMessage(document.RootElement);
@@ -215,7 +230,7 @@ public sealed class SecureConnection : IAsyncDisposable
             Interlocked.Exchange(ref disconnecting, 1);
             ClearIdentity();
             hello.TrySetException(reason);
-            foreach (var item in pending.Values) item.Result.TrySetException(reason);
+            foreach (var item in pending.Values) item.Fail(reason);
             lifetime.Cancel();
             socket.Abort();
         }
@@ -232,11 +247,17 @@ public sealed class SecureConnection : IAsyncDisposable
         {
             if (hello.Task.IsCompleted) throw new InvalidDataException("重复 HELLO。");
             ConnectionId = connectionId;
+            if (message.TryGetProperty("data", out var helloData)) {
+                if (helloData.TryGetProperty("capabilities", out var caps)) foreach (var cap in caps.EnumerateArray()) Capabilities.Add(cap.GetString()!);
+                if (helloData.TryGetProperty("authMode", out var mode)) AuthenticationMode = mode.GetString()!;
+            }
             hello.TrySetResult(connectionId);
             return;
         }
         if (ConnectionId != connectionId) throw new InvalidDataException("connectionId 不匹配。");
         string messageType = type.GetString()!;
+        if (messageType == "UPLOAD_ABORTED") { Log?.Invoke("未完成上传已失效。"); CancelUpload(); return; }
+        if (messageType == "DOWNLOAD_ABORTED") { Log?.Invoke("未完成下载已失效。"); CancelDownload(); return; }
         if (messageType == "AUTH_EXPIRED") { ClearIdentity(); Log?.Invoke("会话已过期，请重新登录。"); return; }
         if (!message.TryGetProperty("requestId", out var request)
             || request.ValueKind != JsonValueKind.String || !Guid.TryParseExact(request.GetString(), "D", out var requestId))
@@ -248,22 +269,22 @@ public sealed class SecureConnection : IAsyncDisposable
             if (!message.TryGetProperty("code", out var code) || code.ValueKind != JsonValueKind.String || !Regex.IsMatch(code.GetString()!, "^[A-Z_]{1,64}$"))
                 throw new InvalidDataException("服务器错误格式无效。");
             if (code.GetString() == "AUTH_REQUIRED") ClearIdentity(waiting.AuthGeneration);
-            waiting.Result.TrySetException(new ServerRequestException(code.GetString()!));
+            waiting.Fail(new ServerRequestException(code.GetString()!));
             return;
         }
-        if (messageType != waiting.ExpectedType || !message.TryGetProperty("data", out var data) || data.ValueKind != JsonValueKind.Object)
+        if (waiting.BinaryResult is not null || messageType != waiting.ExpectedType || !message.TryGetProperty("data", out var data) || data.ValueKind != JsonValueKind.Object)
             throw new InvalidDataException("服务器回复类型不匹配。");
         if (messageType == "ECHO_RESULT")
         {
             if (!data.TryGetProperty("text", out var text) || text.ValueKind != JsonValueKind.String || text.GetString()!.Length > MaxTextLength
                 || waiting.EchoText != text.GetString()) throw new InvalidDataException("ECHO 返回文本不匹配。");
         }
-        else if (messageType is "AUTH_LOGIN_RESULT" or "AUTH_ME_RESULT")
+        else if (messageType is "AUTH_LOGIN_RESULT" or "AUTH_ME_RESULT" or "AUTH_CERT_RESULT" or "AUTH_ATTACH_RESULT")
         {
             if (!ApplyIdentity(ParseIdentity(data), waiting.AuthGeneration))
-            { waiting.Result.TrySetException(new ServerRequestException("AUTH_CANCELLED")); return; }
+            { waiting.Fail(new ServerRequestException("AUTH_CANCELLED")); return; }
         }
-        waiting.Result.TrySetResult(message.Clone());
+        waiting.Result!.TrySetResult(message.Clone());
     }
 
     private static SessionIdentity ParseIdentity(JsonElement data)
@@ -298,6 +319,7 @@ public sealed class SecureConnection : IAsyncDisposable
             if (expectedGeneration.HasValue && authGeneration != expectedGeneration) return authGeneration;
             generation = ++authGeneration;
             identity = null;
+            CancelTransfer();
             expiryTimer?.Dispose();
             expiryTimer = null;
         }

@@ -1,0 +1,167 @@
+Window: "安全文件传输 · 并行与断点恢复", App: SecureFileTransfer.Client.exe.
+	0 window (窗口) 安全文件传输 · 并行与断点恢复 Secondary Actions: Raise
+		1 pane (窗格)
+			2 pane (窗格)
+				3 text (文本) 服务器 IP / 域名
+				4 text field (编辑) (disabled, settable, string) 服务器 IP / 域名 Value: 127.0.0.1
+				5 text (文本) 端口
+				6 spinner (沙网) (disabled) 端口
+					7 spinner (沙网) (disabled) 上下箭头
+						8 button (按钮) (disabled) 向上键
+						9 button (按钮) (disabled) 向下键
+					10 text field (编辑) (disabled, settable, string) 端口 Value: 62284
+				11 text (文本) 并发
+				12 spinner (沙网) (disabled) 并发
+					13 spinner (沙网) (disabled) 上下箭头
+						14 button (按钮) (disabled) 向上键
+						15 button (按钮) (disabled) 向下键
+					16 text field (编辑) (disabled, settable, string) 并发 Value: 4
+				17 button (按钮) (disabled) 连接
+				18 button (按钮) 断开
+				19 text (文本) 当前账户：accept_alice
+			20 pane (窗格) 当前账户：accept_alice
+				21 button (按钮) (disabled) CA 公共证书…
+				22 text field (编辑) (disabled, settable, string) Value: D:\UCAS\软件与系统安全\lab1\artifacts\acceptance-20261125\manual\certs\public\dev-ca.crt
+				23 button (按钮) (disabled) 客户端 PFX…
+				24 button (按钮) (disabled) 证书库…
+				25 button (按钮) (disabled) 清除证书
+				26 text (文本) 未选择客户端证书（密码兼容模式）
+			27 pane (窗格) 未选择客户端证书（密码兼容模式）
+				28 text (文本) 账户
+				29 text field (编辑) (disabled, settable, string) 账户 Value: accept_alice
+				30 text (文本) 密码
+				31 text field (编辑) (disabled, settable, string) 密码 Value: 已拒绝访问
+				32 button (按钮) (disabled) 登录
+				33 button (按钮) 注销
+				34 text (文本) mTLS 由服务器证书绑定确认身份；选证书后重新连接
+			35 pane (窗格) mTLS 由服务器证书绑定确认身份；选证书后重新连接
+				36 button (按钮) 刷新本人文件
+				37 button (按钮) (disabled) 下一页
+				38 button (按钮) 多选上传…
+				39 button (按钮) 所选下载入队…
+			40 table (表格)
+				41 header (标头) 标头控件 ID: Header
+					42 header item (标头项目) 文件名 ID: HeaderItem 0
+					43 header item (标头项目) 大小（字节） ID: HeaderItem 1
+					44 header item (标头项目) SHA-256 ID: HeaderItem 2
+					45 header item (标头项目) 文件 ID ID: HeaderItem 3
+				462 scroll bar (滚动条) (settable, float) 垂直滚动条 Value: 0 ID: NonClientVerticalScrollBar
+					463 button (按钮) 上一行 ID: UpButton
+					464 thumb (缩略图) 位置 ID: ScrollbarThumb
+					465 button (按钮) 向下翻页 ID: DownPageButton
+					466 button (按钮) 下一行 ID: DownButton
+				302 scroll bar (滚动条) (settable, float) 水平滚动条 Value: 0 ID: NonClientHorizontalScrollBar
+					303 button (按钮) 左移一列 ID: UpButton
+					304 thumb (缩略图) 位置 ID: ScrollbarThumb
+					305 button (按钮) 向右翻页 ID: DownPageButton
+					306 button (按钮) 右移一列 ID: DownButton
+				467 thumb (缩略图) (disabled)
+				468 list item (列表项目) (selectable) 操作-甲-8MiB.bin ID: ListViewItem-0
+					469 text (文本) 操作-甲-8MiB.bin ID: ListViewSubItem-0
+					470 text (文本) 8388608 ID: ListViewSubItem-1
+					471 text (文本) df24d288dd3400d2252fdc0f0d8ce318a53a901b855ea858d2d401f2c957cec4 ID: ListViewSubItem-2
+					472 text (文本) ec228d63-4f2e-4577-8315-5586462250cb ID: ListViewSubItem-3
+				473 list item (列表项目) (selectable) 上传-甲-2MiB.bin ID: ListViewItem-1
+					474 text (文本) 上传-甲-2MiB.bin ID: ListViewSubItem-0
+					475 text (文本) 2097152 ID: ListViewSubItem-1
+					476 text (文本) dea1aa0a6171ec9aa5e4c4bd4d1e70224f67c06eee1547bffd19cf28944ba301 ID: ListViewSubItem-2
+					477 text (文本) 6e5b8b2a-ed75-4db0-848b-e999e0111ca2 ID: ListViewSubItem-3
+				478 list item (列表项目) (selectable) 上传-乙-2MiB.bin ID: ListViewItem-2
+					479 text (文本) 上传-乙-2MiB.bin ID: ListViewSubItem-0
+					480 text (文本) 2097152 ID: ListViewSubItem-1
+					481 text (文本) 093adec5193ca12b08f26e6d5040d2be4d7258b7fecc0cc0478b45336ad31eb6 ID: ListViewSubItem-2
+					482 text (文本) 8c6c7a2b-7afe-4b40-a4e6-fe10cdc074bc ID: ListViewSubItem-3
+				483 list item (列表项目) (selectable) 上传-乙-2MiB.bin ID: ListViewItem-3
+					484 text (文本) 上传-乙-2MiB.bin ID: ListViewSubItem-0
+					485 text (文本) 2097152 ID: ListViewSubItem-1
+					486 text (文本) 093adec5193ca12b08f26e6d5040d2be4d7258b7fecc0cc0478b45336ad31eb6 ID: ListViewSubItem-2
+					487 text (文本) 57ae7ee0-61cd-49bc-8d90-9dda9d8802b1 ID: ListViewSubItem-3
+				488 list item (列表项目) (selectable) 上传-甲-2MiB.bin ID: ListViewItem-4
+					489 text (文本) 上传-甲-2MiB.bin ID: ListViewSubItem-0
+					490 text (文本) 2097152 ID: ListViewSubItem-1
+					491 text (文本) dea1aa0a6171ec9aa5e4c4bd4d1e70224f67c06eee1547bffd19cf28944ba301 ID: ListViewSubItem-2
+					492 text (文本) a8f7b75d-e095-489c-99eb-d569f4f8a801 ID: ListViewSubItem-3
+				493 list item (列表项目) (selectable) 下载-小文件.bin ID: ListViewItem-5
+					494 text (文本) 下载-小文件.bin ID: ListViewSubItem-0
+					495 text (文本) 48017 ID: ListViewSubItem-1
+					496 text (文本) 674ce7a0d251260d1d2e42aa613a7add7e83f4d1d7df5c17eaa1a8798eb45c9c ID: ListViewSubItem-2
+					497 text (文本) ab91d3ff-c886-4586-996f-0ba8043f75fc ID: ListViewSubItem-3
+				498 list item (列表项目) (selectable) 下载-乙-2MiB.bin ID: ListViewItem-6
+					499 text (文本) 下载-乙-2MiB.bin ID: ListViewSubItem-0
+					500 text (文本) 2097152 ID: ListViewSubItem-1
+					501 text (文本) 9c357be418bd42240cb85e40838e6322e8ee36b51fd671ebb30bbeeb15abeef1 ID: ListViewSubItem-2
+					502 text (文本) c5b2d8c9-6692-4b05-a549-c3013238b92f ID: ListViewSubItem-3
+				503 list item (列表项目) (selectable) 下载-甲-2MiB.bin ID: ListViewItem-7
+					504 text (文本) 下载-甲-2MiB.bin ID: ListViewSubItem-0
+					505 text (文本) 2097152 ID: ListViewSubItem-1
+					506 text (文本) df9ce9134b7cfc41730b8f8255f63b0ef3612a8df8544f0846e3491a305ffde4 ID: ListViewSubItem-2
+					507 text (文本) 8933ed09-da2c-435b-b133-4b9d490cddaa ID: ListViewSubItem-3
+			46 pane (窗格)
+				47 button (按钮) 暂停所选
+				48 button (按钮) 继续 / 恢复
+				49 button (按钮) 取消并清理
+				50 text (文本) 暂停/断线/关窗保留恢复数据；主动取消清理；重新登录后手动恢复
+			51 table (表格) 暂停/断线/关窗保留恢复数据；主动取消清理；重新登录后手动恢复
+				52 header (标头) 标头控件 ID: Header
+					53 header item (标头项目) 方向 ID: HeaderItem 0
+					54 header item (标头项目) 文件名 ID: HeaderItem 1
+					55 header item (标头项目) 状态 ID: HeaderItem 2
+					56 header item (标头项目) 进度 ID: HeaderItem 3
+					57 header item (标头项目) 已传 / 总字节 ID: HeaderItem 4
+					58 header item (标头项目) 速度 KiB/s ID: HeaderItem 5
+					59 header item (标头项目) 结果 ID: HeaderItem 6
+				307 scroll bar (滚动条) (settable, float) 水平滚动条 Value: 0 ID: NonClientHorizontalScrollBar
+					308 button (按钮) 左移一列 ID: UpButton
+					309 thumb (缩略图) 位置 ID: ScrollbarThumb
+					310 button (按钮) 向右翻页 ID: DownPageButton
+					311 button (按钮) 右移一列 ID: DownButton
+				510 list item (列表项目) (selectable) 上传 ID: ListViewItem-0
+					511 text (文本) 上传 ID: ListViewSubItem-0
+					512 text (文本) 操作-甲-8MiB.bin ID: ListViewSubItem-1
+					513 text (文本) 传输中 ID: ListViewSubItem-2
+					514 text (文本) 80.0% ID: ListViewSubItem-3
+					515 text (文本) 6,709,248 / 8,388,608 ID: ListViewSubItem-4
+					516 text (文本) 0.0 ID: ListViewSubItem-5
+					517 text (文本) ID: ListViewSubItem-6
+				518 list item (列表项目) (selectable) 上传 ID: ListViewItem-1
+					519 text (文本) 上传 ID: ListViewSubItem-0
+					520 text (文本) 操作-乙-8MiB.bin ID: ListViewSubItem-1
+					521 text (文本) 已取消 ID: ListViewSubItem-2
+					522 text (文本) 49.4% ID: ListViewSubItem-3
+					523 text (文本) 4,145,152 / 8,388,608 ID: ListViewSubItem-4
+					524 text (文本) — ID: ListViewSubItem-5
+					525 text (文本) 未完成数据已清理 ID: ListViewSubItem-6
+				526 list item (列表项目) (selectable) 下载 ID: ListViewItem-2
+					527 text (文本) 下载 ID: ListViewSubItem-0
+					528 text (文本) 下载-乙-2MiB.bin ID: ListViewSubItem-1
+					529 text (文本) 完成 ID: ListViewSubItem-2
+					530 text (文本) 100.0% ID: ListViewSubItem-3
+					531 text (文本) 2,097,152 / 2,097,152 ID: ListViewSubItem-4
+					532 text (文本) — ID: ListViewSubItem-5
+					533 text (文本) 已保存 D:\UCAS\软件与系统安全\lab1\artifacts\acceptance-20261125\manual\downloads-final\下载-乙-2MiB.bin; SHA-256=9c357be418bd42240cb85e40838e6322e8ee36b51fd671ebb30bbeeb15abeef1 ID: ListViewSubItem-6
+				534 list item (列表项目) (selectable) 下载 ID: ListViewItem-3
+					535 text (文本) 下载 ID: ListViewSubItem-0
+					536 text (文本) 下载-甲-2MiB.bin ID: ListViewSubItem-1
+					537 text (文本) 完成 ID: ListViewSubItem-2
+					538 text (文本) 100.0% ID: ListViewSubItem-3
+					539 text (文本) 2,097,152 / 2,097,152 ID: ListViewSubItem-4
+					540 text (文本) — ID: ListViewSubItem-5
+					541 text (文本) 已保存 D:\UCAS\软件与系统安全\lab1\artifacts\acceptance-20261125\manual\downloads-final\下载-甲-2MiB.bin; SHA-256=df9ce9134b7cfc41730b8f8255f63b0ef3612a8df8544f0846e3491a305ffde4 ID: ListViewSubItem-6
+			60 text field (编辑) Value: [01:10:45] 控制连接 d64d0681-4f42-411a-a738-dc7c1e492b3f；认证模式 password [01:11:19] 已认证：accept_alice；绝对到期 01:26:19 [01:14:58] 已注销本窗口；任务暂停，恢复需重新认证。其他独立客户端不受影响。 [01:15:24] 已认证：accept_alice；绝对到期 01:30:24
+				61 scroll bar (滚动条) (settable, float) 垂直滚动条 Value: 100 ID: NonClientVerticalScrollBar
+					62 button (按钮) 上一行 ID: UpButton
+					508 button (按钮) 向上翻页 ID: UpPageButton
+					509 thumb (缩略图) 位置 ID: ScrollbarThumb
+					63 button (按钮) 下一行 ID: DownButton
+		64 title bar (标题栏) (settable, string) Value: 安全文件传输 · 并行与断点恢复
+			65 menu bar (菜单栏) 系统 ID: MenuBar
+				312 menu item (菜单项目) 系统
+			67 button (按钮) 最小化
+			68 button (按钮) 最大化
+			69 button (按钮) 关闭
+
+Selected text: ```
+127.0.0.1
+```
+
+Note: Pay special attention to the content selected by the user. If the user asks a question or refers to the content they are looking at on-screen, they might be referring to the selected content (but they might be referring to something else that's visible, too).

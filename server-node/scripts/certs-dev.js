@@ -5,7 +5,7 @@ import { fileURLToPath } from 'node:url';
 import { randomBytes, X509Certificate } from 'node:crypto';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
-const destination = join(root, 'certs');
+const destination = resolve(process.env.SFT_CERT_DIR || join(root, 'certs'));
 const expected = ['public/dev-ca.crt', 'public/server.crt', 'private/ca.key', 'private/server.key'];
 let temporary;
 try {

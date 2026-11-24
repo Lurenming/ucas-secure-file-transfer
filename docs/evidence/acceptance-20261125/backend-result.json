@@ -1,0 +1,20 @@
+{
+  "name": "backend",
+  "startedAt": "2026-11-24T17:09:03.909Z",
+  "endedAt": "2026-11-24T17:13:35.565Z",
+  "command": [
+    "D:\\UCAS\\软件与系统安全\\lab1-tools\\node-v22.23.5-win-x64\\node.exe",
+    "--test",
+    "--test-concurrency=1",
+    "test/*.test.js"
+  ],
+  "cwd": "D:\\UCAS\\软件与系统安全\\lab1\\server-node",
+  "exitCode": 0,
+  "timedOut": false,
+  "processId": 34848,
+  "outputDirectory": "D:\\UCAS\\软件与系统安全\\lab1\\artifacts\\validation\\2026-11-24T17-09-03-909Z-backend",
+  "nodeVersion": "v22.23.5",
+  "nodeExecutable": "D:\\UCAS\\软件与系统安全\\lab1-tools\\node-v22.23.5-win-x64\\node.exe",
+  "stdoutSha256": "17cb70e2d8a3739b60887e07415efe5bf3815b57414fad4ae7c9ea357b80ce2d",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

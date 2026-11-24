@@ -7,11 +7,18 @@ using System.Security.Authentication;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Text.Json;
+using System.Text;
 using SecureFileTransfer.Client.Networking;
+
+// Node sends the private test configuration as UTF-8 over stdin; do not use the Windows console code page.
+Console.InputEncoding = new UTF8Encoding(false, true);
+Console.OutputEncoding = new UTF8Encoding(false);
 
 if (args.Length < 2) throw new ArgumentException("Usage: ConnectionChecks <public-ca.crt> <wss-url> [fixture-url] [--expect-server-stop]");
 string caPath = Path.GetFullPath(args[0]);
 var address = new Uri(args[1]);
+if (args.Contains("--enhanced")) { await EnhancedChecks.RunAsync(caPath, address); return; }
+if (args.Contains("--storage-faults")) { await StorageFaultChecks.RunAsync(caPath, address); return; }
 int scriptOption = Array.IndexOf(args, "--tls-fixture-script");
 string tlsFixtureScript = scriptOption >= 0 ? args[scriptOption + 1]
     : Path.GetFullPath(Path.Combine(Path.GetDirectoryName(caPath)!, "../../scripts/tls-negative-fixture.js"));
@@ -44,7 +51,8 @@ try
 {
     await using (var wrongCa = new SecureConnection(address, wrongCaPath))
     {
-        try { await wrongCa.ConnectAsync(); } catch (WebSocketException) { }
+        try { await wrongCa.ConnectAsync(); } catch (WebSocketException error) { Console.WriteLine("Wrong CA handshake exception: " + error); }
+        Console.WriteLine("Certificate rejection detail (wrong CA): " + (wrongCa.CertificateValidationError ?? "callback not reached"));
         Check(wrongCa.CertificateValidationError?.Contains("chain rejected") == true, "C# custom root rejects wrong CA during a real WSS handshake");
     }
     foreach (string problem in new[] { "hostname", "expired", "usage" })
@@ -64,7 +72,8 @@ try
         // Certificate and key travel only over this private child-process stdin pipe, never logs/files.
         using var fixture = new Process
         {
-            StartInfo = new ProcessStartInfo("node")
+            StartInfo = new ProcessStartInfo(Environment.GetEnvironmentVariable("SFT_NODE_EXECUTABLE")
+                ?? throw new InvalidOperationException("Run checks through server-node/scripts/check-csharp.js to select an explicit Node runtime."))
             {
                 ArgumentList = { tlsFixtureScript }, UseShellExecute = false, CreateNoWindow = true,
                 RedirectStandardInput = true, RedirectStandardOutput = true, RedirectStandardError = true
@@ -140,6 +149,8 @@ if (args.Contains("--auth-stdin"))
 {
     string credentials = await Console.In.ReadLineAsync() ?? throw new InvalidDataException("Missing test input.");
     await AuthenticationChecks.RunAsync(caPath, address, new Uri(args[2]), credentials);
+    await UploadChecks.RunAsync(caPath, address, credentials);
+    await DownloadChecks.RunAsync(caPath, address, new Uri(args[2]), credentials);
     credentials = "";
 }
 

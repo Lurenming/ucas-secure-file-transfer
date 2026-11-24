@@ -1,0 +1,732 @@
+{
+  "scope": "P5 independent ZIP reproduction only; P4 evidence preserved",
+  "runtime": {
+    "download": "https://nodejs.org/dist/v22.23.5/node-v22.23.5-win-x64.zip",
+    "checksums": "https://nodejs.org/dist/v22.23.5/SHASUMS256.txt",
+    "zip": "D:\\UCAS\\软件与系统安全\\lab1-tools\\node-v22.23.5-win-x64.zip",
+    "zipSha256": "4a191082e9706866830379d577d2cc8a50c776fcd9436a8d061b063ed0d9a0e3",
+    "nodeSha256": "247e9693d316da9857e44990e5e11709f596f18112251b8026ec6eed80bdf38a",
+    "versions": {
+      "node": "v22.23.5",
+      "arch": "x64",
+      "execPath": "D:\\UCAS\\软件与系统安全\\lab1-tools\\node-v22.23.5-win-x64\\node.exe",
+      "sqlite": "3.54.1",
+      "openssl": "3.5.9"
+    },
+    "npm": "10.9.9",
+    "globalPathChanged": false,
+    "pgpSignatureVerified": false
+  },
+  "externalEnvironment": {
+    "checkedAt": "2026-11-18T21:04:12.6718575+08:00",
+    "node": "v22.16.0",
+    "npm": "11.12.1",
+    "dotnet": "11.0.100",
+    "openssl": "OpenSSL 3.0.10 1 Aug 2023 (Library: OpenSSL 3.0.10 1 Aug 2023)",
+    "commands": [
+      {
+        "Name": "node.exe",
+        "Source": "D:\\Program Files\\nodejs\\node.exe"
+      },
+      {
+        "Name": "npm.cmd",
+        "Source": "D:\\Program Files\\nodejs\\npm.cmd"
+      },
+      {
+        "Name": "openssl.exe",
+        "Source": "D:\\Anaconda\\Acaconda3\\Library\\bin\\openssl.exe"
+      },
+      {
+        "Name": "dotnet.exe",
+        "Source": "C:\\Program Files\\dotnet\\dotnet.exe"
+      },
+      {
+        "Name": "python.exe",
+        "Source": "D:\\Anaconda\\Acaconda3\\python.exe"
+      },
+      {
+        "Name": "ffprobe.exe",
+        "Source": "D:\\Program Files\\ffmpeg\\ffmpeg-master-latest-win64-gpl-shared\\bin\\ffprobe.exe"
+      }
+    ],
+    "ffprobe": "ffprobe version N-120323-g722a2170e8-20250719 Copyright (c) 2007-2025 the FFmpeg developers",
+    "osArch": "X64"
+  },
+  "runs": [
+    {
+      "name": "RC1",
+      "archive": {
+        "path": "D:\\UCAS\\软件与系统安全\\lab1\\artifacts\\delivery\\P5-CANDIDATE-RC1.zip",
+        "bytes": 237188,
+        "sha256": "0b3fb486201c155d171c33aeb29920af8b29ade7cac89c847cb02d8444b9aca2",
+        "sourceFiles": 82,
+        "encrypted": false
+      },
+      "directory": "D:\\UCAS\\软件与系统安全\\lab1-repro\\P5-RC1-20261118",
+      "commands": [
+        {
+          "action": "info",
+          "command": [
+            "powershell.exe",
+            "-NoProfile",
+            "-NonInteractive",
+            "-File",
+            "D:\\UCAS\\软件与系统安全\\lab1-repro\\P5-RC1-20261118\\src\\tools\\run-node.ps1",
+            "-NodeExe",
+            "D:\\UCAS\\软件与系统安全\\lab1-tools\\node-v22.23.5-win-x64\\node.exe",
+            "-Action",
+            "info",
+            "-AuditFile",
+            "D:\\UCAS\\软件与系统安全\\lab1-repro\\P5-RC1-20261118\\logs\\runtime.jsonl"
+          ],
+          "cwd": "D:\\UCAS\\软件与系统安全\\lab1-repro\\P5-RC1-20261118\\src",
+          "startedAt": "2026-11-18T13:02:58.371159+00:00",
+          "pid": 29300,
+          "endedAt": "2026-11-18T13:02:58.797032+00:00",
+          "exitCode": 0,
+          "stdoutSha256": "018407564f539a13e8082fd3296aad6f4065df4c74d3b7329a4cd79d7e31cb27",
+          "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "action": "npm-ci",
+          "command": [
+            "powershell.exe",
+            "-NoProfile",
+            "-NonInteractive",
+            "-File",
+            "D:\\UCAS\\软件与系统安全\\lab1-repro\\P5-RC1-20261118\\src\\tools\\run-node.ps1",
+            "-NodeExe",
+            "D:\\UCAS\\软件与系统安全\\lab1-tools\\node-v22.23.5-win-x64\\node.exe",
+            "-Action",
+            "npm-ci",
+            "-AuditFile",
+            "D:\\UCAS\\软件与系统安全\\lab1-repro\\P5-RC1-20261118\\logs\\runtime.jsonl",
+            "-NpmCache",
+            "D:\\UCAS\\软件与系统安全\\lab1-repro\\P5-RC1-20261118\\npm-cache"
+          ],
+          "cwd": "D:\\UCAS\\软件与系统安全\\lab1-repro\\P5-RC1-20261118\\src",
+          "startedAt": "2026-11-18T13:02:58.797994+00:00",
+          "pid": 32680,
+          "endedAt": "2026-11-18T13:03:01.434083+00:00",
+          "exitCode": 0,
+          "stdoutSha256": "bddf2daffb03c6cc2ed22e8a029acca928039fb830e1ad149ad7033680d304af",
+          "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "action": "build",
+          "command": [
+            "powershell.exe",
+            "-NoProfile",
+            "-NonInteractive",
+            "-File",
+            "D:\\UCAS\\软件与系统安全\\lab1-repro\\P5-RC1-20261118\\src\\tools\\run-node.ps1",
+            "-NodeExe",
+            "D:\\UCAS\\软件与系统安全\\lab1-tools\\node-v22.23.5-win-x64\\node.exe",
+            "-Action",
+            "build",
+            "-AuditFile",
+            "D:\\UCAS\\软件与系统安全\\lab1-repro\\P5-RC1-20261118\\logs\\runtime.jsonl"
+          ],
+          "cwd": "D:\\UCAS\\软件与系统安全\\lab1-repro\\P5-RC1-20261118\\src",
+          "startedAt": "2026-11-18T13:03:01.435228+00:00",
+          "pid": 35692,
+          "endedAt": "2026-11-18T13:03:05.590176+00:00",
+          "exitCode": 0,
+          "stdoutSha256": "979d0fd5cb87f60d8625e4ae20a3c193bc3fa15afeb82c67c39f204f567873e0",
+          "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "action": "certs",
+          "command": [
+            "powershell.exe",
+            "-NoProfile",
+            "-NonInteractive",
+            "-File",
+            "D:\\UCAS\\软件与系统安全\\lab1-repro\\P5-RC1-20261118\\src\\tools\\run-node.ps1",
+            "-NodeExe",
+            "D:\\UCAS\\软件与系统安全\\lab1-tools\\node-v22.23.5-win-x64\\node.exe",
+            "-Action",
+            "certs",
+            "-AuditFile",
+            "D:\\UCAS\\软件与系统安全\\lab1-repro\\P5-RC1-20261118\\logs\\runtime.jsonl"
+          ],
+          "cwd": "D:\\UCAS\\软件与系统安全\\lab1-repro\\P5-RC1-20261118\\src",
+          "startedAt": "2026-11-18T13:03:05.592104+00:00",
+          "pid": 41364,
+          "endedAt": "2026-11-18T13:03:08.092499+00:00",
+          "exitCode": 0,
+          "stdoutSha256": "2c393044f550a211bb8eb4d4f4dfc5d8d54be65889f2540c5ecc6b3bc96ae942",
+          "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "action": "smoke",
+          "command": [
+            "powershell.exe",
+            "-NoProfile",
+            "-NonInteractive",
+            "-File",
+            "D:\\UCAS\\软件与系统安全\\lab1-repro\\P5-RC1-20261118\\src\\tools\\run-node.ps1",
+            "-NodeExe",
+            "D:\\UCAS\\软件与系统安全\\lab1-tools\\node-v22.23.5-win-x64\\node.exe",
+            "-Action",
+            "smoke",
+            "-AuditFile",
+            "D:\\UCAS\\软件与系统安全\\lab1-repro\\P5-RC1-20261118\\logs\\runtime.jsonl"
+          ],
+          "cwd": "D:\\UCAS\\软件与系统安全\\lab1-repro\\P5-RC1-20261118\\src",
+          "startedAt": "2026-11-18T13:03:08.093475+00:00",
+          "pid": 35784,
+          "endedAt": "2026-11-18T13:03:09.535802+00:00",
+          "exitCode": 0,
+          "stdoutSha256": "4d8b026e6633f1710557460027b7e775d39186ab860cbc0ea716bf4f9b4fc1d7",
+          "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "action": "backend",
+          "command": [
+            "powershell.exe",
+            "-NoProfile",
+            "-NonInteractive",
+            "-File",
+            "D:\\UCAS\\软件与系统安全\\lab1-repro\\P5-RC1-20261118\\src\\tools\\run-node.ps1",
+            "-NodeExe",
+            "D:\\UCAS\\软件与系统安全\\lab1-tools\\node-v22.23.5-win-x64\\node.exe",
+            "-Action",
+            "backend",
+            "-AuditFile",
+            "D:\\UCAS\\软件与系统安全\\lab1-repro\\P5-RC1-20261118\\logs\\runtime.jsonl"
+          ],
+          "cwd": "D:\\UCAS\\软件与系统安全\\lab1-repro\\P5-RC1-20261118\\src",
+          "startedAt": "2026-11-18T13:03:09.536937+00:00",
+          "pid": 10548,
+          "endedAt": "2026-11-18T13:05:42.769496+00:00",
+          "exitCode": 0,
+          "stdoutSha256": "8a1284536afb7cf5ba44d7fd2c28a97730bcd940e438b7f2ff0c701aa95e2443",
+          "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "action": "csharp",
+          "command": [
+            "powershell.exe",
+            "-NoProfile",
+            "-NonInteractive",
+            "-File",
+            "D:\\UCAS\\软件与系统安全\\lab1-repro\\P5-RC1-20261118\\src\\tools\\run-node.ps1",
+            "-NodeExe",
+            "D:\\UCAS\\软件与系统安全\\lab1-tools\\node-v22.23.5-win-x64\\node.exe",
+            "-Action",
+            "csharp",
+            "-AuditFile",
+            "D:\\UCAS\\软件与系统安全\\lab1-repro\\P5-RC1-20261118\\logs\\runtime.jsonl"
+          ],
+          "cwd": "D:\\UCAS\\软件与系统安全\\lab1-repro\\P5-RC1-20261118\\src",
+          "startedAt": "2026-11-18T13:05:42.770462+00:00",
+          "pid": 46048,
+          "endedAt": "2026-11-18T13:05:49.662750+00:00",
+          "exitCode": 1,
+          "stdoutSha256": "37fdd2e39090aa10fcd42a93ff564057da6170c622e6ad18ec1f3ac696522e59",
+          "stderrSha256": "bdbe5d8f24a5215ef1de35abeea62644fdc3a113fd38d56434e609d506ede355"
+        }
+      ],
+      "checks": [
+        {
+          "name": "build",
+          "startedAt": "2026-11-18T13:03:01.809Z",
+          "endedAt": "2026-11-18T13:03:05.561Z",
+          "command": [
+            "dotnet",
+            "build",
+            "SecureFileTransfer.Client/SecureFileTransfer.Client.slnx",
+            "--nologo"
+          ],
+          "cwd": "D:\\UCAS\\软件与系统安全\\lab1-repro\\P5-RC1-20261118\\src",
+          "exitCode": 0,
+          "timedOut": false,
+          "processId": 43404,
+          "outputDirectory": "D:\\UCAS\\软件与系统安全\\lab1-repro\\P5-RC1-20261118\\src\\artifacts\\validation\\2026-11-18T13-03-01-809Z-build",
+          "nodeVersion": "v22.23.5",
+          "nodeExecutable": "D:\\UCAS\\软件与系统安全\\lab1-tools\\node-v22.23.5-win-x64\\node.exe",
+          "stdoutSha256": "58f7b3ca8e44b88a548a9b4832c8e666c5e22441b43a7b354873f43e2afbf8da",
+          "stderrSha256": "74d115b971ffd58da15a4e33fa5568225797a3efc3377c0ee7303d6690b3f4bb"
+        },
+        {
+          "name": "smoke",
+          "startedAt": "2026-11-18T13:03:08.478Z",
+          "endedAt": "2026-11-18T13:03:09.506Z",
+          "command": [
+            "D:\\UCAS\\软件与系统安全\\lab1-tools\\node-v22.23.5-win-x64\\node.exe",
+            "scripts/check-smoke.js"
+          ],
+          "cwd": "D:\\UCAS\\软件与系统安全\\lab1-repro\\P5-RC1-20261118\\src\\server-node",
+          "exitCode": 0,
+          "timedOut": false,
+          "processId": 41848,
+          "outputDirectory": "D:\\UCAS\\软件与系统安全\\lab1-repro\\P5-RC1-20261118\\src\\artifacts\\validation\\2026-11-18T13-03-08-478Z-smoke",
+          "nodeVersion": "v22.23.5",
+          "nodeExecutable": "D:\\UCAS\\软件与系统安全\\lab1-tools\\node-v22.23.5-win-x64\\node.exe",
+          "stdoutSha256": "baeba9cfa20466a2fc07391d200e4cfde1c04e6eb6a7e7448843967706df2594",
+          "stderrSha256": "8ff7af3ce0568e5584e281edb877756a301044b9446849c2041457685a144028"
+        },
+        {
+          "name": "backend",
+          "startedAt": "2026-11-18T13:03:09.911Z",
+          "endedAt": "2026-11-18T13:05:42.738Z",
+          "command": [
+            "D:\\UCAS\\软件与系统安全\\lab1-tools\\node-v22.23.5-win-x64\\node.exe",
+            "--test",
+            "--test-concurrency=1",
+            "test/*.test.js"
+          ],
+          "cwd": "D:\\UCAS\\软件与系统安全\\lab1-repro\\P5-RC1-20261118\\src\\server-node",
+          "exitCode": 0,
+          "timedOut": false,
+          "processId": 8564,
+          "outputDirectory": "D:\\UCAS\\软件与系统安全\\lab1-repro\\P5-RC1-20261118\\src\\artifacts\\validation\\2026-11-18T13-03-09-911Z-backend",
+          "nodeVersion": "v22.23.5",
+          "nodeExecutable": "D:\\UCAS\\软件与系统安全\\lab1-tools\\node-v22.23.5-win-x64\\node.exe",
+          "stdoutSha256": "9fcca1002c8fd58ffe8d3c6a65163e9af6165acb02f7fe31f9fa63b9db66af3f",
+          "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "name": "csharp",
+          "startedAt": "2026-11-18T13:05:43.163Z",
+          "endedAt": "2026-11-18T13:05:49.617Z",
+          "command": [
+            "D:\\UCAS\\软件与系统安全\\lab1-tools\\node-v22.23.5-win-x64\\node.exe",
+            "scripts/check-csharp.js"
+          ],
+          "cwd": "D:\\UCAS\\软件与系统安全\\lab1-repro\\P5-RC1-20261118\\src\\server-node",
+          "exitCode": 1,
+          "timedOut": false,
+          "processId": 25148,
+          "outputDirectory": "D:\\UCAS\\软件与系统安全\\lab1-repro\\P5-RC1-20261118\\src\\artifacts\\validation\\2026-11-18T13-05-43-163Z-csharp",
+          "nodeVersion": "v22.23.5",
+          "nodeExecutable": "D:\\UCAS\\软件与系统安全\\lab1-tools\\node-v22.23.5-win-x64\\node.exe",
+          "stdoutSha256": "ec10d38c704d1ddaac0c417e728723bdfef4c99c0b681686b57526bca1a1c476",
+          "stderrSha256": "aef66e87359478c0fe4657c35a342119ebe7a341a4a62f4c982b4a18e95cd7f5"
+        }
+      ],
+      "auditedProcesses": 23,
+      "runtimeAuditSha256": "86d5bd0ddd802d87f3b999b156353a6841b5b5eda4a28d98201eaa738af13b3a",
+      "allAuditedNodeVersions": [
+        "v22.23.5"
+      ]
+    },
+    {
+      "name": "RC2",
+      "archive": {
+        "path": "D:\\UCAS\\软件与系统安全\\lab1\\artifacts\\delivery\\P5-CANDIDATE-RC2.zip",
+        "bytes": 237381,
+        "sha256": "609f53efa2b2ec4eda4e2d5b004bd1909cc15c72647f200b31051d1c5d6d14a7",
+        "sourceFiles": 82,
+        "encrypted": false
+      },
+      "directory": "D:\\UCAS\\软件与系统安全\\lab1-repro\\P5-RC2-20261118",
+      "commands": [
+        {
+          "action": "info",
+          "command": [
+            "D:\\UCAS\\软件与系统安全\\lab1-tools\\node-v22.23.5-win-x64\\node.exe",
+            "D:\\UCAS\\软件与系统安全\\lab1-repro\\P5-RC2-20261118\\src\\tools\\run-node.mjs",
+            "info"
+          ],
+          "cwd": "D:\\UCAS\\软件与系统安全\\lab1-repro\\P5-RC2-20261118\\src",
+          "startedAt": "2026-11-18T13:05:43.573725+00:00",
+          "pid": 26288,
+          "endedAt": "2026-11-18T13:05:43.644032+00:00",
+          "exitCode": 0,
+          "stdoutSha256": "64c8d35badc3a7d62b022b1df8dd967c112db0c37172a6b0bfaf8f253d421b1b",
+          "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "action": "npm-ci",
+          "command": [
+            "D:\\UCAS\\软件与系统安全\\lab1-tools\\node-v22.23.5-win-x64\\node.exe",
+            "D:\\UCAS\\软件与系统安全\\lab1-repro\\P5-RC2-20261118\\src\\tools\\run-node.mjs",
+            "npm-ci",
+            "D:\\UCAS\\软件与系统安全\\lab1-repro\\P5-RC2-20261118\\npm-cache"
+          ],
+          "cwd": "D:\\UCAS\\软件与系统安全\\lab1-repro\\P5-RC2-20261118\\src",
+          "startedAt": "2026-11-18T13:05:43.645019+00:00",
+          "pid": 42784,
+          "endedAt": "2026-11-18T13:05:45.714597+00:00",
+          "exitCode": 0,
+          "stdoutSha256": "72986b0234179a4f416e0366ed707c9f6875d3b2c7cf792f4d1177e66f2b434c",
+          "stderrSha256": "583d25ffba30c76de27e8dd1da397f9d599d5426acbda3812ba73c71512bc0f5"
+        },
+        {
+          "action": "build",
+          "command": [
+            "D:\\UCAS\\软件与系统安全\\lab1-tools\\node-v22.23.5-win-x64\\node.exe",
+            "D:\\UCAS\\软件与系统安全\\lab1-repro\\P5-RC2-20261118\\src\\tools\\run-node.mjs",
+            "build"
+          ],
+          "cwd": "D:\\UCAS\\软件与系统安全\\lab1-repro\\P5-RC2-20261118\\src",
+          "startedAt": "2026-11-18T13:05:45.715658+00:00",
+          "pid": 30456,
+          "endedAt": "2026-11-18T13:05:47.317339+00:00",
+          "exitCode": 0,
+          "stdoutSha256": "e023b7a0882299a5bd4b26834629fb0bdd865d461658fd790a16d69a2c3f3018",
+          "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "action": "certs",
+          "command": [
+            "D:\\UCAS\\软件与系统安全\\lab1-tools\\node-v22.23.5-win-x64\\node.exe",
+            "D:\\UCAS\\软件与系统安全\\lab1-repro\\P5-RC2-20261118\\src\\tools\\run-node.mjs",
+            "certs"
+          ],
+          "cwd": "D:\\UCAS\\软件与系统安全\\lab1-repro\\P5-RC2-20261118\\src",
+          "startedAt": "2026-11-18T13:05:47.318691+00:00",
+          "pid": 45080,
+          "endedAt": "2026-11-18T13:05:49.240274+00:00",
+          "exitCode": 0,
+          "stdoutSha256": "a546b23e44d8e79cf63d1330b84b2bd0eeaa4d42d90787f8bf4c99b7593ada72",
+          "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "action": "smoke",
+          "command": [
+            "D:\\UCAS\\软件与系统安全\\lab1-tools\\node-v22.23.5-win-x64\\node.exe",
+            "D:\\UCAS\\软件与系统安全\\lab1-repro\\P5-RC2-20261118\\src\\tools\\run-node.mjs",
+            "smoke"
+          ],
+          "cwd": "D:\\UCAS\\软件与系统安全\\lab1-repro\\P5-RC2-20261118\\src",
+          "startedAt": "2026-11-18T13:05:49.241248+00:00",
+          "pid": 39880,
+          "endedAt": "2026-11-18T13:05:50.670565+00:00",
+          "exitCode": 0,
+          "stdoutSha256": "93095ccd8b1eb5274cc018dbfa70cc614490bdac38fe97e083681bed45cca748",
+          "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "action": "backend",
+          "command": [
+            "D:\\UCAS\\软件与系统安全\\lab1-tools\\node-v22.23.5-win-x64\\node.exe",
+            "D:\\UCAS\\软件与系统安全\\lab1-repro\\P5-RC2-20261118\\src\\tools\\run-node.mjs",
+            "backend"
+          ],
+          "cwd": "D:\\UCAS\\软件与系统安全\\lab1-repro\\P5-RC2-20261118\\src",
+          "startedAt": "2026-11-18T13:05:50.671542+00:00",
+          "pid": 41924,
+          "endedAt": "2026-11-18T13:08:23.771418+00:00",
+          "exitCode": 0,
+          "stdoutSha256": "f58dce8d5ffc66e63583813144fedcf7c58b11bb73928d33d4d2d5ee4c15f86b",
+          "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "action": "csharp",
+          "command": [
+            "D:\\UCAS\\软件与系统安全\\lab1-tools\\node-v22.23.5-win-x64\\node.exe",
+            "D:\\UCAS\\软件与系统安全\\lab1-repro\\P5-RC2-20261118\\src\\tools\\run-node.mjs",
+            "csharp"
+          ],
+          "cwd": "D:\\UCAS\\软件与系统安全\\lab1-repro\\P5-RC2-20261118\\src",
+          "startedAt": "2026-11-18T13:08:23.772421+00:00",
+          "pid": 45688,
+          "endedAt": "2026-11-18T13:08:28.943420+00:00",
+          "exitCode": 1,
+          "stdoutSha256": "c88db41466a43105806f4a40158b7f622c5ec4b29585b7c6c4594f90f7e2a7fd",
+          "stderrSha256": "c2feb42129efe8909451eb72a94717f9872c9b823baafc51d6a20c6009277816"
+        }
+      ],
+      "checks": [
+        {
+          "name": "build",
+          "startedAt": "2026-11-18T13:05:45.879Z",
+          "endedAt": "2026-11-18T13:05:47.298Z",
+          "command": [
+            "dotnet",
+            "build",
+            "SecureFileTransfer.Client/SecureFileTransfer.Client.slnx",
+            "--nologo"
+          ],
+          "cwd": "D:\\UCAS\\软件与系统安全\\lab1-repro\\P5-RC2-20261118\\src",
+          "exitCode": 0,
+          "timedOut": false,
+          "processId": 42208,
+          "outputDirectory": "D:\\UCAS\\软件与系统安全\\lab1-repro\\P5-RC2-20261118\\src\\artifacts\\validation\\2026-11-18T13-05-45-879Z-build",
+          "nodeVersion": "v22.23.5",
+          "nodeExecutable": "D:\\UCAS\\软件与系统安全\\lab1-tools\\node-v22.23.5-win-x64\\node.exe",
+          "stdoutSha256": "9e8ec06e39efeba2caa58f8e0bcf41642526d87cbceb6a65c373e0ab4a00d076",
+          "stderrSha256": "74d115b971ffd58da15a4e33fa5568225797a3efc3377c0ee7303d6690b3f4bb"
+        },
+        {
+          "name": "smoke",
+          "startedAt": "2026-11-18T13:05:49.423Z",
+          "endedAt": "2026-11-18T13:05:50.653Z",
+          "command": [
+            "D:\\UCAS\\软件与系统安全\\lab1-tools\\node-v22.23.5-win-x64\\node.exe",
+            "scripts/check-smoke.js"
+          ],
+          "cwd": "D:\\UCAS\\软件与系统安全\\lab1-repro\\P5-RC2-20261118\\src\\server-node",
+          "exitCode": 0,
+          "timedOut": false,
+          "processId": 36608,
+          "outputDirectory": "D:\\UCAS\\软件与系统安全\\lab1-repro\\P5-RC2-20261118\\src\\artifacts\\validation\\2026-11-18T13-05-49-423Z-smoke",
+          "nodeVersion": "v22.23.5",
+          "nodeExecutable": "D:\\UCAS\\软件与系统安全\\lab1-tools\\node-v22.23.5-win-x64\\node.exe",
+          "stdoutSha256": "c0a784b091f5099d8eb70ed2c0185853299e4c2f499919f7e311a8394daaed16",
+          "stderrSha256": "b4ca964134818093f0a028da0f25bd0c7512a1bc8114eabca461f1e2a8a8a303"
+        },
+        {
+          "name": "backend",
+          "startedAt": "2026-11-18T13:05:50.816Z",
+          "endedAt": "2026-11-18T13:08:23.759Z",
+          "command": [
+            "D:\\UCAS\\软件与系统安全\\lab1-tools\\node-v22.23.5-win-x64\\node.exe",
+            "--test",
+            "--test-concurrency=1",
+            "test/*.test.js"
+          ],
+          "cwd": "D:\\UCAS\\软件与系统安全\\lab1-repro\\P5-RC2-20261118\\src\\server-node",
+          "exitCode": 0,
+          "timedOut": false,
+          "processId": 42624,
+          "outputDirectory": "D:\\UCAS\\软件与系统安全\\lab1-repro\\P5-RC2-20261118\\src\\artifacts\\validation\\2026-11-18T13-05-50-816Z-backend",
+          "nodeVersion": "v22.23.5",
+          "nodeExecutable": "D:\\UCAS\\软件与系统安全\\lab1-tools\\node-v22.23.5-win-x64\\node.exe",
+          "stdoutSha256": "68cc917fc9cfee4ce47a230c338332d2c0cb781b4f17081e073f85fa0abd5d48",
+          "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "name": "csharp",
+          "startedAt": "2026-11-18T13:08:23.906Z",
+          "endedAt": "2026-11-18T13:08:28.930Z",
+          "command": [
+            "D:\\UCAS\\软件与系统安全\\lab1-tools\\node-v22.23.5-win-x64\\node.exe",
+            "scripts/check-csharp.js"
+          ],
+          "cwd": "D:\\UCAS\\软件与系统安全\\lab1-repro\\P5-RC2-20261118\\src\\server-node",
+          "exitCode": 1,
+          "timedOut": false,
+          "processId": 24676,
+          "outputDirectory": "D:\\UCAS\\软件与系统安全\\lab1-repro\\P5-RC2-20261118\\src\\artifacts\\validation\\2026-11-18T13-08-23-906Z-csharp",
+          "nodeVersion": "v22.23.5",
+          "nodeExecutable": "D:\\UCAS\\软件与系统安全\\lab1-tools\\node-v22.23.5-win-x64\\node.exe",
+          "stdoutSha256": "fc1a914cb2ebb7cae41298d15a5abf34753e2b7b2d275cbdc6481c5888975cb9",
+          "stderrSha256": "c04c81ea7c5f295cd445edc3d72843fe031088ca32eb47a7e54558fe425c0ebc"
+        }
+      ],
+      "auditedProcesses": 22,
+      "runtimeAuditSha256": "42ad89d81337d5bac810d51ae5638be26e6cf041efecd5770dd81d0186d83a7b",
+      "allAuditedNodeVersions": [
+        "v22.23.5"
+      ]
+    },
+    {
+      "name": "RC3",
+      "archive": {
+        "path": "D:\\UCAS\\软件与系统安全\\lab1\\artifacts\\delivery\\P5-CANDIDATE-RC3.zip",
+        "bytes": 237606,
+        "sha256": "8c05dba0db1e365e5abdf692ca7964c20a582c37f2c74376b0a76d232ce94c73",
+        "sourceFiles": 82,
+        "encrypted": false
+      },
+      "directory": "D:\\UCAS\\软件与系统安全\\lab1-repro\\P5-RC3-20261118",
+      "commands": [
+        {
+          "action": "info",
+          "command": [
+            "D:\\UCAS\\软件与系统安全\\lab1-tools\\node-v22.23.5-win-x64\\node.exe",
+            "D:\\UCAS\\软件与系统安全\\lab1-repro\\P5-RC3-20261118\\src\\tools\\run-node.mjs",
+            "info"
+          ],
+          "cwd": "D:\\UCAS\\软件与系统安全\\lab1-repro\\P5-RC3-20261118\\src",
+          "startedAt": "2026-11-18T13:06:55.634338+00:00",
+          "pid": 12412,
+          "endedAt": "2026-11-18T13:06:55.716993+00:00",
+          "exitCode": 0,
+          "stdoutSha256": "64c8d35badc3a7d62b022b1df8dd967c112db0c37172a6b0bfaf8f253d421b1b",
+          "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "action": "npm-ci",
+          "command": [
+            "D:\\UCAS\\软件与系统安全\\lab1-tools\\node-v22.23.5-win-x64\\node.exe",
+            "D:\\UCAS\\软件与系统安全\\lab1-repro\\P5-RC3-20261118\\src\\tools\\run-node.mjs",
+            "npm-ci",
+            "D:\\UCAS\\软件与系统安全\\lab1-repro\\P5-RC3-20261118\\npm-cache"
+          ],
+          "cwd": "D:\\UCAS\\软件与系统安全\\lab1-repro\\P5-RC3-20261118\\src",
+          "startedAt": "2026-11-18T13:06:55.719924+00:00",
+          "pid": 35396,
+          "endedAt": "2026-11-18T13:06:57.534126+00:00",
+          "exitCode": 0,
+          "stdoutSha256": "221d2e0539a0b1cca77a60b9ff7333beaa918d69f3f75e9d18b7b39d6bf11892",
+          "stderrSha256": "583d25ffba30c76de27e8dd1da397f9d599d5426acbda3812ba73c71512bc0f5"
+        },
+        {
+          "action": "build",
+          "command": [
+            "D:\\UCAS\\软件与系统安全\\lab1-tools\\node-v22.23.5-win-x64\\node.exe",
+            "D:\\UCAS\\软件与系统安全\\lab1-repro\\P5-RC3-20261118\\src\\tools\\run-node.mjs",
+            "build"
+          ],
+          "cwd": "D:\\UCAS\\软件与系统安全\\lab1-repro\\P5-RC3-20261118\\src",
+          "startedAt": "2026-11-18T13:06:57.535772+00:00",
+          "pid": 41676,
+          "endedAt": "2026-11-18T13:06:59.007234+00:00",
+          "exitCode": 0,
+          "stdoutSha256": "816793bcba3cd61d4c32c8007a74eb3d82cebcc62929c856e5574b6986d37e58",
+          "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "action": "certs",
+          "command": [
+            "D:\\UCAS\\软件与系统安全\\lab1-tools\\node-v22.23.5-win-x64\\node.exe",
+            "D:\\UCAS\\软件与系统安全\\lab1-repro\\P5-RC3-20261118\\src\\tools\\run-node.mjs",
+            "certs"
+          ],
+          "cwd": "D:\\UCAS\\软件与系统安全\\lab1-repro\\P5-RC3-20261118\\src",
+          "startedAt": "2026-11-18T13:06:59.010164+00:00",
+          "pid": 42848,
+          "endedAt": "2026-11-18T13:07:01.853768+00:00",
+          "exitCode": 0,
+          "stdoutSha256": "1f1890e63db75cb4bbab082b0ac0bfb475c7bbce46e96a2c2cb5da16b7b96920",
+          "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "action": "smoke",
+          "command": [
+            "D:\\UCAS\\软件与系统安全\\lab1-tools\\node-v22.23.5-win-x64\\node.exe",
+            "D:\\UCAS\\软件与系统安全\\lab1-repro\\P5-RC3-20261118\\src\\tools\\run-node.mjs",
+            "smoke"
+          ],
+          "cwd": "D:\\UCAS\\软件与系统安全\\lab1-repro\\P5-RC3-20261118\\src",
+          "startedAt": "2026-11-18T13:07:01.855725+00:00",
+          "pid": 28988,
+          "endedAt": "2026-11-18T13:07:03.060162+00:00",
+          "exitCode": 0,
+          "stdoutSha256": "5ffb4f28ecea9756835a1c7c47c2ca858c0033054ff23f55ceb89599a9db81d7",
+          "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "action": "security",
+          "command": [
+            "D:\\UCAS\\软件与系统安全\\lab1-tools\\node-v22.23.5-win-x64\\node.exe",
+            "D:\\UCAS\\软件与系统安全\\lab1-repro\\P5-RC3-20261118\\src\\tools\\run-node.mjs",
+            "security"
+          ],
+          "cwd": "D:\\UCAS\\软件与系统安全\\lab1-repro\\P5-RC3-20261118\\src",
+          "startedAt": "2026-11-18T13:07:03.061150+00:00",
+          "pid": 39940,
+          "endedAt": "2026-11-18T13:07:14.720025+00:00",
+          "exitCode": 0,
+          "stdoutSha256": "dbe44f4011e67a69c4d59ed71decd80ef276d6f16c1ae5679bda9bebc07b80ee",
+          "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "action": "csharp",
+          "command": [
+            "D:\\UCAS\\软件与系统安全\\lab1-tools\\node-v22.23.5-win-x64\\node.exe",
+            "D:\\UCAS\\软件与系统安全\\lab1-repro\\P5-RC3-20261118\\src\\tools\\run-node.mjs",
+            "csharp"
+          ],
+          "cwd": "D:\\UCAS\\软件与系统安全\\lab1-repro\\P5-RC3-20261118\\src",
+          "startedAt": "2026-11-18T13:07:14.720913+00:00",
+          "pid": 20512,
+          "endedAt": "2026-11-18T13:08:34.387242+00:00",
+          "exitCode": 0,
+          "stdoutSha256": "604ace5f9452a35c39a6c5d1c91d1dabae5b132d02aa009fe2aad1cffe253d47",
+          "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "checks": [
+        {
+          "name": "build",
+          "startedAt": "2026-11-18T13:06:57.671Z",
+          "endedAt": "2026-11-18T13:06:58.992Z",
+          "command": [
+            "dotnet",
+            "build",
+            "SecureFileTransfer.Client/SecureFileTransfer.Client.slnx",
+            "--nologo"
+          ],
+          "cwd": "D:\\UCAS\\软件与系统安全\\lab1-repro\\P5-RC3-20261118\\src",
+          "exitCode": 0,
+          "timedOut": false,
+          "processId": 41516,
+          "outputDirectory": "D:\\UCAS\\软件与系统安全\\lab1-repro\\P5-RC3-20261118\\src\\artifacts\\validation\\2026-11-18T13-06-57-671Z-build",
+          "nodeVersion": "v22.23.5",
+          "nodeExecutable": "D:\\UCAS\\软件与系统安全\\lab1-tools\\node-v22.23.5-win-x64\\node.exe",
+          "stdoutSha256": "e23efe247dc9e38e68b1819357bc868582fd4ce7647ef9631de5d6d858489e24",
+          "stderrSha256": "74d115b971ffd58da15a4e33fa5568225797a3efc3377c0ee7303d6690b3f4bb"
+        },
+        {
+          "name": "smoke",
+          "startedAt": "2026-11-18T13:07:01.999Z",
+          "endedAt": "2026-11-18T13:07:03.045Z",
+          "command": [
+            "D:\\UCAS\\软件与系统安全\\lab1-tools\\node-v22.23.5-win-x64\\node.exe",
+            "scripts/check-smoke.js"
+          ],
+          "cwd": "D:\\UCAS\\软件与系统安全\\lab1-repro\\P5-RC3-20261118\\src\\server-node",
+          "exitCode": 0,
+          "timedOut": false,
+          "processId": 43300,
+          "outputDirectory": "D:\\UCAS\\软件与系统安全\\lab1-repro\\P5-RC3-20261118\\src\\artifacts\\validation\\2026-11-18T13-07-01-999Z-smoke",
+          "nodeVersion": "v22.23.5",
+          "nodeExecutable": "D:\\UCAS\\软件与系统安全\\lab1-tools\\node-v22.23.5-win-x64\\node.exe",
+          "stdoutSha256": "990cc1409a9507165da5ffeebb591683ec8052eee949a04a1216fad776f992e1",
+          "stderrSha256": "ad4d1b1972f3d7f9c843ba20c97b066ba07904e17bb12eb73db3cc2dfdef3593"
+        },
+        {
+          "name": "security",
+          "startedAt": "2026-11-18T13:07:03.206Z",
+          "endedAt": "2026-11-18T13:07:14.695Z",
+          "command": [
+            "D:\\UCAS\\软件与系统安全\\lab1-tools\\node-v22.23.5-win-x64\\node.exe",
+            "--test",
+            "test/security.test.js"
+          ],
+          "cwd": "D:\\UCAS\\软件与系统安全\\lab1-repro\\P5-RC3-20261118\\src\\server-node",
+          "exitCode": 0,
+          "timedOut": false,
+          "processId": 42136,
+          "outputDirectory": "D:\\UCAS\\软件与系统安全\\lab1-repro\\P5-RC3-20261118\\src\\artifacts\\validation\\2026-11-18T13-07-03-206Z-security",
+          "nodeVersion": "v22.23.5",
+          "nodeExecutable": "D:\\UCAS\\软件与系统安全\\lab1-tools\\node-v22.23.5-win-x64\\node.exe",
+          "stdoutSha256": "dd20236d18bf3ba0534fcd97058f69ba569356ef20703ed99ac13c09149df0ad",
+          "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "name": "csharp",
+          "startedAt": "2026-11-18T13:07:14.859Z",
+          "endedAt": "2026-11-18T13:08:34.373Z",
+          "command": [
+            "D:\\UCAS\\软件与系统安全\\lab1-tools\\node-v22.23.5-win-x64\\node.exe",
+            "scripts/check-csharp.js"
+          ],
+          "cwd": "D:\\UCAS\\软件与系统安全\\lab1-repro\\P5-RC3-20261118\\src\\server-node",
+          "exitCode": 0,
+          "timedOut": false,
+          "processId": 45292,
+          "outputDirectory": "D:\\UCAS\\软件与系统安全\\lab1-repro\\P5-RC3-20261118\\src\\artifacts\\validation\\2026-11-18T13-07-14-859Z-csharp",
+          "nodeVersion": "v22.23.5",
+          "nodeExecutable": "D:\\UCAS\\软件与系统安全\\lab1-tools\\node-v22.23.5-win-x64\\node.exe",
+          "stdoutSha256": "d89b959068fc8ad3fa4c23aa36f17541aae11977241aa8001055c3eddeb311a1",
+          "stderrSha256": "62f69e6e27f5d56adcda503a3eabca0b36c7bb65e6a765dc3454a7480c55a53d"
+        }
+      ],
+      "auditedProcesses": 12,
+      "runtimeAuditSha256": "7988189f3fe009e9cff9fe072e4f27236aaf9316f7eb56f52b22a556a5adece8",
+      "allAuditedNodeVersions": [
+        "v22.23.5"
+      ]
+    }
+  ],
+  "rc2Rc3ServerAndClientNetworkCodeIdentical": true,
+  "rc3Postcheck": "Original aggregation failed on GBK decoding of UTF-8 audit; fixed explicit encoding and independently verified existing successful commands/hashes. No test rerun represented by verification.",
+  "oldRuntimeRefusal": {
+    "command": [
+      "D:\\Program Files\\nodejs\\node.exe",
+      "tools/run-node.mjs",
+      "info"
+    ],
+    "exitCode": 2,
+    "expectedExitCode": 2,
+    "at": "2026-11-18T13:05:37.734787+00:00",
+    "stderrSha256": "ff2c4639c029aaa5e0fa3c866896e428eb9c1f35aa2e03f933885a3e657fc68e"
+  }
+}

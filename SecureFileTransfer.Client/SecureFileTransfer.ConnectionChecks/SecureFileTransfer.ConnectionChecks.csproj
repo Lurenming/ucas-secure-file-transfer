@@ -4,6 +4,7 @@
     <TargetFramework>net10.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <DefineConstants>$(DefineConstants);SFT_TEST_IO</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
     <!-- Compile the exact connection/validation sources used by WinForms, without a GUI dependency. -->

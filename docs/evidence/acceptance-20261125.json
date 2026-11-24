@@ -1,0 +1,991 @@
+{
+  "version": "4.0.0 acceptance revision",
+  "dateAsiaShanghai": "2026-11-25",
+  "scope": "Course functional acceptance; no fixed duration, soak or new business features",
+  "suites": {
+    "build": {
+      "name": "build",
+      "startedAt": "2026-11-24T17:08:39.879Z",
+      "endedAt": "2026-11-24T17:08:43.325Z",
+      "command": [
+        "dotnet",
+        "build",
+        "SecureFileTransfer.Client/SecureFileTransfer.Client.slnx",
+        "--nologo"
+      ],
+      "cwd": "D:\\UCAS\\软件与系统安全\\lab1",
+      "exitCode": 0,
+      "timedOut": false,
+      "processId": 9920,
+      "outputDirectory": "D:\\UCAS\\软件与系统安全\\lab1\\artifacts\\validation\\2026-11-24T17-08-39-879Z-build",
+      "nodeVersion": "v22.23.5",
+      "nodeExecutable": "D:\\UCAS\\软件与系统安全\\lab1-tools\\node-v22.23.5-win-x64\\node.exe",
+      "stdoutSha256": "d34e619365e0e5fbb22c8251ef7f1bdcb3ffe19f95a9d57c9fbae75a28c095c1",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "passLines": 0
+    },
+    "backend": {
+      "name": "backend",
+      "startedAt": "2026-11-24T17:09:03.909Z",
+      "endedAt": "2026-11-24T17:13:35.565Z",
+      "command": [
+        "D:\\UCAS\\软件与系统安全\\lab1-tools\\node-v22.23.5-win-x64\\node.exe",
+        "--test",
+        "--test-concurrency=1",
+        "test/*.test.js"
+      ],
+      "cwd": "D:\\UCAS\\软件与系统安全\\lab1\\server-node",
+      "exitCode": 0,
+      "timedOut": false,
+      "processId": 34848,
+      "outputDirectory": "D:\\UCAS\\软件与系统安全\\lab1\\artifacts\\validation\\2026-11-24T17-09-03-909Z-backend",
+      "nodeVersion": "v22.23.5",
+      "nodeExecutable": "D:\\UCAS\\软件与系统安全\\lab1-tools\\node-v22.23.5-win-x64\\node.exe",
+      "stdoutSha256": "17cb70e2d8a3739b60887e07415efe5bf3815b57414fad4ae7c9ea357b80ce2d",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "passLines": 0,
+      "tap": {
+        "tests": 43,
+        "passed": 43,
+        "failed": 0,
+        "skipped": 0
+      }
+    },
+    "csharp-enhanced": {
+      "name": "csharp-enhanced",
+      "startedAt": "2026-11-24T17:09:03.687Z",
+      "endedAt": "2026-11-24T17:09:23.291Z",
+      "command": [
+        "D:\\UCAS\\软件与系统安全\\lab1-tools\\node-v22.23.5-win-x64\\node.exe",
+        "scripts/check-enhanced-csharp.js"
+      ],
+      "cwd": "D:\\UCAS\\软件与系统安全\\lab1\\server-node",
+      "exitCode": 0,
+      "timedOut": false,
+      "processId": 8172,
+      "outputDirectory": "D:\\UCAS\\软件与系统安全\\lab1\\artifacts\\validation\\2026-11-24T17-09-03-687Z-csharp-enhanced",
+      "nodeVersion": "v22.23.5",
+      "nodeExecutable": "D:\\UCAS\\软件与系统安全\\lab1-tools\\node-v22.23.5-win-x64\\node.exe",
+      "stdoutSha256": "370a290dbf15a1ff8e1d0716c61182840e63f9319f7ea7828746c0754840189a",
+      "stderrSha256": "1489cdd1730a553187478e6ac587c097f02b0924b7376407f8107dd19e09f7ec",
+      "passLines": 23
+    },
+    "storage-faults": {
+      "name": "storage-faults",
+      "startedAt": "2026-11-24T17:09:04.218Z",
+      "endedAt": "2026-11-24T17:09:12.134Z",
+      "command": [
+        "D:\\UCAS\\软件与系统安全\\lab1-tools\\node-v22.23.5-win-x64\\node.exe",
+        "scripts/check-storage-faults.js",
+        "D:\\UCAS\\软件与系统安全\\lab1\\artifacts\\acceptance-20261125\\storage-faults-1795540144218"
+      ],
+      "cwd": "D:\\UCAS\\软件与系统安全\\lab1\\server-node",
+      "exitCode": 0,
+      "timedOut": false,
+      "processId": 11224,
+      "outputDirectory": "D:\\UCAS\\软件与系统安全\\lab1\\artifacts\\validation\\2026-11-24T17-09-04-218Z-storage-faults",
+      "nodeVersion": "v22.23.5",
+      "nodeExecutable": "D:\\UCAS\\软件与系统安全\\lab1-tools\\node-v22.23.5-win-x64\\node.exe",
+      "stdoutSha256": "006921fdf668c316af937477972520ae04ff7331eef7cce77c5db969953348a0",
+      "stderrSha256": "ae5dd75fc07f4715ba819a83643842bbdf46954897dcc5d50a59d49bf54d71be",
+      "passLines": 0
+    },
+    "gui-regression": {
+      "name": "gui-regression",
+      "startedAt": "2026-11-24T17:08:58.338Z",
+      "endedAt": "2026-11-24T17:08:59.739Z",
+      "command": [
+        "dotnet",
+        "SecureFileTransfer.Client/SecureFileTransfer.GuiChecks/bin/Debug/net10.0-windows/SecureFileTransfer.GuiChecks.dll",
+        "D:\\UCAS\\软件与系统安全\\lab1\\artifacts\\acceptance-20261125\\gui-regression-1795540138338"
+      ],
+      "cwd": "D:\\UCAS\\软件与系统安全\\lab1",
+      "exitCode": 0,
+      "timedOut": false,
+      "processId": 31096,
+      "outputDirectory": "D:\\UCAS\\软件与系统安全\\lab1\\artifacts\\validation\\2026-11-24T17-08-58-338Z-gui-regression",
+      "nodeVersion": "v22.23.5",
+      "nodeExecutable": "D:\\UCAS\\软件与系统安全\\lab1-tools\\node-v22.23.5-win-x64\\node.exe",
+      "stdoutSha256": "b614e5c32f8a4be9e02defc68e780ac0b73f2ae0f79f1505036f52e48903e9a6",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "passLines": 8
+    }
+  },
+  "simulatedDiskFull": {
+    "passed": true,
+    "serverScenarios": 5,
+    "clientScenarios": 4,
+    "realDiskFull": false
+  },
+  "windowsCheckpointContention": {
+    "realFileLock": true,
+    "transientRetryPassed": true,
+    "persistentDenialBounded": true,
+    "oldRecordPreserved": true,
+    "maxAttempts": 6,
+    "maxTotalDelayMs": 385
+  },
+  "formMethodRegression": {
+    "passedChecks": 8,
+    "actualDesktopClicks": false,
+    "bugs": [
+      "invalid candidate must not replace valid connection settings",
+      "expired partial upload must not require local download part"
+    ]
+  },
+  "actualGuiAutomation": {
+    "performed": true,
+    "tool": "@oai/sky Windows Computer Use",
+    "cases": [
+      "invalid 0.0.0.0 rejected without crash",
+      "CA file selection",
+      "password login and file list",
+      "same window two uploads plus two downloads",
+      "upload and download pause/resume",
+      "single cancellation isolation",
+      "logout and explicit reauthentication",
+      "active-upload normal close and restart/resume",
+      "real unwritable destination and safe cancellation",
+      "PFX selection, temporary unlock, mTLS account binding and logout"
+    ],
+    "finalBatch": {
+      "completed": 3,
+      "explicitlyCancelled": 1,
+      "unexpectedTaskFailures": 0,
+      "retainedTasks": 0,
+      "localPartFiles": 0
+    },
+    "finalOverlap": {
+      "samples": 80,
+      "first": {
+        "at": "2026-11-24T17:13:27.662Z",
+        "up": 2,
+        "down": 2
+      },
+      "last": {
+        "at": "2026-11-24T17:14:16.710Z",
+        "up": 2,
+        "down": 2
+      },
+      "sampleIntervalMs": 500
+    },
+    "verifiedCompletedFileHashesAcrossGuiRuns": 10,
+    "firstChanceAccessDeniedAfterFix": 1,
+    "thisWasHandledRetryNotTaskFailure": true,
+    "notEquivalentToUserManualSignoff": true
+  },
+  "failuresAndRepairs": [
+    "Initial new test harness failed CS4007 due to a span across await; read into an array first, then full build passed. Original failed receipt retained.",
+    "Four pre-fix GUI upload attempts reached recoverable state after Windows denied local checkpoint File.Move; stack captured, no corrupt final file published.",
+    "Added bounded asynchronous rename retry for Windows 5/32/33; real held-file regression reproduces previous synchronous failure. Final GUI batch handled another transient denial and finished successfully.",
+    "Initial queue-record save failure could leave a job registered; now removes registration and permits retry, covered by simulated disk-full and real C#/Node completion.",
+    "Two pre-fix diagnostic uploads intentionally remain retained in isolated data (one password, one mTLS); no claim that every historical attempt completed.",
+    "GUI automation modal element cache/focus issues were resolved with fresh snapshots, native file picker keyboard navigation and explicit PFX child-window targeting.",
+    "Initial server tool stdin was unavailable; only checked owned PIDs were terminated. Then both exact manual startup commands, strict HTTPS health and graceful service.stop were revalidated with a PTY; final active tasks/connections zero. Neither is power loss."
+  ],
+  "nonPassingIntermediateUiObservations": {
+    "gui-04-four-tasks.txt": "Folder picker still open; this initial attempt did not prove four concurrent tasks",
+    "gui-07-paused-upload.txt": "Upload had already completed before pause click; use 08/09 and final 24/25 for actual pause/resume evidence"
+  },
+  "unperformed": [
+    "real two-machine LAN",
+    "formal dedicated runtime account deployment",
+    "real GUI certificate-store selection and switch to another user certificate",
+    "all combinations of multiple in-flight tasks during GUI close",
+    "desktop click expiry cleanup (form-method regression passed)",
+    "user manual signoff"
+  ],
+  "notRequiredAndNotPerformed": [
+    "fixed-duration or long pressure test",
+    "real disk-full test",
+    "real power-loss test"
+  ],
+  "historicalEvidence": "docs/evidence/enhanced-20261124.json",
+  "serverRuntimeCodeUnchangedFromV4Snapshot": true,
+  "changedOrAddedCodeFromV4Snapshot": [
+    "SecureFileTransfer.Client/SecureFileTransfer.Client/Networking/SecureConnection.Resume.cs",
+    "SecureFileTransfer.Client/SecureFileTransfer.Client/Networking/TransferFaults.cs",
+    "SecureFileTransfer.Client/SecureFileTransfer.Client/Networking/TransferQueue.cs",
+    "SecureFileTransfer.Client/SecureFileTransfer.Client/Networking/TransferState.cs",
+    "SecureFileTransfer.Client/SecureFileTransfer.Client/TransferForm.cs",
+    "SecureFileTransfer.Client/SecureFileTransfer.Client.slnx",
+    "SecureFileTransfer.Client/SecureFileTransfer.ConnectionChecks/Program.cs",
+    "SecureFileTransfer.Client/SecureFileTransfer.ConnectionChecks/SecureFileTransfer.ConnectionChecks.csproj",
+    "SecureFileTransfer.Client/SecureFileTransfer.ConnectionChecks/StorageFaultChecks.cs",
+    "SecureFileTransfer.Client/SecureFileTransfer.GuiChecks/Program.cs",
+    "SecureFileTransfer.Client/SecureFileTransfer.GuiChecks/SecureFileTransfer.GuiChecks.csproj",
+    "SecureFileTransfer.Client/SecureFileTransfer.GuiChecks/StartupHook.cs",
+    "server-node/scripts/acceptance-server.js",
+    "server-node/scripts/check-storage-faults.js",
+    "server-node/scripts/prepare-acceptance.js",
+    "server-node/scripts/verify-acceptance.js"
+  ],
+  "testedCodeSha256": {
+    "SecureFileTransfer.Client/SecureFileTransfer.Client/ConnectionTestForm.cs": "da15b9d108e5532f34585d65b7c9508bd8a3217c2dd124af564bdeaf5907f3df",
+    "SecureFileTransfer.Client/SecureFileTransfer.Client/ConnectionTestForm.Download.cs": "df349854a76f191aa74d42516d6f347dd4f18c8a5dfdc82612aabe382d44746c",
+    "SecureFileTransfer.Client/SecureFileTransfer.Client/Form1.cs": "0e4a9c1729c408ef7dc649eaa486c5cbfaa8e011d32883afd3e91f063cae2256",
+    "SecureFileTransfer.Client/SecureFileTransfer.Client/Form1.Designer.cs": "c685a14b772550e5e4959d5121aa1ead5aec360c2e2fcb193c2e6c5071286cbe",
+    "SecureFileTransfer.Client/SecureFileTransfer.Client/Networking/AuthenticationModels.cs": "bedee7d680d9ead4ff7189815cabfc5af20e2cfca705b18661dd5dbd9a8d3456",
+    "SecureFileTransfer.Client/SecureFileTransfer.Client/Networking/ClientSettings.cs": "e8f00c0f9f3b091d52dd37035a523090b4c4312e34ac889de6be59dcae1a4c1a",
+    "SecureFileTransfer.Client/SecureFileTransfer.Client/Networking/DevelopmentCertificateValidator.cs": "e7c7ee2cdd6cf0f5e65e5b1d45fabedd176a2f451568ff06439fc04a8b282191",
+    "SecureFileTransfer.Client/SecureFileTransfer.Client/Networking/DownloadProtocol.cs": "43b5361ae99d0f8c15d915ddf4208f44c4e92a51e477643e3d8db98ba9279657",
+    "SecureFileTransfer.Client/SecureFileTransfer.Client/Networking/DownloadTarget.cs": "8cc01ae8431507a0a8f04c42d9b14018f5e64b134ef710c581ad1e037ac6b377",
+    "SecureFileTransfer.Client/SecureFileTransfer.Client/Networking/SecureConnection.cs": "5a8bb53a2b0326940abf9aade3bc5ace0f65f65f24b71bae3d8df90aedf1ceac",
+    "SecureFileTransfer.Client/SecureFileTransfer.Client/Networking/SecureConnection.Download.cs": "6a34f0a02ceee9da50ed9299eeaae91f29528ca8f61b64771f44e47da121c5a3",
+    "SecureFileTransfer.Client/SecureFileTransfer.Client/Networking/SecureConnection.EnhancedAuth.cs": "1925f880399d4c975f03f883d322f561e0a2d5e19ee39f4fe24d74dbac57853e",
+    "SecureFileTransfer.Client/SecureFileTransfer.Client/Networking/SecureConnection.Resume.cs": "b6bd4309b7b441a7546ec1fddc93f183a7a4200213e85839f85207d4aac22b72",
+    "SecureFileTransfer.Client/SecureFileTransfer.Client/Networking/SecureConnection.Transfers.cs": "58bc954ecd3474686a708627d31ada3fd50d39051156e2f8e1ae6d28e65abe4d",
+    "SecureFileTransfer.Client/SecureFileTransfer.Client/Networking/SecureConnection.Upload.cs": "8f1e022a7b68d0a28a57e8a4d11dcffccad9333578833e26b7b88d8828284d49",
+    "SecureFileTransfer.Client/SecureFileTransfer.Client/Networking/TransferFaults.cs": "75c6a46dc31155b3aa5ddde1a7bb09328cb5381ec77b1d66ead3c722d9706e47",
+    "SecureFileTransfer.Client/SecureFileTransfer.Client/Networking/TransferQueue.cs": "c18ec5345716d421430732e8977b855ef21eda2c2b6de5355b44dbacc00c5f09",
+    "SecureFileTransfer.Client/SecureFileTransfer.Client/Networking/TransferState.cs": "5a79ea29230b66e97554b11a8845f09979b941105d869c205f6aab17dbd9f3a4",
+    "SecureFileTransfer.Client/SecureFileTransfer.Client/Networking/UploadProtocol.cs": "39a499fcf4698e729dfd8acddcd18e3950a3855de6e887376be394d73ff9966a",
+    "SecureFileTransfer.Client/SecureFileTransfer.Client/Program.cs": "63361f4836fb02b7beb0f6bf97c1ecf65a88cae19d15bf3e39b891e9518574db",
+    "SecureFileTransfer.Client/SecureFileTransfer.Client/SecureFileTransfer.Client.csproj": "0a214937b57e509f976b6bdf92a4e662895e7bb70c4ac4c391d98e8377356a88",
+    "SecureFileTransfer.Client/SecureFileTransfer.Client/TransferForm.cs": "64a85938326c8ecdcabef7ff75935ef0f73f82b7d6d7d59918a6bf75771023a7",
+    "SecureFileTransfer.Client/SecureFileTransfer.Client/UiTransferProgress.cs": "78f0147347ae7afd8595cd9486e481fc1df790a4911a4341ab3603e8b9c6c0c8",
+    "SecureFileTransfer.Client/SecureFileTransfer.Client.slnx": "2a67f66d2e70d59446380235f2a4c6ca78b5cce06cdd7e3f0d6fa2ba38d02666",
+    "SecureFileTransfer.Client/SecureFileTransfer.ConnectionChecks/AuthenticationChecks.cs": "ca41a633d1dae8ec1dd3abe236045d66d80ab848010e95c35ff4db718b52783c",
+    "SecureFileTransfer.Client/SecureFileTransfer.ConnectionChecks/DownloadChecks.cs": "65cf3c6d9e5fe919d2e25c522480422edc69b9d44439c3cc51632d80a08b984d",
+    "SecureFileTransfer.Client/SecureFileTransfer.ConnectionChecks/EnhancedChecks.cs": "ede4b664b5e81f0879a0c9cde39e1449a06a281a319a1d637fdce0985658f39f",
+    "SecureFileTransfer.Client/SecureFileTransfer.ConnectionChecks/Program.cs": "11f9b0a7940c79ce3f1f3f869bff0614fb851234267c92cf548d500a6576fffd",
+    "SecureFileTransfer.Client/SecureFileTransfer.ConnectionChecks/SecureFileTransfer.ConnectionChecks.csproj": "7556868c267e8b343f1d0a8b98dfbac9d134006e8047d9d3787a5bd8644daa57",
+    "SecureFileTransfer.Client/SecureFileTransfer.ConnectionChecks/StorageFaultChecks.cs": "bbbe54f5ad73134461aa87a19652dfc11b953916df6b3feac50387fd4d88cb43",
+    "SecureFileTransfer.Client/SecureFileTransfer.ConnectionChecks/UploadChecks.cs": "1269a29f634a1d9b89d0df56d98aa71332a4c1084b8690182fb8844f14f83c2f",
+    "SecureFileTransfer.Client/SecureFileTransfer.GuiChecks/Program.cs": "ccfb92df560494192a945df89d2760b4b70ba71fb351773bc43142ba8367dad7",
+    "SecureFileTransfer.Client/SecureFileTransfer.GuiChecks/SecureFileTransfer.GuiChecks.csproj": "ffc03cb9bbe89d6ee98e0f1778bf738decbc687ee2bca07cf4431c5e24c7c1a6",
+    "SecureFileTransfer.Client/SecureFileTransfer.GuiChecks/StartupHook.cs": "f5a02a5b448162c13b9b8169d96a398d9081e0c2448ea59af208ddd7052a516d",
+    "SecureFileTransfer.Client/SecureFileTransfer.Protocol/Program.cs": "c45c61f06a76722559ada9849ff79ddaf1a4904a7b797dfcb1f7c50b9c232670",
+    "SecureFileTransfer.Client/SecureFileTransfer.Protocol/SecureFileTransfer.Protocol.csproj": "96118037d4040d2d67496059a40521e51b390867f7ce27bbe028f0a8e92dbf45",
+    "SecureFileTransfer.Client/SecureFileTransfer.Server/Program.cs": "c45c61f06a76722559ada9849ff79ddaf1a4904a7b797dfcb1f7c50b9c232670",
+    "SecureFileTransfer.Client/SecureFileTransfer.Server/SecureFileTransfer.Server.csproj": "a6626fba8a6d568e8aae67b948d4052a92f4069918797290a7030661cc408b5f",
+    "server-node/scripts/acceptance-server.js": "b02569c8f01e289f7d8ffcf36ff6e6482456a7e881f42694b018fd6898d9f5b6",
+    "server-node/scripts/admin.js": "57f03b908c5be2802848746e0004c183ec73af5d01a2d8991debc06be9d48bba",
+    "server-node/scripts/certs-dev.js": "bd85bb4323ff97008d5527dcaf7c7f83e81680e39b0e49424a5f56bc2e0f1021",
+    "server-node/scripts/check-csharp.js": "12b0eff6dfa8116ad77d0acc7b7a6400294a4276b8c3c23ea4d081e12a372a61",
+    "server-node/scripts/check-enhanced-csharp.js": "ad27557f717571292998b95f0f76874bd49dd002096d9e0ecb984bc7fca20f1b",
+    "server-node/scripts/check-pki.js": "bd6f94177cda7bf1fafc8045697c8061270e856f72b79b843d9753c5975c6d50",
+    "server-node/scripts/check-smoke.js": "fad92d3f7e7a042229b5438a8d3c068bc0565a1d3119ec4d99c75547376201f9",
+    "server-node/scripts/check-storage-faults.js": "c16297ed939462a379966eb12ebff6d1f561c2d3e607b96f36684ec9930cbc39",
+    "server-node/scripts/gui-fixture.js": "887f0279e2b709cdd2ed54b77bd87a8954739a89282470c2aaf9cee8f9849563",
+    "server-node/scripts/health.js": "481e1aad20997b22dd8f26274c18a179ff6e1da2d161a29c4bf8f659c19f03d4",
+    "server-node/scripts/migration-check.js": "156b3a97ca164099cc7b9262bf426431943047099a22959b89167a7ced1f299e",
+    "server-node/scripts/pki.js": "7c818df78cc6d7a8b554f72110a6488a72ba14fc225434bd1e6e44bc5b9ef022",
+    "server-node/scripts/prepare-acceptance.js": "bc4c65bf6299e8606dd35c1470e3d9043decdf6efe62020872e8d5bf520d754f",
+    "server-node/scripts/tls-negative-fixture.js": "34e20732d4edfee65b88e14d1c78f90fcf1138d6376dabb9c490319a5f748121",
+    "server-node/scripts/user-create.js": "db68da19d5a1647fe141f1505cad2eb00c6dd5857851dcfbcd206d64a72ad8c7",
+    "server-node/scripts/verify-acceptance.js": "05b15ce719d8af49a211d6bf14f941b3f0c29194506b39562532891f05c07050",
+    "server-node/src/accounts.js": "1f213e2c4d093ba13fbfae17cef938754e7641249f7da7d0eacaf6f8e1a33861",
+    "server-node/src/app.js": "e305abe542e5f75ca7d3b73a45cc2295d0d146122ad645f9599e9c11c38ca2a0",
+    "server-node/src/auth.js": "1a4677062f89d2c69acd866dfa693e8ee6c57226fc8de4a197047f91ceb643b7",
+    "server-node/src/bandwidth.js": "947963e7ccf71cfe07fbbac4304d6d9f2cc468ed3da6b3d21e6246d735b3b9fe",
+    "server-node/src/connection-config.js": "223c8401f0592346fe21e7a09777943871aba7507b966cee8b9caa4df94818d4",
+    "server-node/src/download-protocol.js": "3e3b99d6501e70491cf3218187697eb7cf1c6326121d325311e1661d57a5e461",
+    "server-node/src/downloads.js": "5926a5a31d1159d3ecf28ec49da99e2db2745dcfb76d428c27058831e300e69e",
+    "server-node/src/file-list.js": "9f5f6f5482342a29ab989dd4983634bd7fd48f13fe491b4a4f3c7e217bfff254",
+    "server-node/src/migrations.js": "9a16f17b7ed506f06bbfaa39f0c5d4061756a6ca06e874aba8bdfad08053aa49",
+    "server-node/src/passwords.js": "dfc0e286cc689fe574c11c13008216190f19a27d976a7c7985138bc4b4db0981",
+    "server-node/src/private-storage.js": "040faf25c436a6282c6f7242bc6f68f96b6bee3fd0a588a454cc4ad64013b6be",
+    "server-node/src/resume-store.js": "a3b7ba65014acc3b4d5052d61371a5aab1efc65e932c4d35ac45afcf4edf6fdd",
+    "server-node/src/server.js": "5c854565f05a5936c182227e5e90ea03a7563db594ecbe3c45ed9046f69a7725",
+    "server-node/src/service.js": "aa5260f9e23bd49bff476bbc2627a4e37b513f8d0ccf9e46f2fb931b248cf116",
+    "server-node/src/tls.js": "767199224cab938e076077f8763293da10c9dc27f39e9124ffff0fc0bd1d2f77",
+    "server-node/src/upload-protocol.js": "2d7051bbc5cd825631318bdeb032395f80fa59b60f3c7c6ad8b2f39a97c4ea74",
+    "server-node/src/upload-store.js": "31a28a501a715d4b7a6ef75a9ebf0a7d58e54d1c88ae9b032bedfb79627a6aa3",
+    "server-node/src/uploads.js": "a029bb311cb91de3c7bf25aa822cbb03a2ba583b3cc60b9a7baa99cefd66538c",
+    "server-node/src/window-auth.js": "d9d98266a8b28fb61af7a936d46b9d0f26301f2fd9c9ccaa412aea149b797437",
+    "server-node/test/auth.test.js": "e6c78f4f4a9f98ff09f935d86ab2f481d4b6c6d7925150157bcd3164210a0f19",
+    "server-node/test/check-cli-account.js": "4a92010716a16cd49237cc58d356e69f82909e6d9222711e39c90663e73bde6d",
+    "server-node/test/download.test.js": "52bc9a808cba151f1723905e069029886b60cce5d7d7f03238274753e6da45ad",
+    "server-node/test/enhanced.test.js": "ddb6406de49a9244201481c5e0c152d002e5086d7b747902e40eb59fa0f55f44",
+    "server-node/test/helpers.js": "26b44137abe4ba50f28f1d34cf1534fe5c386d83bb89cd5bae4a587422321b20",
+    "server-node/test/integration.test.js": "a6857d725cb23c4e5985623d6ea42f8fc503ccf27f9ca2a72febf208f56e7453",
+    "server-node/test/resume-child.js": "f6154a07b2c8bbdf5dc9d13d69220413c963ca8a51f8af00f16e3eb308b99400",
+    "server-node/test/security.test.js": "ec084e0265b31c239648a738335caed8ec8a467c087792418371fe7c5d968f64",
+    "server-node/test/server-child.js": "1f932aa1d79d916ff157e79581378b64e1874b2eb741a62bb8bda9246eef88a3",
+    "server-node/test/upload-crash-child.js": "7c7f835415384f1b82665b4974438561a0a0bcdba456320f82a6490698875aa0",
+    "server-node/test/upload-fixture.js": "f294080fbaef997aa807b6023b852959be71b28dd929a23dea0e6c3f274776d0",
+    "server-node/test/upload.test.js": "4eb4d5a1cee10c0dc0a812052c43263c19f7374e56a51aa06901deb0c033b290"
+  },
+  "originals": {
+    "originalFiles": 71,
+    "currentFiles": 73,
+    "originalContentsUnchanged": true,
+    "directoryCompletelyUnchanged": false,
+    "changedOrMissingOriginals": [],
+    "addedFiles": [
+      "server-node/data/uploads-backup-20261124-191550/uploads.sqlite-shm",
+      "server-node/data/uploads-backup-20261124-191550/uploads.sqlite-wal"
+    ],
+    "differences": [
+      "server-node/data/uploads-backup-20261124-191550/uploads.sqlite-shm",
+      "server-node/data/uploads-backup-20261124-191550/uploads.sqlite-wal"
+    ],
+    "userAcceptanceFileUnchanged": true,
+    "originalsOpenedReadOnly": true
+  },
+  "postAudit": {
+    "at": "2026-11-24T17:33:17.700Z",
+    "passed": true,
+    "classification": "Post-GUI filesystem/database audit; clicks evidenced separately",
+    "modes": {
+      "password": {
+        "integrity": "ok",
+        "schemaVersion": 1,
+        "seededFilesUnchanged": 6,
+        "committed": 12,
+        "retained": 1,
+        "reservedBytes": 42039074,
+        "quotaBytes": 134217728
+      },
+      "mtls": {
+        "integrity": "ok",
+        "schemaVersion": 1,
+        "seededFilesUnchanged": 6,
+        "committed": 6,
+        "retained": 1,
+        "reservedBytes": 16873250,
+        "quotaBytes": 134217728
+      }
+    },
+    "clients": {
+      "client-password": {
+        "completed": 7,
+        "cancelled": 2,
+        "retained": 1,
+        "partFiles": 0,
+        "pendingRecordFiles": 0,
+        "tasks": [
+          {
+            "id": "04d5b8cb-635e-4501-9f1b-faa601b702e6",
+            "direction": "download",
+            "name": "下载-小文件.bin",
+            "status": "已取消",
+            "offset": 48017,
+            "size": 48017,
+            "uploadId": null
+          },
+          {
+            "id": "200d797f-d83c-493d-8a3a-a2978cc1ae3b",
+            "direction": "upload",
+            "name": "操作-乙-8MiB.bin",
+            "status": "待恢复",
+            "offset": 4169728,
+            "size": 8388608,
+            "uploadId": "a07b6c7d-aea6-410c-b0fd-f35031e1d48a"
+          },
+          {
+            "id": "2b0412fe-1cc3-4286-9c6d-2f9ad5e290d7",
+            "direction": "upload",
+            "name": "上传-乙-2MiB.bin",
+            "status": "完成",
+            "offset": 2097152,
+            "size": 2097152,
+            "uploadId": "57ae7ee0-61cd-49bc-8d90-9dda9d8802b1"
+          },
+          {
+            "id": "440312a5-3bef-487b-b85a-b96d1fec1be9",
+            "direction": "download",
+            "name": "下载-乙-2MiB.bin",
+            "status": "完成",
+            "offset": 2097152,
+            "size": 2097152,
+            "uploadId": null
+          },
+          {
+            "id": "6144208a-aed9-4256-893c-dffa1320bcb6",
+            "direction": "upload",
+            "name": "上传-甲-2MiB.bin",
+            "status": "完成",
+            "offset": 2097152,
+            "size": 2097152,
+            "uploadId": "a8f7b75d-e095-489c-99eb-d569f4f8a801"
+          },
+          {
+            "id": "81dbb68d-fd76-49f7-8b94-2f86ee665e98",
+            "direction": "download",
+            "name": "下载-甲-2MiB.bin",
+            "status": "完成",
+            "offset": 2097152,
+            "size": 2097152,
+            "uploadId": null
+          },
+          {
+            "id": "8cb3e0fe-4a25-4674-a0b0-b8a05106e562",
+            "direction": "upload",
+            "name": "上传-乙-2MiB.bin",
+            "status": "完成",
+            "offset": 2097152,
+            "size": 2097152,
+            "uploadId": "8c6c7a2b-7afe-4b40-a4e6-fe10cdc074bc"
+          },
+          {
+            "id": "8dc83361-66e0-40e6-84fc-3a1f6dd264de",
+            "direction": "upload",
+            "name": "操作-甲-8MiB.bin",
+            "status": "完成",
+            "offset": 8388608,
+            "size": 8388608,
+            "uploadId": "ec228d63-4f2e-4577-8315-5586462250cb"
+          },
+          {
+            "id": "bcb0ebfc-fbf3-413d-a308-738dfaa7c908",
+            "direction": "upload",
+            "name": "上传-甲-2MiB.bin",
+            "status": "完成",
+            "offset": 2097152,
+            "size": 2097152,
+            "uploadId": "6e5b8b2a-ed75-4db0-848b-e999e0111ca2"
+          },
+          {
+            "id": "fe0b3c07-b915-4dd8-b670-e0c28052d18a",
+            "direction": "upload",
+            "name": "操作-乙-8MiB.bin",
+            "status": "已取消",
+            "offset": 1957888,
+            "size": 8388608,
+            "uploadId": "db4a2089-9817-42fb-b7c6-01d8050dcee7"
+          }
+        ]
+      },
+      "client-final": {
+        "completed": 3,
+        "cancelled": 1,
+        "retained": 0,
+        "partFiles": 0,
+        "pendingRecordFiles": 0,
+        "tasks": [
+          {
+            "id": "01388217-f760-45c3-b55d-f6e3d82b5351",
+            "direction": "upload",
+            "name": "操作-甲-8MiB.bin",
+            "status": "完成",
+            "offset": 8388608,
+            "size": 8388608,
+            "uploadId": "2a37a303-97f2-4327-bec6-1451969d3731"
+          },
+          {
+            "id": "3c6bcda5-3b1f-48f6-90a4-e99983d7a300",
+            "direction": "download",
+            "name": "下载-甲-2MiB.bin",
+            "status": "完成",
+            "offset": 2097152,
+            "size": 2097152,
+            "uploadId": null
+          },
+          {
+            "id": "7f7d9bee-099b-400c-91ed-f63e067a8c72",
+            "direction": "download",
+            "name": "下载-乙-2MiB.bin",
+            "status": "完成",
+            "offset": 2097152,
+            "size": 2097152,
+            "uploadId": null
+          },
+          {
+            "id": "ba764561-14ed-4004-a84a-f72ba70f50b4",
+            "direction": "upload",
+            "name": "操作-乙-8MiB.bin",
+            "status": "已取消",
+            "offset": 4145152,
+            "size": 8388608,
+            "uploadId": "f5f142cb-8f40-4cb3-8cd2-c19b5ce2657f"
+          }
+        ]
+      },
+      "client-mtls": {
+        "completed": 0,
+        "cancelled": 0,
+        "retained": 1,
+        "partFiles": 0,
+        "pendingRecordFiles": 0,
+        "tasks": [
+          {
+            "id": "3758cbd7-a919-4352-94e1-69595c09b4c6",
+            "direction": "upload",
+            "name": "操作-甲-8MiB.bin",
+            "status": "待恢复",
+            "offset": 655360,
+            "size": 8388608,
+            "uploadId": "6e8c3298-5b03-42bd-be1b-fbb2666de451"
+          }
+        ]
+      }
+    },
+    "hashes": [
+      {
+        "client": "client-password",
+        "direction": "upload",
+        "fileId": "57ae7ee0-61cd-49bc-8d90-9dda9d8802b1",
+        "name": "上传-乙-2MiB.bin",
+        "size": 2097152,
+        "sha256": "093adec5193ca12b08f26e6d5040d2be4d7258b7fecc0cc0478b45336ad31eb6"
+      },
+      {
+        "client": "client-password",
+        "direction": "download",
+        "fileId": "c5b2d8c9-6692-4b05-a549-c3013238b92f",
+        "name": "下载-乙-2MiB.bin",
+        "size": 2097152,
+        "sha256": "9c357be418bd42240cb85e40838e6322e8ee36b51fd671ebb30bbeeb15abeef1"
+      },
+      {
+        "client": "client-password",
+        "direction": "upload",
+        "fileId": "a8f7b75d-e095-489c-99eb-d569f4f8a801",
+        "name": "上传-甲-2MiB.bin",
+        "size": 2097152,
+        "sha256": "dea1aa0a6171ec9aa5e4c4bd4d1e70224f67c06eee1547bffd19cf28944ba301"
+      },
+      {
+        "client": "client-password",
+        "direction": "download",
+        "fileId": "8933ed09-da2c-435b-b133-4b9d490cddaa",
+        "name": "下载-甲-2MiB.bin",
+        "size": 2097152,
+        "sha256": "df9ce9134b7cfc41730b8f8255f63b0ef3612a8df8544f0846e3491a305ffde4"
+      },
+      {
+        "client": "client-password",
+        "direction": "upload",
+        "fileId": "8c6c7a2b-7afe-4b40-a4e6-fe10cdc074bc",
+        "name": "上传-乙-2MiB.bin",
+        "size": 2097152,
+        "sha256": "093adec5193ca12b08f26e6d5040d2be4d7258b7fecc0cc0478b45336ad31eb6"
+      },
+      {
+        "client": "client-password",
+        "direction": "upload",
+        "fileId": "ec228d63-4f2e-4577-8315-5586462250cb",
+        "name": "操作-甲-8MiB.bin",
+        "size": 8388608,
+        "sha256": "df24d288dd3400d2252fdc0f0d8ce318a53a901b855ea858d2d401f2c957cec4"
+      },
+      {
+        "client": "client-password",
+        "direction": "upload",
+        "fileId": "6e5b8b2a-ed75-4db0-848b-e999e0111ca2",
+        "name": "上传-甲-2MiB.bin",
+        "size": 2097152,
+        "sha256": "dea1aa0a6171ec9aa5e4c4bd4d1e70224f67c06eee1547bffd19cf28944ba301"
+      },
+      {
+        "client": "client-final",
+        "direction": "upload",
+        "fileId": "2a37a303-97f2-4327-bec6-1451969d3731",
+        "name": "操作-甲-8MiB.bin",
+        "size": 8388608,
+        "sha256": "df24d288dd3400d2252fdc0f0d8ce318a53a901b855ea858d2d401f2c957cec4"
+      },
+      {
+        "client": "client-final",
+        "direction": "download",
+        "fileId": "8933ed09-da2c-435b-b133-4b9d490cddaa",
+        "name": "下载-甲-2MiB.bin",
+        "size": 2097152,
+        "sha256": "df9ce9134b7cfc41730b8f8255f63b0ef3612a8df8544f0846e3491a305ffde4"
+      },
+      {
+        "client": "client-final",
+        "direction": "download",
+        "fileId": "c5b2d8c9-6692-4b05-a549-c3013238b92f",
+        "name": "下载-乙-2MiB.bin",
+        "size": 2097152,
+        "sha256": "9c357be418bd42240cb85e40838e6322e8ee36b51fd671ebb30bbeeb15abeef1"
+      }
+    ],
+    "finalGuiOverlap": {
+      "samples": 80,
+      "first": {
+        "at": "2026-11-24T17:13:27.662Z",
+        "up": 2,
+        "down": 2
+      },
+      "last": {
+        "at": "2026-11-24T17:14:16.710Z",
+        "up": 2,
+        "down": 2
+      },
+      "sampleIntervalMs": 500
+    },
+    "unwritableSentinelUnchanged": true,
+    "initialFixtureShutdown": {
+      "StoppedOwnedPids": [
+        33064,
+        25412
+      ],
+      "Method": "Controlled process termination: tool session stdin closed; not power loss",
+      "PortsReleased": [
+        62284,
+        62287
+      ],
+      "GuiExited": true,
+      "UnknownProcessesStopped": false
+    },
+    "finalStartupAndShutdown": {
+      "Modes": [
+        {
+          "Mode": "password",
+          "Start": "2026-11-24T17:28:08.506Z",
+          "End": "2026-11-24T17:29:04.920Z",
+          "HttpsStatus": 200,
+          "StrictTls": true,
+          "ConnectionsAfter": 0,
+          "ActiveAfter": 0
+        },
+        {
+          "Mode": "mtls",
+          "Start": "2026-11-24T17:28:32.628Z",
+          "End": "2026-11-24T17:29:07.802Z",
+          "HttpsStatus": 200,
+          "StrictTls": true,
+          "ConnectionsAfter": 0,
+          "ActiveAfter": 0
+        }
+      ],
+      "PortsReleased": true,
+      "StoppedVia": "own server stdin stop; graceful service.stop",
+      "PowerLossTest": false
+    }
+  },
+  "git": {
+    "branch": "master",
+    "head": "2aa0e325ba0d93f73265c7b96920d8b24c5ae3fa",
+    "status": "M .gitignore\n M SecureFileTransfer.Client/SecureFileTransfer.Client.slnx\n M SecureFileTransfer.Client/SecureFileTransfer.Client/ConnectionTestForm.cs\n M SecureFileTransfer.Client/SecureFileTransfer.Client/Networking/AuthenticationModels.cs\n M SecureFileTransfer.Client/SecureFileTransfer.Client/Networking/SecureConnection.cs\n M SecureFileTransfer.Client/SecureFileTransfer.Client/Program.cs\n M SecureFileTransfer.Client/SecureFileTransfer.ConnectionChecks/Program.cs\n M SecureFileTransfer.Client/SecureFileTransfer.ConnectionChecks/SecureFileTransfer.ConnectionChecks.csproj\n M docs/p1.md\n M server-node/.gitignore\n M server-node/package-lock.json\n M server-node/package.json\n M server-node/scripts/certs-dev.js\n M server-node/scripts/check-csharp.js\n M server-node/scripts/health.js\n M server-node/src/accounts.js\n M server-node/src/app.js\n M server-node/src/auth.js\n M server-node/src/server.js\n M server-node/src/service.js\n M server-node/src/tls.js\n M server-node/test/auth.test.js\n M server-node/test/integration.test.js\n?? SFT_Manual_Acceptance_P5.md\n?? SecureFileTransfer.Client/SecureFileTransfer.Client/ConnectionTestForm.Download.cs\n?? SecureFileTransfer.Client/SecureFileTransfer.Client/Networking/ClientSettings.cs\n?? SecureFileTransfer.Client/SecureFileTransfer.Client/Networking/DownloadProtocol.cs\n?? SecureFileTransfer.Client/SecureFileTransfer.Client/Networking/DownloadTarget.cs\n?? SecureFileTransfer.Client/SecureFileTransfer.Client/Networking/SecureConnection.Download.cs\n?? SecureFileTransfer.Client/SecureFileTransfer.Client/Networking/SecureConnection.EnhancedAuth.cs\n?? SecureFileTransfer.Client/SecureFileTransfer.Client/Networking/SecureConnection.Resume.cs\n?? SecureFileTransfer.Client/SecureFileTransfer.Client/Networking/SecureConnection.Transfers.cs\n?? SecureFileTransfer.Client/SecureFileTransfer.Client/Networking/SecureConnection.Upload.cs\n?? SecureFileTransfer.Client/SecureFileTransfer.Client/Networking/TransferFaults.cs\n?? SecureFileTransfer.Client/SecureFileTransfer.Client/Networking/TransferQueue.cs\n?? SecureFileTransfer.Client/SecureFileTransfer.Client/Networking/TransferState.cs\n?? SecureFileTransfer.Client/SecureFileTransfer.Client/Networking/UploadProtocol.cs\n?? SecureFileTransfer.Client/SecureFileTransfer.Client/TransferForm.cs\n?? SecureFileTransfer.Client/SecureFileTransfer.Client/UiTransferProgress.cs\n?? SecureFileTransfer.Client/SecureFileTransfer.ConnectionChecks/DownloadChecks.cs\n?? SecureFileTransfer.Client/SecureFileTransfer.ConnectionChecks/EnhancedChecks.cs\n?? SecureFileTransfer.Client/SecureFileTransfer.ConnectionChecks/StorageFaultChecks.cs\n?? SecureFileTransfer.Client/SecureFileTransfer.ConnectionChecks/UploadChecks.cs\n?? SecureFileTransfer.Client/SecureFileTransfer.GuiChecks/\n?? SecureFileTransfer.Client/TextFile1.json\n?? docs/acceptance-20261125.md\n?? docs/delivery-closure.md\n?? docs/delivery.md\n?? docs/demo-script.md\n?? docs/enhancements.md\n?? docs/evidence/\n?? docs/gui-p2-p3.md\n?? docs/manual-enhanced.md\n?? docs/p2.md\n?? docs/p3.md\n?? docs/p4.md\n?? docs/p5.md\n?? docs/protocol-v4.md\n?? docs/protocol.md\n?? docs/report-draft.md\n?? image-1.png\n?? image.png\n?? server-node/scripts/acceptance-server.js\n?? server-node/scripts/admin.js\n?? server-node/scripts/check-enhanced-csharp.js\n?? server-node/scripts/check-pki.js\n?? server-node/scripts/check-smoke.js\n?? server-node/scripts/check-storage-faults.js\n?? server-node/scripts/gui-fixture.js\n?? server-node/scripts/migration-check.js\n?? server-node/scripts/pki.js\n?? server-node/scripts/prepare-acceptance.js\n?? server-node/scripts/verify-acceptance.js\n?? server-node/src/bandwidth.js\n?? server-node/src/connection-config.js\n?? server-node/src/download-protocol.js\n?? server-node/src/downloads.js\n?? server-node/src/file-list.js\n?? server-node/src/migrations.js\n?? server-node/src/private-storage.js\n?? server-node/src/resume-store.js\n?? server-node/src/upload-protocol.js\n?? server-node/src/upload-store.js\n?? server-node/src/uploads.js\n?? server-node/src/window-auth.js\n?? server-node/test/download.test.js\n?? server-node/test/enhanced.test.js\n?? server-node/test/resume-child.js\n?? server-node/test/security.test.js\n?? server-node/test/upload-crash-child.js\n?? server-node/test/upload-fixture.js\n?? server-node/test/upload.test.js\n?? submission-info.json\n?? test.sh\n?? tools/\n?? \"实验 1 讲解 2026.pdf\"\n?? 验收.md",
+    "newCommit": false,
+    "pushed": false,
+    "permissionNote": "Existing .git write restriction retained; no ACL bypass or repeated lock removal attempt"
+  },
+  "publicEvidenceFiles": [
+    {
+      "path": "docs/evidence/acceptance-20261125/build-result.json",
+      "bytes": 759,
+      "sha256": "15d820b988d9019f1cae5bc8deac35078e01149d8d6271db1f228c1e3c2d59b9"
+    },
+    {
+      "path": "docs/evidence/acceptance-20261125/build-stdout.txt",
+      "bytes": 1066,
+      "sha256": "d34e619365e0e5fbb22c8251ef7f1bdcb3ffe19f95a9d57c9fbae75a28c095c1"
+    },
+    {
+      "path": "docs/evidence/acceptance-20261125/build-stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/evidence/acceptance-20261125/backend-result.json",
+      "bytes": 818,
+      "sha256": "30ea662e8387d6827eef4a397d5e9eb8344042785bfdecf90e429df9e5e43042"
+    },
+    {
+      "path": "docs/evidence/acceptance-20261125/backend-stdout.txt",
+      "bytes": 12829,
+      "sha256": "17cb70e2d8a3739b60887e07415efe5bf3815b57414fad4ae7c9ea357b80ce2d"
+    },
+    {
+      "path": "docs/evidence/acceptance-20261125/backend-stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/evidence/acceptance-20261125/csharp-enhanced-result.json",
+      "bytes": 809,
+      "sha256": "d67615247698d8eceb991712eb1ad31aa834e23ce6465ef5ef61d2aab467f48c"
+    },
+    {
+      "path": "docs/evidence/acceptance-20261125/csharp-enhanced-stdout.txt",
+      "bytes": 2885,
+      "sha256": "370a290dbf15a1ff8e1d0716c61182840e63f9319f7ea7828746c0754840189a"
+    },
+    {
+      "path": "docs/evidence/acceptance-20261125/csharp-enhanced-stderr.txt",
+      "bytes": 168,
+      "sha256": "1489cdd1730a553187478e6ac587c097f02b0924b7376407f8107dd19e09f7ec"
+    },
+    {
+      "path": "docs/evidence/acceptance-20261125/storage-faults-result.json",
+      "bytes": 914,
+      "sha256": "468237fc7fad7d6fe58360561d284ff60ce67ec5d7444b141c47deca27285ffb"
+    },
+    {
+      "path": "docs/evidence/acceptance-20261125/storage-faults-stdout.txt",
+      "bytes": 2805,
+      "sha256": "006921fdf668c316af937477972520ae04ff7331eef7cce77c5db969953348a0"
+    },
+    {
+      "path": "docs/evidence/acceptance-20261125/storage-faults-stderr.txt",
+      "bytes": 169,
+      "sha256": "ae5dd75fc07f4715ba819a83643842bbdf46954897dcc5d50a59d49bf54d71be"
+    },
+    {
+      "path": "docs/evidence/acceptance-20261125/gui-regression-result.json",
+      "bytes": 913,
+      "sha256": "3fbc0435a85ec5c0da63e3df6dcc6bd2c2e87f703dda9805ac5bfb53dbcd9b45"
+    },
+    {
+      "path": "docs/evidence/acceptance-20261125/gui-regression-stdout.txt",
+      "bytes": 555,
+      "sha256": "b614e5c32f8a4be9e02defc68e780ac0b73f2ae0f79f1505036f52e48903e9a6"
+    },
+    {
+      "path": "docs/evidence/acceptance-20261125/gui-regression-stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/evidence/acceptance-20261125/initial-build-failed-result.json",
+      "bytes": 759,
+      "sha256": "bf2e45e77a4216728618481f55b14f27de226c675d03236835d1b8dd675f88f6"
+    },
+    {
+      "path": "docs/evidence/acceptance-20261125/initial-build-failed-stdout.txt",
+      "bytes": 1432,
+      "sha256": "aa2cb2b718b8d5f516838472546ffe54a5f42836d7fc95cb612b46c396d4819d"
+    },
+    {
+      "path": "docs/evidence/acceptance-20261125/storage-fault-details.json",
+      "bytes": 3830,
+      "sha256": "c753702368a58ce3b44dd139a04db61008590f500a1077f8dd63ea02e7a69de4"
+    },
+    {
+      "path": "docs/evidence/acceptance-20261125/form-method-details.json",
+      "bytes": 693,
+      "sha256": "20634cbb750b46df314ebd820f44a24db44fd6f3aa7a66555f598829fdb70d41"
+    },
+    {
+      "path": "docs/evidence/acceptance-20261125/gui-post-audit.json",
+      "bytes": 9478,
+      "sha256": "c4dbfc4e48a75a00027acb2e76141f6bd9ec3730b5cb2ce80da174a0ee571e34"
+    },
+    {
+      "path": "docs/evidence/acceptance-20261125/originals-check.json",
+      "bytes": 591,
+      "sha256": "de23b536c7200f681604b0a3041403848ff72c1ba6adaba95e03b16a178aa7b8"
+    },
+    {
+      "path": "docs/evidence/acceptance-20261125/no-write-evidence.json",
+      "bytes": 302,
+      "sha256": "9c170b07c8e152dbb6d463251cc21e3ad64d5c6f0a4edcba912855ef7c636324"
+    },
+    {
+      "path": "docs/evidence/acceptance-20261125/shutdown.json",
+      "bytes": 414,
+      "sha256": "73428d1c1a3a4874b6786d639b931a35733dd33fc871e27faae65dbb60253ba9"
+    },
+    {
+      "path": "docs/evidence/acceptance-20261125/startup-health-and-graceful-stop.json",
+      "bytes": 929,
+      "sha256": "d081e14569c0b924bfd036b9e67795d4ad556b9cbd659a360af99111c2fe9f6f"
+    },
+    {
+      "path": "docs/evidence/acceptance-20261125/gui-server-observations.json",
+      "bytes": 59601,
+      "sha256": "7f0646165b5eae7ff93be6d77b24d310ccc0aa5ec03d4637e03cce53d9678c90"
+    },
+    {
+      "path": "docs/evidence/acceptance-20261125/checkpoint-denied-before.txt",
+      "bytes": 5043,
+      "sha256": "317d1e2f7a66494dfff9636a453a04932b7c6184ce3f57437222e18cb3a5d55d"
+    },
+    {
+      "path": "docs/evidence/acceptance-20261125/checkpoint-retried-after.txt",
+      "bytes": 1663,
+      "sha256": "ddf6c76a7c49504ae241665bb871a468998d436dd202278e4ded37c235e6c6c2"
+    },
+    {
+      "path": "docs/evidence/acceptance-20261125/gui-four-active.png",
+      "bytes": 98126,
+      "sha256": "85cdaf2c100ed6d593ab7bc29982d90e115bba4fe5b72b274b47af3ab8d60268"
+    },
+    {
+      "path": "docs/evidence/acceptance-20261125/gui-final-completed.png",
+      "bytes": 113373,
+      "sha256": "2ead2cb6814229fe044049755457e4555d2d8e05da936238fddc29d7157947f1"
+    },
+    {
+      "path": "docs/evidence/acceptance-20261125/gui-mtls-login.png",
+      "bytes": 80896,
+      "sha256": "c8ab66534c1df35ffdca5cfc55ba153b4713d81ff541a1cf15d7c395ae2226cc"
+    },
+    {
+      "path": "docs/evidence/acceptance-20261125/gui-01-invalid-address.txt",
+      "bytes": 4016,
+      "sha256": "d6db4088ba58d9df8daa822552682be10dec004f78ea9d988e8252371d14acbd"
+    },
+    {
+      "path": "docs/evidence/acceptance-20261125/gui-02-ca-selected.txt",
+      "bytes": 4018,
+      "sha256": "05d69a5c3f11b809f80144c3467e0c5fcf7bc714bbaddc6cdb074d6ca4875e60"
+    },
+    {
+      "path": "docs/evidence/acceptance-20261125/gui-03-password-login-complete.txt",
+      "bytes": 5921,
+      "sha256": "8cf1cb2b214a40ef9ba0e3b6a8a0c46fad110c2dc5abd7da978d0c60d8b3cd5c"
+    },
+    {
+      "path": "docs/evidence/acceptance-20261125/gui-03-password-login.txt",
+      "bytes": 4407,
+      "sha256": "ea6057d6beb965553d6a4131d1ac09ef0ada9af4aeccae8a2bce8e2e0fa6b838"
+    },
+    {
+      "path": "docs/evidence/acceptance-20261125/gui-04-four-tasks.txt",
+      "bytes": 21450,
+      "sha256": "28b4f15f24d5dd412d689ead7baee976a052c35197c57855cf33c9ab3376756d"
+    },
+    {
+      "path": "docs/evidence/acceptance-20261125/gui-05-overlapping-four-tasks.txt",
+      "bytes": 9204,
+      "sha256": "ccbe6b114dad138485acd7e77e797611105e7aae0f3daf07a37ad36aca5b38d8"
+    },
+    {
+      "path": "docs/evidence/acceptance-20261125/gui-06-unexpected-access-denied.txt",
+      "bytes": 9740,
+      "sha256": "0d71b5baaa7ed00edda8a618a2dc7d08d741e5b335842d688f46cc5e8bb2a408"
+    },
+    {
+      "path": "docs/evidence/acceptance-20261125/gui-07-paused-upload.txt",
+      "bytes": 9828,
+      "sha256": "33826284641fb6c37340677d1e68176b3c5935941b051b0816bc6cc68bf6f52f"
+    },
+    {
+      "path": "docs/evidence/acceptance-20261125/gui-08-pause-confirmed.txt",
+      "bytes": 10763,
+      "sha256": "f1cae62dc60eff729c2dd68768a13a431be44e5933b1c07f51692580b6e48c19"
+    },
+    {
+      "path": "docs/evidence/acceptance-20261125/gui-09-resumed.txt",
+      "bytes": 10738,
+      "sha256": "2234a7a56318e3e4c9130ef982876f26ec5ace9b92d81317672326c108678c43"
+    },
+    {
+      "path": "docs/evidence/acceptance-20261125/gui-10-cancel-isolated.txt",
+      "bytes": 10766,
+      "sha256": "89b54cab9bf7d4e15bac70b529604efa698aeb1f7207fbb602dbeb227f92870e"
+    },
+    {
+      "path": "docs/evidence/acceptance-20261125/gui-11-unwritable-download.txt",
+      "bytes": 11664,
+      "sha256": "e8ce428a2ce421a9cbddc7a64e27d575049c21eb783024742d8ecfcef633cce2"
+    },
+    {
+      "path": "docs/evidence/acceptance-20261125/gui-12-unwritable-failed.txt",
+      "bytes": 11695,
+      "sha256": "cbd81247e9a79ab6afccd7fe597d192b18a89716f427329a090292857db29ddc"
+    },
+    {
+      "path": "docs/evidence/acceptance-20261125/gui-13-logout.txt",
+      "bytes": 5423,
+      "sha256": "0a8f61f5df4e185a326598b03803b9c25d01e3b758184925ef2fe289be1e1a0e"
+    },
+    {
+      "path": "docs/evidence/acceptance-20261125/gui-14-unwritable-cancelled.txt",
+      "bytes": 11454,
+      "sha256": "3274eda1ea90ca5f9dfe6225c41eab8c1aee02a032a42465d17bcce44fe6c769"
+    },
+    {
+      "path": "docs/evidence/acceptance-20261125/gui-15-pfx-selected.txt",
+      "bytes": 4748,
+      "sha256": "56da9ece2dc26d51a21873b64e8a7f2937467336ce0b517563c126bf7f78df7f"
+    },
+    {
+      "path": "docs/evidence/acceptance-20261125/gui-16-mtls-login.txt",
+      "bytes": 6177,
+      "sha256": "ef02c71ff6a917bd049300d93cf5427b60bf3afbb4e6b21004522c7c15da76f9"
+    },
+    {
+      "path": "docs/evidence/acceptance-20261125/gui-17-mtls-upload-active.txt",
+      "bytes": 6628,
+      "sha256": "9c4ca261e5469ca6a1da8e5b2eec5fe6c258c2781fec572270d3405a57ffaa65"
+    },
+    {
+      "path": "docs/evidence/acceptance-20261125/gui-18-mtls-logout-active.txt",
+      "bytes": 5190,
+      "sha256": "e08a9bf7d0dfb361a3826492d573cabb8367ce3563fb8a34884818fc67fd0a35"
+    },
+    {
+      "path": "docs/evidence/acceptance-20261125/gui-19-third-access-denied.txt",
+      "bytes": 6906,
+      "sha256": "3440a1771248ae5f45985c658bcb32740330f27f931fd5dc7d27296684758f2a"
+    },
+    {
+      "path": "docs/evidence/acceptance-20261125/gui-20-diagnostic-recovery-complete.txt",
+      "bytes": 11571,
+      "sha256": "6708baece857b5767bf094df08ebd8863c3f6254de40d5ca72079c1d1aec80b5"
+    },
+    {
+      "path": "docs/evidence/acceptance-20261125/gui-21-actual-exe-failed.txt",
+      "bytes": 14447,
+      "sha256": "b491fb471aa8e0f4ae6d0f2ffed50f43525aa328d1ab9e4e00f6a902514aeb46"
+    },
+    {
+      "path": "docs/evidence/acceptance-20261125/gui-22-final-upload-start.txt",
+      "bytes": 9399,
+      "sha256": "15240782d18ee162e16ca01ba422731432600df3ec6dd6d2f0d364507c5ad5cb"
+    },
+    {
+      "path": "docs/evidence/acceptance-20261125/gui-23-final-four-active.txt",
+      "bytes": 10314,
+      "sha256": "6a43da1302881d95806ed67cb237618a10b2c24ff1cb4549a2718b0ef89ae58d"
+    },
+    {
+      "path": "docs/evidence/acceptance-20261125/gui-24-final-download-paused.txt",
+      "bytes": 10353,
+      "sha256": "8d3497e3ce09579bc3133c7688f95a997cbf15a75c5159e4768b0ac7bcdd39da"
+    },
+    {
+      "path": "docs/evidence/acceptance-20261125/gui-25-final-download-resumed.txt",
+      "bytes": 10328,
+      "sha256": "9a61bef876972a0bfcaaeba8191363692c36e9319372d805ffe6455b64dad0e0"
+    },
+    {
+      "path": "docs/evidence/acceptance-20261125/gui-26-final-cancel-isolated.txt",
+      "bytes": 10354,
+      "sha256": "2bbd33f63ccffb62d31c362b6cc5b2c17540110544b3a358780df27716b80b08"
+    },
+    {
+      "path": "docs/evidence/acceptance-20261125/gui-27-final-logout-active.txt",
+      "bytes": 5194,
+      "sha256": "c1de41ca88077bc14238eddf42c1ecf8afded89a6c426f2caefc04a72c376e6d"
+    },
+    {
+      "path": "docs/evidence/acceptance-20261125/gui-28-final-before-close-active.txt",
+      "bytes": 11001,
+      "sha256": "2abdad6dd432b6c099f5a40d6ad76f75aaaac42a487e4a26ab60881b10ebbe53"
+    },
+    {
+      "path": "docs/evidence/acceptance-20261125/gui-30-final-reopened-not-authenticated.txt",
+      "bytes": 4114,
+      "sha256": "2f94ee7b96d869aa958d9c235fdf050524395722c7cc2e99f381f52ddc4523e0"
+    },
+    {
+      "path": "docs/evidence/acceptance-20261125/gui-31-final-reopened-task.txt",
+      "bytes": 10752,
+      "sha256": "17c4b422279e6d992c64ac8dbc9cdac9bfc4d08a18012af2f5c7dbe587590463"
+    },
+    {
+      "path": "docs/evidence/acceptance-20261125/gui-32-final-close-resumed.txt",
+      "bytes": 10724,
+      "sha256": "1cbd30b3f74dec832e60df702e84ce4973e013ffb76d8decca3e54f717394b52"
+    },
+    {
+      "path": "docs/evidence/acceptance-20261125/gui-33-final-completed.txt",
+      "bytes": 10840,
+      "sha256": "fa07eb917d3b8ed7c4a61a95f0be96c466508562b9721c888e8db3439f49b846"
+    },
+    {
+      "path": "docs/evidence/acceptance-20261125/gui-18-mtls-logout-state.json",
+      "bytes": 745,
+      "sha256": "05d4424bea288dbc69f743416fd2112bfc0d71dca8be78c58640578607895dc0"
+    },
+    {
+      "path": "docs/evidence/acceptance-20261125/gui-27-final-logout-states.json",
+      "bytes": 1483,
+      "sha256": "ed3bc3822096b26b7841633bc47daaad3891f2480554b4b036e55fe14c45e3d1"
+    },
+    {
+      "path": "docs/evidence/acceptance-20261125/gui-29-final-close-states.json",
+      "bytes": 1483,
+      "sha256": "0333528cc3e8c13d7a1f364c3e70b10a5699fefc6f28b9014b66e50f2f9caa0e"
+    }
+  ]
+}

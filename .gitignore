@@ -8,6 +8,8 @@ node_modules/
 *.suo
 TestResults/
 artifacts/
+__pycache__/
+*.py[cod]
 
 # Logs, local configuration and credentials
 *.log
@@ -18,6 +20,10 @@ logs/
 .npmrc
 secrets/
 data/
+uploads/
+downloads/
+/SFT下载测试/
+*.part
 *.sqlite
 *.sqlite-*
 *.db

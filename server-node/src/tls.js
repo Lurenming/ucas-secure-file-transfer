@@ -2,10 +2,12 @@ import { readFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { X509Certificate, createPrivateKey } from 'node:crypto';
+import { authMode } from './connection-config.js';
+import { isIP } from 'node:net';
 
-export const defaultCertDirectory = fileURLToPath(new URL('../certs/', import.meta.url));
+export const defaultCertDirectory = process.env.SFT_CERT_DIR ? resolve(process.env.SFT_CERT_DIR) : fileURLToPath(new URL('../certs/', import.meta.url));
 
-export function loadTlsOptions(directory = process.env.SFT_CERT_DIR || defaultCertDirectory) {
+export function loadTlsOptions(directory = process.env.SFT_CERT_DIR || defaultCertDirectory, mode = authMode()) {
   const base = resolve(directory);
   try {
     const cert = readFileSync(join(base, 'public/server.crt'));
@@ -20,9 +22,11 @@ export function loadTlsOptions(directory = process.env.SFT_CERT_DIR || defaultCe
       throw new Error('Invalid development CA or certificate chain');
     }
     if (!leaf.checkPrivateKey(createPrivateKey(key))) throw new Error('Server certificate and private key do not match');
-    if (!leaf.checkHost('localhost', { subject: 'never' }) || !leaf.checkIP('127.0.0.1')) throw new Error('Missing localhost/127.0.0.1 SAN');
+    if (!leaf.subjectAltName) throw new Error('Missing server SAN');
+    const name = process.env.SFT_SERVER_NAME;
+    if (name && !(isIP(name) ? leaf.checkIP(name) : leaf.checkHost(name, { subject: 'never' }))) throw new Error('SFT_SERVER_NAME does not match certificate SAN');
     if (!leaf.keyUsage?.includes('1.3.6.1.5.5.7.3.1')) throw new Error('Missing serverAuth extended key usage');
-    return { cert, key, minVersion: 'TLSv1.2', handshakeTimeout: 10000 };
+    return { cert, key, ca: ca.toString(), requestCert: mode === 'mtls-required', rejectUnauthorized: true, minVersion: 'TLSv1.2', handshakeTimeout: 10000 };
   } catch (error) {
     throw new Error(`TLS certificates missing or invalid (${error.code ?? error.message}). Inspect ${base}; run npm run certs:dev for initial generation. No HTTP fallback.`);
   }

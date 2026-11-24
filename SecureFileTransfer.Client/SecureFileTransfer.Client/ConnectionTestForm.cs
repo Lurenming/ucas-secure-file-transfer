@@ -2,7 +2,7 @@ using SecureFileTransfer.Client.Networking;
 
 namespace SecureFileTransfer.Client;
 
-public sealed class ConnectionTestForm : Form
+public sealed partial class ConnectionTestForm : Form
 {
     private readonly TextBox address = new() { Text = "wss://127.0.0.1:8443/ws", Dock = DockStyle.Fill };
     private readonly TextBox caPath = new() { Dock = DockStyle.Fill };
@@ -14,6 +14,15 @@ public sealed class ConnectionTestForm : Form
     private readonly Button logout = new() { Text = "注销", AutoSize = true };
     private readonly Button me = new() { Text = "查询当前身份", AutoSize = true };
     private readonly Label identityLabel = new() { Text = "未登录", AutoSize = true, Padding = new Padding(0, 8, 0, 0) };
+    private readonly TextBox filePath = new() { ReadOnly = true, Dock = DockStyle.Fill };
+    private readonly Button chooseFile = new() { Text = "选择文件…", AutoSize = true };
+    private readonly Button upload = new() { Text = "开始上传", AutoSize = true };
+    private readonly Button cancelUpload = new() { Text = "取消上传", AutoSize = true };
+    private readonly ProgressBar uploadProgress = new() { Width = 240, Maximum = 1000 };
+    private readonly Label uploadStatus = new() { Text = "尚未上传", AutoSize = true };
+    private bool uploading;
+    private int uploadGeneration;
+    private Task<UploadResult>? fileUploadTask;
     private readonly Button browse = new() { Text = "选择 CA…", AutoSize = true };
     private readonly Button connect = new() { Text = "连接", AutoSize = true };
     private readonly Button send = new() { Text = "发送测试消息", AutoSize = true };
@@ -33,17 +42,20 @@ public sealed class ConnectionTestForm : Form
 
     public ConnectionTestForm()
     {
-        Text = "安全文件传输 · P1 账户与连接测试";
-        ClientSize = new Size(1050, 680);
+        Text = "安全文件传输 · P3 本人文件与下载";
+        ClientSize = new Size(1100, 900);
         MinimumSize = new Size(800, 480);
         AutoScaleMode = AutoScaleMode.Font;
         StartPosition = FormStartPosition.CenterScreen;
-        var layout = new TableLayoutPanel { Dock = DockStyle.Fill, Padding = new Padding(16), ColumnCount = 3, RowCount = 8 };
+        var layout = new TableLayoutPanel { Dock = DockStyle.Fill, Padding = new Padding(16), ColumnCount = 3, RowCount = 13 };
         layout.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 110));
         layout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100));
         layout.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize));
-        for (int row = 0; row < 7; row++) layout.RowStyles.Add(new RowStyle(SizeType.AutoSize));
-        layout.RowStyles.Add(new RowStyle(SizeType.Percent, 100));
+        for (int row = 0; row < 9; row++) layout.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+        layout.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+        layout.RowStyles.Add(new RowStyle(SizeType.Percent, 55));
+        layout.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+        layout.RowStyles.Add(new RowStyle(SizeType.Percent, 45));
         layout.Controls.Add(new Label { Text = "服务器地址", AutoSize = true }, 0, 0);
         layout.Controls.Add(address, 1, 0);
         layout.SetColumnSpan(address, 2);
@@ -75,7 +87,15 @@ public sealed class ConnectionTestForm : Form
         actions.Controls.AddRange([connect, send, disconnect, status]);
         layout.Controls.Add(actions, 0, 6);
         layout.SetColumnSpan(actions, 3);
-        layout.Controls.Add(log, 0, 7);
+        layout.Controls.Add(new Label { Text = "上传文件", AutoSize = true }, 0, 7);
+        layout.Controls.Add(filePath, 1, 7);
+        layout.Controls.Add(chooseFile, 2, 7);
+        var uploadActions = new FlowLayoutPanel { AutoSize = true, Dock = DockStyle.Fill, Padding = new Padding(0, 8, 0, 8) };
+        uploadActions.Controls.AddRange([upload, cancelUpload, uploadProgress, uploadStatus]);
+        layout.Controls.Add(uploadActions, 0, 8);
+        layout.SetColumnSpan(uploadActions, 3);
+        InitializeDownloads(layout);
+        layout.Controls.Add(log, 0, 12);
         layout.SetColumnSpan(log, 3);
         Controls.Add(layout);
         caPath.Text = FindLocalCa();
@@ -86,6 +106,9 @@ public sealed class ConnectionTestForm : Form
         login.Click += async (_, _) => await AuthenticateAsync("login");
         logout.Click += async (_, _) => await AuthenticateAsync("logout");
         me.Click += async (_, _) => await AuthenticateAsync("me");
+        chooseFile.Click += (_, _) => ChooseFile();
+        upload.Click += async (_, _) => await UploadSelectedAsync();
+        cancelUpload.Click += (_, _) => { active?.CancelUpload(); uploadStatus.Text = "正在取消；已提交的文件不会删除"; };
         FormClosing += OnClosingAsync;
         FormClosed += (_, _) => windowLifetime.Dispose();
         UpdateControls();
@@ -170,6 +193,9 @@ public sealed class ConnectionTestForm : Form
             generation++;
             sending = false;
             authenticating = loggingOut = queryingIdentity = false;
+            if (uploading) uploadStatus.Text = "连接已断开，上传未确认";
+            uploading = false;
+            ResetDownloadDisplay();
             password.Clear();
             status.Text = "已断开";
             UpdateControls();
@@ -185,6 +211,9 @@ public sealed class ConnectionTestForm : Form
         connecting = true;
         sending = false;
         authenticating = loggingOut = queryingIdentity = false;
+        if (uploading) uploadStatus.Text = "连接已断开，上传未确认";
+        uploading = false;
+        ResetDownloadDisplay();
         password.Clear();
         status.Text = "正在断开…";
         UpdateControls();
@@ -214,6 +243,8 @@ public sealed class ConnectionTestForm : Form
         var connection = active;
         active = null;
         if (connection is not null) await connection.DisposeAsync();
+        if (fileUploadTask is not null) { try { await fileUploadTask; } catch { } }
+        if (fileDownloadTask is not null) { try { await fileDownloadTask; } catch { } }
         allowClose = true;
         Close();
     }
@@ -248,7 +279,11 @@ public sealed class ConnectionTestForm : Form
         username.Enabled = !closing && !authOperation && active?.Identity is null;
         password.Enabled = username.Enabled;
         var identity = active?.Identity;
+        chooseFile.Enabled = !closing && !uploading && !downloading;
+        upload.Enabled = connected && identity is not null && !uploading && !downloading && filePath.TextLength > 0 && !authOperation;
+        cancelUpload.Enabled = connected && uploading;
         identityLabel.Text = identity is null ? "未登录" : $"{identity.Username} · {identity.UserId}";
+        UpdateDownloadControls(connected, authOperation);
         if (!closing && !connecting) status.Text = !connected ? "未连接" : identity is null ? "已连接未登录" : "已登录";
     }
 
@@ -292,6 +327,65 @@ public sealed class ConnectionTestForm : Form
                 else queryingIdentity = false;
                 UpdateControls();
             }
+        }
+    }
+
+    private void ChooseFile()
+    {
+        using var picker = new OpenFileDialog { Title = "选择上传文件（最多 100 MiB）", CheckFileExists = true, Multiselect = false };
+        if (picker.ShowDialog(this) == DialogResult.OK) { filePath.Text = picker.FileName; UpdateControls(); }
+    }
+
+    private async Task UploadSelectedAsync()
+    {
+        var connection = active;
+        int current = generation;
+        if (connection is null || uploading || downloading || closing) return;
+        long identityGeneration = connection.IdentityGeneration;
+        int operation = ++uploadGeneration;
+        uploading = true; uploadProgress.Value = 0; uploadStatus.Text = "准备上传"; UpdateControls();
+        using var progress = new UiTransferProgress<UploadProgress>(value =>
+        {
+            if (closing || active != connection || current != generation || operation != uploadGeneration || !uploading
+                || connection.IdentityGeneration != identityGeneration) return;
+            uploadProgress.Value = value.TotalBytes == 0 ? (value.Phase == "上传成功" ? 1000 : 0)
+                : (int)Math.Clamp(value.ConfirmedBytes * 1000 / value.TotalBytes, 0, 1000);
+            uploadStatus.Text = $"{value.Phase} · {value.ConfirmedBytes}/{value.TotalBytes} 字节";
+        });
+        try
+        {
+            fileUploadTask = connection.UploadFileAsync(filePath.Text, progress, windowLifetime.Token);
+            var result = await fileUploadTask;
+            if (!closing && active == connection && current == generation)
+            {
+                if (connection.IdentityGeneration != identityGeneration)
+                {
+                    uploadStatus.Text = "会话已改变，请登录原账户核对上传结果";
+                    return;
+                }
+                uploadProgress.Value = 1000; uploadStatus.Text = "上传成功";
+                AppendLog($"上传成功：fileId={result.FileId}，大小={result.Size} 字节，SHA-256={result.Sha256}");
+                await LoadFilesAsync(null, []);
+            }
+        }
+        catch (Exception error)
+        {
+            if (error is UploadOutcomeUnknownException && !closing
+                && ((active == connection && current == generation) || (active is null && generation == current + 1)))
+            {
+                uploadStatus.Text = "提交结果未确认；请核对，勿自动重传";
+                AppendLog(error.Message);
+            }
+            else if (!closing && active == connection && current == generation)
+            {
+                uploadStatus.Text = connection.IdentityGeneration != identityGeneration ? "会话已改变，原上传已失效或结束"
+                    : error is OperationCanceledException ? "上传已取消" : "上传未完成";
+                AppendLog(error is OperationCanceledException ? "上传已取消，未自动重传。" : error.Message);
+            }
+        }
+        finally
+        {
+            if (!closing && active == connection && current == generation) { uploading = false; UpdateControls(); }
         }
     }
 

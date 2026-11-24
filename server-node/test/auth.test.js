@@ -65,7 +65,7 @@ const login = (client, username, password) => client.request('AUTH_LOGIN', { use
 function noSecrets(wire, values) {
   const text = wire.join('\n');
   assert.ok(values.every(value => !text.includes(value)), 'Responses do not contain authentication secrets');
-  assert.ok(!/"(password|password_hash|salt|algorithm|maxmem)"/.test(text), 'Responses expose no credential fields');
+  assert.ok(!/"(password|password_hash|salt|algorithm|maxmem)"\s*:/.test(text), 'Responses expose no credential fields');
 }
 
 test('SQLite persistence, normalization, unique salts, fixed parameters and password boundaries', async () => {

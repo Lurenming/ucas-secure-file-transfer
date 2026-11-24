@@ -1,0 +1,18 @@
+{
+  "name": "csharp-enhanced",
+  "startedAt": "2026-11-24T17:09:03.687Z",
+  "endedAt": "2026-11-24T17:09:23.291Z",
+  "command": [
+    "D:\\UCAS\\软件与系统安全\\lab1-tools\\node-v22.23.5-win-x64\\node.exe",
+    "scripts/check-enhanced-csharp.js"
+  ],
+  "cwd": "D:\\UCAS\\软件与系统安全\\lab1\\server-node",
+  "exitCode": 0,
+  "timedOut": false,
+  "processId": 8172,
+  "outputDirectory": "D:\\UCAS\\软件与系统安全\\lab1\\artifacts\\validation\\2026-11-24T17-09-03-687Z-csharp-enhanced",
+  "nodeVersion": "v22.23.5",
+  "nodeExecutable": "D:\\UCAS\\软件与系统安全\\lab1-tools\\node-v22.23.5-win-x64\\node.exe",
+  "stdoutSha256": "370a290dbf15a1ff8e1d0716c61182840e63f9319f7ea7828746c0754840189a",
+  "stderrSha256": "1489cdd1730a553187478e6ac587c097f02b0924b7376407f8107dd19e09f7ec"
+}

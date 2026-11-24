@@ -1,7 +1,8 @@
 import { createService } from './service.js';
+import { listenConfig } from './connection-config.js';
 
-const host = '127.0.0.1';
-const port = 8443;
+const { host, port } = listenConfig();
+console.log(`[runtime] Node ${process.version}; ${process.execPath}`);
 try {
   const service = createService();
   service.server.on('error', (error) => {
@@ -13,7 +14,7 @@ try {
   });
   service.server.listen(port, host, () => {
     const address = service.server.address();
-    console.log(`[server] Listening on https://${address.address}:${address.port}; WSS /ws (P1, TLS >= 1.2, local only)`);
+    console.log(`[server] Listening on ${address.address}:${address.port}; WSS /ws (enhanced-v1, TLS >= 1.2; listener is not the client destination)`);
   });
   let stopping = false;
   const shutdown = async (signal) => {
@@ -25,7 +26,7 @@ try {
       console.log('[server] Stopped; listening port released.');
     } catch (error) {
       console.error(`[server] Shutdown failed: ${error.code ?? error.message}`);
-      process.exitCode = 1;
+      process.exit(1); // This service only: leave durable records for startup recovery after the bounded wait.
     }
   };
   process.on('SIGINT', () => void shutdown('SIGINT'));
